@@ -252,7 +252,7 @@ public class MemberDao {
 	}
 
 	
-	public void MemberInfo(String id){
+	public boolean MemberInfo(String id){
 		
 		ml.clear();
 		ListInsert();
@@ -275,7 +275,7 @@ public class MemberDao {
 					System.out.println("잔여시간 : " + str[6]);
 					System.out.println("사용시간 : " + str[7]);
 					System.out.println();
-					return;
+					return true;
 				}
 
 
@@ -286,9 +286,82 @@ public class MemberDao {
 		}
 		
 		System.out.println("ID 조회 실패...");
+		return false;
 		
 	}
 
+	public void useTime(String id, int time){
+		
+		
+		ml.clear();
+		ListInsert();
+
+		int check = 0;
+		
+		for(int i=0; i<ml.size(); i++){
+
+			Iterator iter = ml.iterator();
+
+			String str[];
+
+
+			try(DataOutputStream dout
+					= new DataOutputStream(
+							new FileOutputStream("member.txt"))){
+				while(iter.hasNext()){
+
+					str = (iter.next().toString()).split(", ");
+
+					if(str[1].equals(id)){
+						str[6] = (Integer.parseInt(str[6]) - time) + "";
+						check = 1;
+					}
+
+
+					Member m = new Member(str[0], str[1], str[2],
+							str[3], Integer.parseInt(str[4]), str[5],
+							Integer.parseInt(str[6]), Integer.parseInt(str[7]),
+							Integer.parseInt(str[8]), Boolean.parseBoolean(str[9]));
+
+					dout.writeUTF(m.getName());
+					dout.writeUTF(m.getId());
+					dout.writeUTF(m.getPwd());
+					dout.writeUTF(m.getEmail());
+					dout.writeInt(m.getAge());
+					dout.writeUTF(m.getpNumber());
+
+					dout.writeInt(m.getRestTime());
+					dout.writeInt(m.getUseTime());
+					dout.writeInt(m.getAccTime());
+					dout.writeBoolean(m.getAdmission());
+
+
+
+				}
+				
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+
+		}
+
+		if(check == 1){
+			System.out.println("사용시간  계산 완료...");
+			return;
+		}else{
+			System.out.println("사용시간  계산 실패...");
+			return;
+		}
+
+		
+		
+		
+	}
+	
+	
+	
+	
 	public void ListInsert(){
 		ml.clear();
 		String name;
