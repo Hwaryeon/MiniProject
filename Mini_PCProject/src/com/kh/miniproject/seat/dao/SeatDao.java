@@ -158,20 +158,29 @@ public class SeatDao {
 	public void UseSeat(int seatNo, String id){
 
 		InsertList();
+		
+		int check = 0;
 		try(DataOutputStream os = new DataOutputStream(
 				new FileOutputStream("seat.txt"))){
 
 			for(int i=0; i < MAX_SEAT; i++){
+				
+				System.out.println("id : " + sl.get(i).getUserId());
+				
+				 if(sl.get(i).getUserId().equals(id) ){
+					System.out.println("해당 사용자는 좌석 이용중입니다.");
+					check = 1;
+				}
+				
 				if(sl.get(i).getSeatNo() == seatNo){
 
 					if(sl.get(i).getUseCheck() == true){
 
 						System.out.println("해당 좌석은 이용중입니다.");
-					}else{
-						
+					}
+					else if(check != 1){
 						sl.get(i).setUseCheck(true);
 						sl.get(i).setUserId(id);
-						
 					}
 
 				}
@@ -200,20 +209,25 @@ public class SeatDao {
 		try(DataOutputStream os = new DataOutputStream(
 				new FileOutputStream("seat.txt"))){
 
+			
 			for(int i=0; i < MAX_SEAT; i++){
 				if(sl.get(i).getSeatNo() == seatNo){
 
-					
+					if(sl.get(i).getUseCheck() == false){
+						System.out.println("해당 좌석은 사용중이지 않습니다.");
+					}else{
+						
 						sl.get(i).setUseCheck(false);
 						userId = sl.get(i).getUserId();
-						
+						sl.get(i).setUserId("");
+						System.out.println("좌석 사용 종료...");
+					}
 				}
 				os.writeInt(sl.get(i).getSeatNo());
 				os.writeUTF(sl.get(i).getUserId());
 				os.writeBoolean(sl.get(i).getUseCheck());
 
 			}
-			System.out.println("좌석 사용 종료...");
 			return userId;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

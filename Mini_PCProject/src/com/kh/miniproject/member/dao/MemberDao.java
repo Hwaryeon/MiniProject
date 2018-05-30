@@ -277,10 +277,6 @@ public class MemberDao {
 					System.out.println();
 					return true;
 				}
-
-
-
-
 			}
 
 		}
