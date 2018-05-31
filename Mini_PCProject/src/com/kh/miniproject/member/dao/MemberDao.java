@@ -275,6 +275,7 @@ public class MemberDao {
 					System.out.println("잔여시간 : " + str[6]);
 					System.out.println("사용시간 : " + str[7]);
 					System.out.println();
+					
 					return Integer.parseInt(str[6]);
 				}
 			}
@@ -310,6 +311,7 @@ public class MemberDao {
 
 					if(str[1].equals(id)){
 						str[6] = (Integer.parseInt(str[6]) - time) + "";
+						str[8] = (Integer.parseInt(str[8]) + time) + "";
 						check = 1;
 					}
 

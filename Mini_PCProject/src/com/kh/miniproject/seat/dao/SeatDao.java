@@ -8,17 +8,23 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.seat.vo.Seat;
+import com.kh.miniproject.view.Timer;
 
-public class SeatDao {
+public class SeatDao extends Thread {
 
 
+	Scanner sc = new Scanner(System.in);
+	
 	MemberManager mm = new MemberManager();
 	ArrayList<Seat> sl = new ArrayList<Seat>();
+	
 	final int MAX_SEAT = 12;
 
+	Thread[] tList = new Thread[MAX_SEAT+1];
 
 	public void SeatLeset(){
 		int num = 1;
@@ -121,7 +127,28 @@ public class SeatDao {
 			if(i == 3 || i == 7){
 				System.out.println();
 			}
+
 		}
+
+		System.out.println();
+		System.out.println();
+		for(int i = 0; i < MAX_SEAT; i++){
+
+			if(sl.get(i).getUserTime() > 0){
+
+				Timer timer = new Timer(sl.get(i).getSeatNo(),
+						sl.get(i).getUserId(),
+						sl.get(i).getUserTime());
+				Thread t1 = timer;
+				
+				tList[sl.get(i).getSeatNo()] = t1;
+				
+				t1.start();
+
+				
+			}
+
+		}	// thread 부분
 		System.out.println();
 	}
 
@@ -150,24 +177,24 @@ public class SeatDao {
 	public void UseSeat(int seatNo, String id, int time){
 
 		InsertList();
-		
+
 		int check = 0;
 		try(DataOutputStream os = new DataOutputStream(
 				new FileOutputStream("seat.txt"))){
 
 			for(int i=0; i < MAX_SEAT; i++){
-				
-				 if(sl.get(i).getSeatNo() == seatNo &&
-						 sl.get(i).getUserId().equals(id) ){
+
+				if(sl.get(i).getSeatNo() == seatNo &&
+						sl.get(i).getUserId().equals(id) ){
 					System.out.println("사용자가 좌석 이용중입니다.");
 					check = 1;
 				}
-				
+
 				if(sl.get(i).getSeatNo() == seatNo && time <= 0){
 					System.out.println("사용자의 잔여시간이 없습니다. ");
 					check = 1;
 				}
-				 
+
 				if(sl.get(i).getSeatNo() == seatNo){
 
 					if(sl.get(i).getUseCheck() == true){
@@ -199,20 +226,20 @@ public class SeatDao {
 	public String exitSeat(int seatNo){
 
 		InsertList();
-		
+
 		String userId = "";
-		
+
 		try(DataOutputStream os = new DataOutputStream(
 				new FileOutputStream("seat.txt"))){
 
-			
+
 			for(int i=0; i < MAX_SEAT; i++){
 				if(sl.get(i).getSeatNo() == seatNo){
 
 					if(sl.get(i).getUseCheck() == false){
 						System.out.println("해당 좌석은 사용중이지 않습니다.");
 					}else{
-						
+
 						sl.get(i).setUseCheck(false);
 						userId = sl.get(i).getUserId();
 						sl.get(i).setUserId("");
@@ -233,12 +260,24 @@ public class SeatDao {
 			e.printStackTrace();
 		}
 
-	
+
 		return userId;
-	
-	
-	
+
+
+
 	}
 
+	public void threadOut(){
+		
+		System.out.print("종료할 쓰레드 : ");
+		int num = sc.nextInt();
+		
+		System.out.println("tList : " + tList[1]);
+		
+		tList[num].interrupt();
+		
+		
+	}
+	
 
 }

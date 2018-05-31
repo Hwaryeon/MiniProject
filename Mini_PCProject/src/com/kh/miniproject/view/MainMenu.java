@@ -78,6 +78,7 @@ public class MainMenu {
 			System.out.println("5. 좌석 사용 종료");
 			System.out.println();
 			System.out.println("10. 이전 메뉴로"); 
+			System.out.println("99. 스래드 종료");
 			System.out.println("00. 좌석 초기화");
 			System.out.print("메뉴 번호 선택 : ");
 			num = sc.nextInt();
@@ -118,6 +119,7 @@ public class MainMenu {
 				
 				sm.exitSeat(seatNo, time); break;
 			case 10: ; return;
+			case 99: sd.threadOut(); break;
 			case 00: sd.SeatLeset(); break;
 			default :System.out.println(); System.out.println("잘못 입력하셨습니다."); break;
 			}

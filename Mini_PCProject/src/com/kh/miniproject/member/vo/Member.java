@@ -12,7 +12,7 @@ public class Member implements Serializable {
 	private String pNumber;
 
 	private int restTime;		// 잔여 시간
-	private int useTime;		// 사용 시간
+	private int useTime;		// 사용 시간 -->해당 필드값 사용안해서 수정예정
 	private int accTime;		// 누적 시간
 	private boolean admission;
 

@@ -67,4 +67,10 @@ public class SeatManager {
 	}
 	
 	
+	public void timeThread(){
+		
+		
+		
+	}
+	
 }
