@@ -94,14 +94,19 @@ public class MemberManager {
 
 	}
 
-	public boolean MemberInfo(String id){
+	public int MemberInfo(String id){
 
+		int time = 0;
+		
 		System.out.println(id + "님의 회원정보를 출력합니다.");
-		if(md.MemberInfo(id) == true){
-			return true;
+		
+		time = md.MemberInfo(id);
+		
+		if(time != -1){
+			return time;
 		}
 
-		return false;
+		return -1;
 
 	}
 	

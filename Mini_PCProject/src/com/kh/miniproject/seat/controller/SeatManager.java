@@ -30,19 +30,23 @@ public class SeatManager {
 		System.out.print("등록할 회원 id : " );
 		String id = sc.nextLine();
 		
-		if(mm.MemberInfo(id) == false){
+		int time = 0;
+		
+		time = mm.MemberInfo(id);
+		
+		if(time == -1){
 			System.out.println("해당 id가 존재하지 않습니다.");
 			return;
 		}
 		
 		
-		sd.UseSeat(seatNo, id);
+		sd.UseSeat(seatNo, id, time);
 		
 	}
 	
 	public void PlusTime(String id){
 		
-		if(mm.MemberInfo(id) == false){
+		if(mm.MemberInfo(id) == -1){
 			System.out.println("해당 id가 존재하지 않습니다.");
 			return;
 		}

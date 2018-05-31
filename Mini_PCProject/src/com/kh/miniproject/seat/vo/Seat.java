@@ -5,6 +5,7 @@ public class Seat {
 	private int seatNo;
 	private String userId;
 	private boolean useCheck = false;
+	private int userTime;
 
 	public Seat(){}
 
@@ -12,21 +13,13 @@ public class Seat {
 		this.seatNo = seatNo;
 	}
 
-	public Seat(int seatNo, String userId){
-
-		this.seatNo = seatNo;
-		this.userId = userId;
-		this.useCheck = true;
-
-	}	
-	public Seat(int seatNo, String userId, boolean useCheck){
+	public Seat(int seatNo, String userId, boolean useCheck, int userTime){
 
 		this.seatNo = seatNo;
 		this.userId = userId;
 		this.useCheck = useCheck;
-
+		this.userTime = userTime;
 	}
-
 
 	public int getSeatNo() {
 		return seatNo;
@@ -52,9 +45,17 @@ public class Seat {
 		this.useCheck = useCheck;
 	}
 
+	public int getUserTime() {
+		return userTime;
+	}
+
+	public void setUserTime(int userTime) {
+		this.userTime = userTime;
+	}
+
 	@Override
 	public String toString() {
-		return seatNo + ", " + userId + ", " + useCheck;
+		return seatNo + ", " + userId + ", " + useCheck + ", " + userTime;
 	}
 
 

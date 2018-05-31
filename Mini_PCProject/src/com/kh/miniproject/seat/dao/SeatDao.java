@@ -28,23 +28,16 @@ public class SeatDao {
 			for(int i = 0; i < MAX_SEAT; i++){
 				sl.add(new Seat(num));
 				num++;
-
-
-
 				os.writeInt(sl.get(i).getSeatNo());
 				os.writeUTF(" ");
 				os.writeBoolean(sl.get(i).getUseCheck());
-
-
-
+				os.writeInt(sl.get(i).getUserTime());
 
 			}
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -57,6 +50,7 @@ public class SeatDao {
 		int seatNo = 0;
 		String userId = "";
 		boolean check = false;
+		int time = 0;
 		int value = 0;
 
 		try(DataInputStream dis = new DataInputStream(
@@ -67,19 +61,18 @@ public class SeatDao {
 				seatNo = dis.readInt();
 				userId = dis.readUTF();
 				check = dis.readBoolean();
+				time = dis.readInt();
 
-				sl.add(new Seat(seatNo, userId, check));
+				sl.add(new Seat(seatNo, userId, check, time));
 
 			}
 
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}catch(EOFException e){
 			System.out.println("모든 좌석 출력...");
 		}catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -93,6 +86,7 @@ public class SeatDao {
 		int seatNo = 0;
 		String userId = "";
 		boolean check = false;
+		int time = 0;
 		int value = 0;
 
 		try(DataInputStream dis = new DataInputStream(
@@ -103,19 +97,17 @@ public class SeatDao {
 				seatNo = dis.readInt();
 				userId = dis.readUTF();
 				check = dis.readBoolean();
-
-				sl.add(new Seat(seatNo, userId, check));
+				time = dis.readInt();
+				sl.add(new Seat(seatNo, userId, check, time));
 
 			}
 
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}catch(EOFException e){
 			System.out.println("모든 좌석 출력...");
 		}catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -155,7 +147,7 @@ public class SeatDao {
 
 	}
 
-	public void UseSeat(int seatNo, String id){
+	public void UseSeat(int seatNo, String id, int time){
 
 		InsertList();
 		
@@ -165,13 +157,17 @@ public class SeatDao {
 
 			for(int i=0; i < MAX_SEAT; i++){
 				
-				System.out.println("id : " + sl.get(i).getUserId());
-				
-				 if(sl.get(i).getUserId().equals(id) ){
-					System.out.println("해당 사용자는 좌석 이용중입니다.");
+				 if(sl.get(i).getSeatNo() == seatNo &&
+						 sl.get(i).getUserId().equals(id) ){
+					System.out.println("사용자가 좌석 이용중입니다.");
 					check = 1;
 				}
 				
+				if(sl.get(i).getSeatNo() == seatNo && time <= 0){
+					System.out.println("사용자의 잔여시간이 없습니다. ");
+					check = 1;
+				}
+				 
 				if(sl.get(i).getSeatNo() == seatNo){
 
 					if(sl.get(i).getUseCheck() == true){
@@ -181,20 +177,20 @@ public class SeatDao {
 					else if(check != 1){
 						sl.get(i).setUseCheck(true);
 						sl.get(i).setUserId(id);
+						sl.get(i).setUserTime(time);
 					}
 
 				}
 				os.writeInt(sl.get(i).getSeatNo());
 				os.writeUTF(sl.get(i).getUserId());
 				os.writeBoolean(sl.get(i).getUseCheck());
+				os.writeInt(sl.get(i).getUserTime());
 
 			}
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -220,20 +216,20 @@ public class SeatDao {
 						sl.get(i).setUseCheck(false);
 						userId = sl.get(i).getUserId();
 						sl.get(i).setUserId("");
+						sl.get(i).setUserTime(0);
 						System.out.println("좌석 사용 종료...");
 					}
 				}
 				os.writeInt(sl.get(i).getSeatNo());
 				os.writeUTF(sl.get(i).getUserId());
 				os.writeBoolean(sl.get(i).getUseCheck());
+				os.writeInt(sl.get(i).getUserTime());
 
 			}
 			return userId;
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

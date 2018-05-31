@@ -252,7 +252,7 @@ public class MemberDao {
 	}
 
 	
-	public boolean MemberInfo(String id){
+	public int MemberInfo(String id){
 		
 		ml.clear();
 		ListInsert();
@@ -275,14 +275,14 @@ public class MemberDao {
 					System.out.println("잔여시간 : " + str[6]);
 					System.out.println("사용시간 : " + str[7]);
 					System.out.println();
-					return true;
+					return Integer.parseInt(str[6]);
 				}
 			}
 
 		}
 		
 		System.out.println("ID 조회 실패...");
-		return false;
+		return -1;
 		
 	}
 
