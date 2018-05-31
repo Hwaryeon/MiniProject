@@ -16,7 +16,7 @@ public class Member implements Serializable {
 	private int accTime;		// 누적 시간
 	private boolean admission;
 
-	public Member(){}
+	public Member(){this.id = "";}
 
 	public Member(String name, String id, String pwd, String email, int age, String pNumber) {
 		this.name = name;

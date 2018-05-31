@@ -11,17 +11,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.kh.miniproject.member.vo.Member;
+import com.kh.miniproject.seat.dao.SeatDao;
 
 public class MemberDao {
 
 	ArrayList<Member> ml = new ArrayList<Member>();
 
-	public void MemberJoin(Member m){
+	public void memberJoin(Member m){
 
 		ml.clear();
-		ListInsert();
+		listInsert();
 
-		
 		for(int i=0; i<ml.size(); i++){
 
 			Iterator iter = ml.iterator();
@@ -38,7 +38,7 @@ public class MemberDao {
 				}
 			}
 		}
-		
+
 		try(DataOutputStream dout
 				= new DataOutputStream(
 						new FileOutputStream("member.txt", true))){
@@ -61,10 +61,10 @@ public class MemberDao {
 
 	}
 
-	public void IdSearch(String name, String email){
+	public void idSearch(String name, String email){
 
 		ml.clear();
-		ListInsert();
+		listInsert();
 
 		for(int i=0; i<ml.size(); i++){
 
@@ -82,19 +82,14 @@ public class MemberDao {
 					System.out.println("찾은 ID : " + str[1]);
 					return;
 				}
-
-
 			}
 		}
 		System.out.println("해당하는 정보를 가진 유저가 없습니다.");
-
-
-
 	}
 
-	public void PwSearch(String name, String id){
+	public void pwSearch(String name, String id){
 		ml.clear();
-		ListInsert();
+		listInsert();
 
 		for(int i=0; i<ml.size(); i++){
 
@@ -102,9 +97,7 @@ public class MemberDao {
 
 			String str[];
 
-
 			while(iter.hasNext()){
-
 
 				str = (iter.next().toString()).split(", ");
 
@@ -112,30 +105,23 @@ public class MemberDao {
 					System.out.println("찾은 PASSWORD : " + str[2]);
 					return;
 				}
-
-
 			}
 		}
 		System.out.println("해당하는 정보를 가진 유저가 없습니다.");
-
-
-
 	}
 
-
-	public void MemberAdmission(String id){
+	public void memberAdmission(String id){
 
 		ml.clear();
-		ListInsert();
-		
+		listInsert();
+
 		int check = 0;
-		
+
 		for(int i=0; i<ml.size(); i++){
 
 			Iterator iter = ml.iterator();
 
 			String str[];
-
 
 			try(DataOutputStream dout
 					= new DataOutputStream(
@@ -166,10 +152,8 @@ public class MemberDao {
 					dout.writeInt(m.getAccTime());
 					dout.writeBoolean(m.getAdmission());
 
-
-
 				}
-				
+
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -177,22 +161,19 @@ public class MemberDao {
 		}
 
 		if(check == 1){
-			System.out.println("가입 승인 완료...");
+			//System.out.println("가입 승인 완료...");
 		}else{
-			System.out.println("가입 승인 실패...");
+			//System.out.println("가입 승인 실패...");
 		}
-		
 
 	}
 
-
-
-	public void TimePlus(String id, int time){
+	public void timePlus(String id, int time){
 		ml.clear();
-		ListInsert();
+		listInsert();
 
 		int check = 0;
-		
+
 		for(int i=0; i<ml.size(); i++){
 
 			Iterator iter = ml.iterator();
@@ -229,34 +210,29 @@ public class MemberDao {
 					dout.writeInt(m.getUseTime());
 					dout.writeInt(m.getAccTime());
 					dout.writeBoolean(m.getAdmission());
-
-
-
 				}
-				
-				
+
 			}catch(Exception e){
 				e.printStackTrace();
 			}
 
 		}
-
 		if(check == 1){
-			System.out.println("충전 성공...");
+			//	System.out.println("충전 성공...");
 			return;
 		}else{
-			System.out.println("충전 실패...");
+			//	System.out.println("충전 실패...");
 			return;
 		}
 
 	}
 
-	
-	public int MemberInfo(String id){
-		
-		ml.clear();
-		ListInsert();
+	public Member memberInfo(String id){
 
+		ml.clear();
+		listInsert();
+
+		Member m;
 		
 		for(int i=0; i<ml.size(); i++){
 
@@ -272,28 +248,33 @@ public class MemberDao {
 					System.out.println();
 					System.out.println("이름 : " + str[0]);
 					System.out.println("아이디 : " + str[1]);
-					System.out.println("잔여시간 : " + str[6]);
-					System.out.println("사용시간 : " + str[7]);
-					System.out.println();
-					
-					return Integer.parseInt(str[6]);
+					//System.out.println("충전시간 : " + str[6]);
+					//System.out.println("사용시간 : " + str[7]);
+
+					m = new Member(str[0], str[1], str[2],
+							str[3], Integer.parseInt(str[4]), str[5],
+							Integer.parseInt(str[6]),
+							Integer.parseInt(str[7]),
+							Integer.parseInt(str[8]), 
+							Boolean.parseBoolean(str[9]));
+
+					return m;
+					//return Integer.parseInt(str[6]);
 				}
 			}
 
 		}
-		
 		System.out.println("ID 조회 실패...");
-		return -1;
-		
+		return (m = new Member());
+
 	}
+	
+	public Member memberInfo_time(String id){
 
-	public void useTime(String id, int time){
-		
-		
 		ml.clear();
-		ListInsert();
+		listInsert();
 
-		int check = 0;
+		Member m;
 		
 		for(int i=0; i<ml.size(); i++){
 
@@ -301,6 +282,47 @@ public class MemberDao {
 
 			String str[];
 
+			while(iter.hasNext()){
+
+				str = (iter.next().toString()).split(", ");
+
+				if(str[1].equals(id)){
+					System.out.println();
+					System.out.println("이름 : " + str[0]);
+					System.out.println("아이디 : " + str[1]);
+					System.out.println("충전시간 : " + str[6]);
+					System.out.println("사용시간 : " + str[7]);
+
+					m = new Member(str[0], str[1], str[2],
+							str[3], Integer.parseInt(str[4]), str[5],
+							Integer.parseInt(str[6]),
+							Integer.parseInt(str[7]),
+							Integer.parseInt(str[8]), 
+							Boolean.parseBoolean(str[9]));
+
+					return m;
+					//return Integer.parseInt(str[6]);
+				}
+			}
+
+		}
+		System.out.println("ID 조회 실패...");
+		return (m = new Member());
+
+	}
+
+	public void useTime(String id, int time){
+
+		ml.clear();
+		listInsert();
+
+		int check = 0;
+
+		for(int i=0; i<ml.size(); i++){
+
+			Iterator iter = ml.iterator();
+
+			String str[];
 
 			try(DataOutputStream dout
 					= new DataOutputStream(
@@ -314,7 +336,6 @@ public class MemberDao {
 						str[8] = (Integer.parseInt(str[8]) + time) + "";
 						check = 1;
 					}
-
 
 					Member m = new Member(str[0], str[1], str[2],
 							str[3], Integer.parseInt(str[4]), str[5],
@@ -332,12 +353,7 @@ public class MemberDao {
 					dout.writeInt(m.getUseTime());
 					dout.writeInt(m.getAccTime());
 					dout.writeBoolean(m.getAdmission());
-
-
-
 				}
-				
-				
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -345,22 +361,16 @@ public class MemberDao {
 		}
 
 		if(check == 1){
-			System.out.println("사용시간  계산 완료...");
+			//System.out.println("사용시간  계산 완료...");
 			return;
 		}else{
-			System.out.println("사용시간  계산 실패...");
+			//System.out.println("사용시간  계산 실패...");
 			return;
 		}
 
-		
-		
-		
 	}
-	
-	
-	
-	
-	public void ListInsert(){
+
+	public void listInsert(){
 		ml.clear();
 		String name;
 		String id;
@@ -394,25 +404,19 @@ public class MemberDao {
 				accTime = din.readInt();
 				admission = din.readBoolean();
 
-
 				ml.add(new Member(name, id, pwd, email, age, pNumber,
 						restTime, useTime, accTime, admission));
 
 			}
 		}catch(EOFException e){
-			System.out.println("모든 멤버 출력...");
+			//	System.out.println("모든 멤버 출력...");
 		}
 		catch(Exception e){
-			e.printStackTrace();
+			//	e.printStackTrace();
 		}
-
-
 	}
 
-
-
-
-	public void MemberList(){
+	public void memberList(){
 		ml.clear();
 		String name;
 		String id;
@@ -448,19 +452,17 @@ public class MemberDao {
 				accTime = din.readInt();
 				admission = din.readBoolean();
 
-
 				System.out.println(i +" : " + name + ", " + id + ", " + pwd
 						+", " +email+", " +age+", " +pNumber+", " + restTime
 						+", " + useTime+", " +accTime+", " +admission);
 				i++;
 			}
 		}catch(EOFException e){
-			System.out.println("모든 멤버 출력...");
+			//	System.out.println("모든 멤버 출력...");
 		}
 		catch(Exception e){
-			e.printStackTrace();
+			//	e.printStackTrace();
 		}
-
 
 	}
 

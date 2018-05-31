@@ -11,7 +11,7 @@ public class MemberManager {
 
 	MemberDao md = new MemberDao();
 
-	public void MemberJoin(){
+	public void memberJoin(){
 
 		System.out.println();
 
@@ -31,11 +31,11 @@ public class MemberManager {
 
 		Member m = new Member(name, id, pwd, email, age, pNumber);
 
-		md.MemberJoin(m);
+		md.memberJoin(m);
 
 	}
 
-	public void IdSearch(){
+	public void idSearch(){
 
 		System.out.println();
 		System.out.println("아이디 찾기위해 해당 정보를 입력해주세요.");
@@ -44,11 +44,11 @@ public class MemberManager {
 		System.out.print("EMAIL : ");
 		String email = sc.nextLine();
 
-		md.IdSearch(name, email);
+		md.idSearch(name, email);
 
 	}
 
-	public void PwSearch(){
+	public void pwSearch(){
 
 		System.out.println();
 		System.out.println("아이디 찾기위해 해당 정보를 입력해주세요.");
@@ -57,17 +57,17 @@ public class MemberManager {
 		System.out.print("ID : ");
 		String id = sc.nextLine();
 
-		md.PwSearch(name, id);
+		md.pwSearch(name, id);
 
 	}
 
-	public void MemberAdmission(String id){
+	public void memberAdmission(String id){
 
 		System.out.print("해당  " + id + "의 회원가입을 승인하시겠습니까 ? (y,n) : ");
 		char ch = sc.next().charAt(0);
 
 		if(ch == 'y' || ch == 'Y'){
-			md.MemberAdmission(id);
+			md.memberAdmission(id);
 		}else{
 			System.out.println("승인이 취소되었습니다.");
 			return;
@@ -75,38 +75,54 @@ public class MemberManager {
 
 	}
 
-	public void TimePlus(){
+	public void timePlus(){
 
 		System.out.print("충전할 ID : ");
 		String id = sc.nextLine();
 		System.out.print("충전할 시간 : ");
 		int time = sc.nextInt();
 
-		md.TimePlus(id, time);
-
-
+		md.timePlus(id, time);
 	}
 
-	public void TimePlus(String id, int time){
+	public void timePlus(String id, int time){
 
-		md.TimePlus(id, time);
-
-
+		md.timePlus(id, time);
 	}
 
-	public int MemberInfo(String id){
+	public Member memberInfo(String id){
 
 		int time = 0;
 		
 		System.out.println(id + "님의 회원정보를 출력합니다.");
 		
-		time = md.MemberInfo(id);
+		Member m = md.memberInfo(id);
 		
-		if(time != -1){
-			return time;
+		time = m.getUseTime();
+		
+		if(m.getId() != ""){
+			return m;
 		}
 
-		return -1;
+		return m;
+
+	}
+	
+	public Member memberInfo_time(String id){
+
+		int time = 0;
+		
+		System.out.println(id + "님의 회원정보를 출력합니다.");
+		
+		Member m = md.memberInfo_time(id);
+		
+		time = m.getUseTime();
+		
+		if(m.getId() != ""){
+			return m;
+		}
+
+		return m;
 
 	}
 	

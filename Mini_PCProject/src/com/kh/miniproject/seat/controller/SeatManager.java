@@ -3,6 +3,7 @@ package com.kh.miniproject.seat.controller;
 import java.util.Scanner;
 
 import com.kh.miniproject.member.controller.MemberManager;
+import com.kh.miniproject.member.vo.Member;
 import com.kh.miniproject.seat.dao.SeatDao;
 
 public class SeatManager {
@@ -19,34 +20,38 @@ public class SeatManager {
 	}
 	
 	
-	public void CheckSeat(int seatNo){
+	public void checkSeat(int seatNo){
 		
-		sd.CheckSeat(seatNo);
+		sd.checkSeat(seatNo);
 		
 	}
 	
-	public void UseSeat(int seatNo){
+	public void useSeat(int seatNo){
 		
 		System.out.print("등록할 회원 id : " );
 		String id = sc.nextLine();
 		
-		int time = 0;
+		Member m = mm.memberInfo(id);
 		
-		time = mm.MemberInfo(id);
-		
-		if(time == -1){
+		if(m.getId() == ""){
 			System.out.println("해당 id가 존재하지 않습니다.");
 			return;
 		}
 		
+		if(m.getAdmission() == false){
+			System.out.println("가입 미승인 회원은 사용할 수 없습니다.");
+			return;
+		}
 		
-		sd.UseSeat(seatNo, id, time);
+		sd.useSeat(seatNo, id, m.getRestTime());
 		
 	}
 	
-	public void PlusTime(String id){
+	public void plusTime(String id){
 		
-		if(mm.MemberInfo(id) == -1){
+		Member m = mm.memberInfo(id);
+		
+		if(m.getId() == null){
 			System.out.println("해당 id가 존재하지 않습니다.");
 			return;
 		}
@@ -54,22 +59,15 @@ public class SeatManager {
 	
 		System.out.println("추가할 시간 : ");
 		int time = sc.nextInt();
-		mm.TimePlus(id, time);
+		mm.timePlus(id, time);
 		
 	}
 	
 	
-	public void exitSeat(int seatNo, int userTime){
+	public void exitSeat(int seatNo/*, int userTime*/){
 		
 		
-		mm.useTime(sd.exitSeat(seatNo), userTime);
-		
-	}
-	
-	
-	public void timeThread(){
-		
-		
+		mm.useTime(sd.exitSeat(seatNo), SeatDao.iList[seatNo-1]);
 		
 	}
 	

@@ -40,21 +40,21 @@ public class MainMenu {
 			sc.nextLine();
 			
 			switch(num){
-			case 1: mm.MemberJoin();	break;
-			case 2: mm.IdSearch(); 		break;
-			case 3: mm.PwSearch(); 		break;
+			case 1: mm.memberJoin();	break;
+			case 2: mm.idSearch(); 		break;
+			case 3: mm.pwSearch(); 		break;
 			case 4:
 				System.out.print("승인할 ID 입력 : ");
 				id = sc.nextLine();
-				mm.MemberAdmission(id); break;
-			case 5: mm.TimePlus(); break;
+				mm.memberAdmission(id); break;
+			case 5: mm.timePlus(); break;
 			case 6:
 				System.out.print("검색할 ID 입력 : ");
 				id = sc.nextLine();
-				mm.MemberInfo(id); 
+				mm.memberInfo_time(id); 
 				break;
-			case 7: SeatMenu(); break;
-			case 9: md.MemberList();	break;
+			case 7: seatMenu(); break;
+			case 9: md.memberList();	break;
 			case 10: ; return;
 			default :System.out.println(); System.out.println("잘못 입력하셨습니다."); break;
 			}
@@ -64,7 +64,7 @@ public class MainMenu {
 
 	}
 	
-	public void SeatMenu(){
+	public void seatMenu(){
 
 		int num = 0;
 		String id = "";
@@ -78,7 +78,6 @@ public class MainMenu {
 			System.out.println("5. 좌석 사용 종료");
 			System.out.println();
 			System.out.println("10. 이전 메뉴로"); 
-			System.out.println("99. 스래드 종료");
 			System.out.println("00. 좌석 초기화");
 			System.out.print("메뉴 번호 선택 : ");
 			num = sc.nextInt();
@@ -93,7 +92,7 @@ public class MainMenu {
 					System.out.println("없는 좌석입니다.");
 					break;
 				}
-				sm.CheckSeat(num);
+				sm.checkSeat(num);
 				break;
 			case 3: 
 				System.out.print("사용할 좌석 : ");
@@ -102,25 +101,24 @@ public class MainMenu {
 					System.out.println("없는 좌석입니다.");
 					break;
 				}
-				sm.UseSeat(num);
+				sm.useSeat(num);
 				break;
 			case 4:
 				System.out.print("추가할 회원ID : ");
 				String str = sc.nextLine();
 				
-				sm.PlusTime(str);
+				sm.plusTime(str);
 				break;
 			case 5:
 				
 				System.out.print("종료할 좌석 : ");
 				int seatNo = sc.nextInt();
-				System.out.print("사용 시간 : ");
-				int time = sc.nextInt();
+				/*System.out.print("사용 시간 : ");
+				int time = sc.nextInt();*/
 				
-				sm.exitSeat(seatNo, time); break;
+				sm.exitSeat(seatNo/*, time*/); break;
 			case 10: ; return;
-			case 99: sd.threadOut(); break;
-			case 00: sd.SeatLeset(); break;
+			case 00: sd.seatLeset(); break;
 			default :System.out.println(); System.out.println("잘못 입력하셨습니다."); break;
 			}
 
