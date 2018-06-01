@@ -1,10 +1,11 @@
 package com.kh.miniproject.view;
 
+import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.seat.controller.SeatManager;
 import com.kh.miniproject.seat.dao.SeatDao;
 
-public class Timer extends Thread{
+public class Timer extends Thread implements ConversionTime{
 
 	private int seatNum;
 	private String id;
@@ -14,7 +15,7 @@ public class Timer extends Thread{
 
 	MemberManager mm = new MemberManager();
 	SeatManager sm = new SeatManager();
-
+	
 	public Timer(int seatNum, String id, int time){
 		this.seatNum = seatNum;
 		this.id = id;
@@ -33,9 +34,11 @@ public class Timer extends Thread{
 				SeatDao.iList[seatNum-1] = count;
 				//System.out.println(id + "님의 사용시간 : " + j );
 			} catch (InterruptedException e) {
-				System.out.println("좌석 이용 종료...");
-				System.out.println("사용시간(초) : "
-						+ SeatDao.iList[seatNum-1]);
+				System.out.println("좌석 사용 종료...");
+				
+				System.out.print("종료전까지 사용시간 : ");
+				conversionTime(SeatDao.iList[seatNum-1]);
+				System.out.println();
 				//this.interrupt();
 				this.stop();
 			}
@@ -47,6 +50,18 @@ public class Timer extends Thread{
 		System.out.println();
 		System.out.println(id + "님의 사용시간종료");
 
+	}
+
+	@Override
+	public void conversionTime(int time){
+		long cTime = time;
+
+
+		long second = (long) ((cTime ) % 60);
+		long minute = (long) ((cTime / (  60)) % 60);
+		long hour = (long) ((cTime / ( 60 * 60)));
+
+		System.out.printf("%02d:%02d:%02d", hour, minute, second);
 	}
 
 

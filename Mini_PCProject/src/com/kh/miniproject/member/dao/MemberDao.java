@@ -10,10 +10,11 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.member.vo.Member;
 import com.kh.miniproject.seat.dao.SeatDao;
 
-public class MemberDao {
+public class MemberDao implements ConversionTime {
 
 	ArrayList<Member> ml = new ArrayList<Member>();
 
@@ -224,8 +225,6 @@ public class MemberDao {
 
 					}
 
-
-
 					dout.writeUTF(m.getName());
 					dout.writeUTF(m.getId());
 					dout.writeUTF(m.getPwd());
@@ -275,6 +274,10 @@ public class MemberDao {
 					System.out.println();
 					System.out.println("이름 : " + str[0]);
 					System.out.println("아이디 : " + str[1]);
+
+					System.out.print("충전 시간 : ");
+					conversionTime(Integer.parseInt(str[6]));
+					System.out.println();
 					//System.out.println("충전시간 : " + str[6]);
 					//System.out.println("사용시간 : " + str[7]);
 
@@ -320,18 +323,12 @@ public class MemberDao {
 					System.out.println();
 					System.out.println("이름 : " + str[0]);
 					System.out.println("아이디 : " + str[1]);
-
-					int t = (int)(Integer.parseInt(str[6]) / 60.0 / 60.0);
-					int mt = (int)(Integer.parseInt(str[6])  / 60.0 / 10);
-					int st = (int)(Integer.parseInt(str[6]) % ( 60) );
-
-					System.out.printf("충전 시간  %02d : %02d : %02d\n" ,t , mt, st);
-					
-					t = (int)(Integer.parseInt(str[8]) / 60.0 / 60.0);
-					mt = (int)(Integer.parseInt(str[8])  / 60.0 / 10);
-					st = (int)(Integer.parseInt(str[8]) % ( 60) );
-
-					System.out.printf("누적 사용 시간  %02d : %02d : %02d\n" ,t , mt, st);
+					System.out.print("충전시간 : ");
+					conversionTime(Integer.parseInt(str[6]));
+					System.out.println();
+					System.out.print("누적사용시간 : ");
+					conversionTime(Integer.parseInt(str[8]));
+					System.out.println();
 
 					m = new Member(str[0], str[1], str[2],
 							str[3], Integer.parseInt(str[4]), str[5],
@@ -491,10 +488,18 @@ public class MemberDao {
 				accTime = din.readInt();
 				admission = din.readBoolean();
 
-				System.out.println(i +" : " + name + ", " + id + ", " + pwd
-						+", " +email+", " +age+", " +pNumber+", "
-						+ (restTime / 60 / 60)
-						+", " + useTime+", " +accTime+", " +admission);
+				System.out.print(i +" : " + name + ", " + id + ", " + pwd
+						+", " +email+", " +age+", " +pNumber+", " );
+
+				conversionTime(restTime);
+
+				System.out.printf(", %d, " ,useTime);
+
+				conversionTime(accTime);
+
+				System.out.printf(", %b" ,admission);
+				System.out.println();
+				
 				i++;
 			}
 		}catch(EOFException e){
@@ -549,28 +554,19 @@ public class MemberDao {
 					if(admission == false){
 						continue;
 					}
-					
-					int t = (int)(restTime/ 60.0 / 60.0);
-					int mt = (int)(restTime  / 60.0 / 10);
-					int st = (int)(restTime % ( 60) );
 
-					
-					/// 수정해야 하는 부분
-					
-					
-					System.out.printf("충전 시간  %02d : %02d : %02d\n" ,t , mt, st);
-					
-					t = (int)(din.readInt() / 60.0 / 60.0);
-					mt = (int)(din.readInt()  / 60.0 / 10);
-					st = (int)(din.readInt() % ( 60) );
+					System.out.print(i +" : " + name + ", " + id + ", " + pwd
+							+", " +email+", " +age+", " +pNumber+", " );
 
-					System.out.printf("누적 사용 시간  %02d : %02d : %02d\n" ,t , mt, st);
+					conversionTime(restTime);
 
+					System.out.printf(", %d, " ,useTime);
+
+					conversionTime(accTime);
+
+					System.out.printf(", %b" ,admission);
+					System.out.println();
 					
-					System.out.println(i +" : " + name + ", " + id + ", " + pwd
-							+", " +email+", " +age+", " +pNumber+", " 
-							+ (restTime / 60 / 60)
-							+", " + useTime+", " +accTime+", " +admission);
 					i++;
 
 				}else{
@@ -578,12 +574,20 @@ public class MemberDao {
 					if(admission == true){
 						continue;
 					}
-					System.out.println(i +" : " + name + ", " + id + ", " + pwd
-							+", " +email+", " +age+", " +pNumber+", " 
-							+ (restTime / 60 / 60)
-							+", " + useTime+", " +accTime+", " +admission);
-					i++;
 
+					System.out.print(i +" : " + name + ", " + id + ", " + pwd
+							+", " +email+", " +age+", " +pNumber+", " );
+
+					conversionTime(restTime);
+
+					System.out.printf(", %d, " ,useTime);
+
+					conversionTime(accTime);
+
+					System.out.printf(", %b" ,admission);
+					System.out.println();
+					
+					i++;
 
 				}
 			}
@@ -594,6 +598,17 @@ public class MemberDao {
 			//	e.printStackTrace();
 		}
 
+	}
+	
+	@Override
+	public void conversionTime(int time){
+		long cTime = time;
+
+		long second = (long) ((cTime ) % 60);
+		long minute = (long) ((cTime / (  60)) % 60);
+		long hour = (long) ((cTime / ( 60 * 60)));
+
+		System.out.printf("%02d:%02d:%02d", hour, minute, second);
 	}
 
 }

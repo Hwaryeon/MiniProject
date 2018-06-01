@@ -10,11 +10,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.seat.vo.Seat;
 import com.kh.miniproject.view.Timer;
 
-public class SeatDao extends Thread {
+public class SeatDao extends Thread implements ConversionTime{
 
 
 	Scanner sc = new Scanner(System.in);
@@ -144,10 +145,13 @@ public class SeatDao extends Thread {
 
 				if(sl.get(i).getUseCheck() == true){
 
-					System.out.println("충전 시간 : "
-							+ (mm.memberInfo(sl.get(i).getUserId()).getRestTime()
-							- iList[seatNo-1]));
-					System.out.println("사용 시간 : " + iList[seatNo-1] );
+
+					mm.memberInfo(sl.get(i).getUserId());
+					System.out.println();
+
+					System.out.print("사용시간 : ");
+					conversionTime(iList[seatNo-1]);
+					System.out.println();
 					return;
 				}
 			}
@@ -257,6 +261,18 @@ public class SeatDao extends Thread {
 			e.printStackTrace();
 		}
 		return userId;
+	}
+
+	@Override
+	public void conversionTime(int time){
+		long cTime = time;
+
+
+		long second = (long) ((cTime ) % 60);
+		long minute = (long) ((cTime / (  60)) % 60);
+		long hour = (long) ((cTime / ( 60 * 60)));
+
+		System.out.printf("%02d:%02d:%02d", hour, minute, second);
 	}
 
 }
