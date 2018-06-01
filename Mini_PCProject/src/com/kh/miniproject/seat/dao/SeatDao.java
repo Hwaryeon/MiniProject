@@ -237,8 +237,6 @@ public class SeatDao extends Thread implements ConversionTime{
 
 		String userId = "";
 
-		tList[seatNo-1].interrupt();
-
 		try(DataOutputStream os = new DataOutputStream(
 				new FileOutputStream("seat.txt"))){
 
@@ -254,6 +252,8 @@ public class SeatDao extends Thread implements ConversionTime{
 						sl.get(i).setUserId("");
 						sl.get(i).setUserTime(0);
 						System.out.println("좌석 사용 종료...");
+						tList[seatNo-1].interrupt();
+						
 					}
 				}
 				os.writeInt(sl.get(i).getSeatNo());

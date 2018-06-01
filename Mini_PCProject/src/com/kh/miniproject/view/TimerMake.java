@@ -93,7 +93,7 @@ public class TimerMake extends JFrame {
 		constraints.gridy = 1;
 		centerPanel.add(timeText, constraints);
 
-		JLabel title = new JLabel("현재 " + (threadNumber+1) +"번 좌석 사용시간");
+		JLabel title = new JLabel("좌석 사용시간");
 		title.setForeground(Color.white);
 		title.setFont(new Font("Gothic", Font.BOLD, 20));
 		constraints.gridx = 0;
@@ -187,6 +187,7 @@ public class TimerMake extends JFrame {
 	private String toTime(long time){
 		// time 은  초 * 1000
 		// 단위가 밀리세컨드임
+		
 		time = (SeatDao.iList[threadNumber] * 1000);
 		start();
 		int t = (int)(time / 1000.0 / 60.0 / 60.0);
