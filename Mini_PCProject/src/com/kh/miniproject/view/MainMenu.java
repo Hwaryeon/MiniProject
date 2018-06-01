@@ -31,10 +31,12 @@ public class MainMenu {
 			System.out.println("4. 회원가입 승인");
 			System.out.println("5. 시간 추가");
 			System.out.println("6. 회원 정보 출력");
+			System.out.println("7. 승인된 멤버 리스트 출력");
+			System.out.println("8. 비승인된 멤버 리스트 출력");
+			System.out.println("9. 전체 멤버 리스트 출력");
 			System.out.println();
-			System.out.println("7. 좌석관리 메뉴로 이동");
-			System.out.println("9. 멤버 리스트 출력 (임시 멤버확인용)");
-			System.out.println("10. 끝내기"); 
+			System.out.println("10. 좌석관리 메뉴로 이동");
+			System.out.println("15. 끝내기"); 
 			System.out.print("메뉴 번호 선택 : ");
 			num = sc.nextInt();
 			sc.nextLine();
@@ -53,9 +55,11 @@ public class MainMenu {
 				id = sc.nextLine();
 				mm.memberInfo_time(id); 
 				break;
-			case 7: seatMenu(); break;
+			case 7: md.memberTFList(true); break;
+			case 8: md.memberTFList(false); break;
 			case 9: md.memberList();	break;
-			case 10: ; return;
+			case 10: seatMenu(); break;
+			case 15: ; return;
 			default :System.out.println(); System.out.println("잘못 입력하셨습니다."); break;
 			}
 

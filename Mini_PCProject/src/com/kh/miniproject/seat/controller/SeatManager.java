@@ -43,6 +43,8 @@ public class SeatManager {
 			return;
 		}
 		
+		//m.getRestTime() 초로 저장되어있음..
+		
 		sd.useSeat(seatNo, id, m.getRestTime());
 		
 	}
@@ -53,11 +55,12 @@ public class SeatManager {
 		
 		if(m.getId() == null){
 			System.out.println("해당 id가 존재하지 않습니다.");
+			
 			return;
 		}
 		
 	
-		System.out.println("추가할 시간 : ");
+		System.out.print("추가할 시간 : ");
 		int time = sc.nextInt();
 		mm.timePlus(id, time);
 		
@@ -67,7 +70,7 @@ public class SeatManager {
 	public void exitSeat(int seatNo/*, int userTime*/){
 		
 		
-		mm.useTime(sd.exitSeat(seatNo), SeatDao.iList[seatNo-1]);
+		mm.useTime(sd.exitSeat(seatNo), (SeatDao.iList[seatNo-1] * 60 * 60 ));
 		
 	}
 	

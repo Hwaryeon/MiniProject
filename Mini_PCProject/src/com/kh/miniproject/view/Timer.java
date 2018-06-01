@@ -28,12 +28,14 @@ public class Timer extends Thread{
 
 		for(int j = 0; j < time; j++){
 			try {
-				Thread.sleep(60000);	// 1분
+				Thread.sleep(1000);	// 1초
 				count++;
 				SeatDao.iList[seatNum-1] = count;
 				//System.out.println(id + "님의 사용시간 : " + j );
 			} catch (InterruptedException e) {
 				System.out.println("좌석 이용 종료...");
+				System.out.println("사용시간(초) : "
+						+ SeatDao.iList[seatNum-1]);
 				//this.interrupt();
 				this.stop();
 			}

@@ -188,16 +188,43 @@ public class MemberDao {
 
 					str = (iter.next().toString()).split(", ");
 
-					if(str[1].equals(id)){
-						str[6] = (Integer.parseInt(str[6]) + time) + "";
-						check = 1;
-					}
+					/*if(str[1].equals(id)){
 
+						if(Boolean.getBoolean(str[9]) == false){
+
+							System.out.println("가입 승인 상태가 아닙니다.");
+						}else if(Boolean.getBoolean(str[9]) == true){
+							str[6] = ((Integer.parseInt(str[6])
+									+ (time * 60 * 60)) + "");
+							check = 1;
+						}
+
+					}*/
 
 					Member m = new Member(str[0], str[1], str[2],
 							str[3], Integer.parseInt(str[4]), str[5],
 							Integer.parseInt(str[6]), Integer.parseInt(str[7]),
 							Integer.parseInt(str[8]), Boolean.parseBoolean(str[9]));
+
+					if(m.getId().equals(id)){
+
+
+						if(m.getAdmission() == false){
+							System.out.println("가입 승인 상태가 아닙니다.");
+						}else{
+
+							m.setRestTime(
+
+									Integer.parseInt(str[6])
+									+ (time * 60 * 60));
+
+							check = 1;
+						}
+
+
+					}
+
+
 
 					dout.writeUTF(m.getName());
 					dout.writeUTF(m.getId());
@@ -233,7 +260,7 @@ public class MemberDao {
 		listInsert();
 
 		Member m;
-		
+
 		for(int i=0; i<ml.size(); i++){
 
 			Iterator iter = ml.iterator();
@@ -268,19 +295,22 @@ public class MemberDao {
 		return (m = new Member());
 
 	}
-	
+
 	public Member memberInfo_time(String id){
 
 		ml.clear();
 		listInsert();
 
 		Member m;
-		
+
+
 		for(int i=0; i<ml.size(); i++){
 
 			Iterator iter = ml.iterator();
 
 			String str[];
+
+			double dTime = 0;
 
 			while(iter.hasNext()){
 
@@ -290,8 +320,18 @@ public class MemberDao {
 					System.out.println();
 					System.out.println("이름 : " + str[0]);
 					System.out.println("아이디 : " + str[1]);
-					System.out.println("충전시간 : " + str[6]);
-					System.out.println("사용시간 : " + str[7]);
+
+					int t = (int)(Integer.parseInt(str[6]) / 60.0 / 60.0);
+					int mt = (int)(Integer.parseInt(str[6])  / 60.0 / 10);
+					int st = (int)(Integer.parseInt(str[6]) % ( 60) );
+
+					System.out.printf("충전 시간  %02d : %02d : %02d\n" ,t , mt, st);
+					
+					t = (int)(Integer.parseInt(str[8]) / 60.0 / 60.0);
+					mt = (int)(Integer.parseInt(str[8])  / 60.0 / 10);
+					st = (int)(Integer.parseInt(str[8]) % ( 60) );
+
+					System.out.printf("누적 사용 시간  %02d : %02d : %02d\n" ,t , mt, st);
 
 					m = new Member(str[0], str[1], str[2],
 							str[3], Integer.parseInt(str[4]), str[5],
@@ -301,7 +341,6 @@ public class MemberDao {
 							Boolean.parseBoolean(str[9]));
 
 					return m;
-					//return Integer.parseInt(str[6]);
 				}
 			}
 
@@ -332,8 +371,8 @@ public class MemberDao {
 					str = (iter.next().toString()).split(", ");
 
 					if(str[1].equals(id)){
-						str[6] = (Integer.parseInt(str[6]) - time) + "";
-						str[8] = (Integer.parseInt(str[8]) + time) + "";
+						str[6] = (Integer.parseInt(str[6]) - (time / 60 / 60)) + "";
+						str[8] = (Integer.parseInt(str[8]) + (time / 60 / 60)) + "";
 						check = 1;
 					}
 
@@ -453,9 +492,100 @@ public class MemberDao {
 				admission = din.readBoolean();
 
 				System.out.println(i +" : " + name + ", " + id + ", " + pwd
-						+", " +email+", " +age+", " +pNumber+", " + restTime
+						+", " +email+", " +age+", " +pNumber+", "
+						+ (restTime / 60 / 60)
 						+", " + useTime+", " +accTime+", " +admission);
 				i++;
+			}
+		}catch(EOFException e){
+			//	System.out.println("모든 멤버 출력...");
+		}
+		catch(Exception e){
+			//	e.printStackTrace();
+		}
+
+	}
+
+	public void memberTFList(boolean b){
+
+		ml.clear();
+		String name;
+		String id;
+		String pwd;
+		String email;
+		int age;
+		String pNumber;
+
+		int restTime;
+		int useTime;
+		int accTime;
+		boolean admission;
+
+		int i = 1;
+
+
+		try(DataInputStream din 
+				= new DataInputStream(
+						new FileInputStream("member.txt"));
+				){
+
+			// member.txt에 아무 정보없을때 에러처리 ---> 일단 나중에 처리
+
+			while(true){
+				name = din.readUTF();
+				id = din.readUTF();
+				pwd = din.readUTF();
+				email = din.readUTF();
+				age = din.readInt();
+				pNumber = din.readUTF();
+
+				restTime = din.readInt();
+				useTime = din.readInt();
+				accTime = din.readInt();
+				admission = din.readBoolean();
+
+				if(b == true){
+
+					if(admission == false){
+						continue;
+					}
+					
+					int t = (int)(restTime/ 60.0 / 60.0);
+					int mt = (int)(restTime  / 60.0 / 10);
+					int st = (int)(restTime % ( 60) );
+
+					
+					/// 수정해야 하는 부분
+					
+					
+					System.out.printf("충전 시간  %02d : %02d : %02d\n" ,t , mt, st);
+					
+					t = (int)(din.readInt() / 60.0 / 60.0);
+					mt = (int)(din.readInt()  / 60.0 / 10);
+					st = (int)(din.readInt() % ( 60) );
+
+					System.out.printf("누적 사용 시간  %02d : %02d : %02d\n" ,t , mt, st);
+
+					
+					System.out.println(i +" : " + name + ", " + id + ", " + pwd
+							+", " +email+", " +age+", " +pNumber+", " 
+							+ (restTime / 60 / 60)
+							+", " + useTime+", " +accTime+", " +admission);
+					i++;
+
+				}else{
+
+					if(admission == true){
+						continue;
+					}
+					System.out.println(i +" : " + name + ", " + id + ", " + pwd
+							+", " +email+", " +age+", " +pNumber+", " 
+							+ (restTime / 60 / 60)
+							+", " + useTime+", " +accTime+", " +admission);
+					i++;
+
+
+				}
 			}
 		}catch(EOFException e){
 			//	System.out.println("모든 멤버 출력...");

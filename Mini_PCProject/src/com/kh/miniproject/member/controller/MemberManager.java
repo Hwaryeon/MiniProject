@@ -93,13 +93,13 @@ public class MemberManager {
 	public Member memberInfo(String id){
 
 		int time = 0;
-		
+
 		System.out.println(id + "님의 회원정보를 출력합니다.");
-		
+
 		Member m = md.memberInfo(id);
-		
+
 		time = m.getUseTime();
-		
+
 		if(m.getId() != ""){
 			return m;
 		}
@@ -107,17 +107,17 @@ public class MemberManager {
 		return m;
 
 	}
-	
+
 	public Member memberInfo_time(String id){
 
 		int time = 0;
-		
+
 		System.out.println(id + "님의 회원정보를 출력합니다.");
-		
+
 		Member m = md.memberInfo_time(id);
-		
+
 		time = m.getUseTime();
-		
+
 		if(m.getId() != ""){
 			return m;
 		}
@@ -125,12 +125,22 @@ public class MemberManager {
 		return m;
 
 	}
-	
+
 	public void useTime(String id, int time){
-		
+
 		md.useTime(id, time);
-		
-		
+
+
 	}
+
+	public void memberTFList(boolean b){
+
+
+		md.memberTFList(b);
+
+
+
+	}
+
 
 }
