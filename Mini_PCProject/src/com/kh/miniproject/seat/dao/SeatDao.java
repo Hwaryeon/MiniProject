@@ -14,6 +14,7 @@ import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.seat.vo.Seat;
 import com.kh.miniproject.view.Timer;
+import com.kh.miniproject.view.TimerMake;
 
 public class SeatDao extends Thread implements ConversionTime{
 
@@ -21,6 +22,7 @@ public class SeatDao extends Thread implements ConversionTime{
 	Scanner sc = new Scanner(System.in);
 
 	MemberManager mm = new MemberManager();
+	TimerMake tm = new TimerMake();
 	ArrayList<Seat> sl = new ArrayList<Seat>();
 
 	final static int MAX_SEAT = 12;
@@ -152,6 +154,10 @@ public class SeatDao extends Thread implements ConversionTime{
 					System.out.print("사용시간 : ");
 					conversionTime(iList[seatNo-1]);
 					System.out.println();
+					
+					tm.threadNumber = seatNo-1;
+					tm.visibleFrame();
+					
 					return;
 				}
 			}
@@ -161,6 +167,7 @@ public class SeatDao extends Thread implements ConversionTime{
 
 	}
 
+	
 	public void useSeat(int seatNo, String id, int time){
 
 		insertList();

@@ -32,7 +32,7 @@ public class Timer extends Thread implements ConversionTime{
 				Thread.sleep(1000);	// 1초
 				count++;
 				SeatDao.iList[seatNum-1] = count;
-				//System.out.println(id + "님의 사용시간 : " + j );
+			//	System.out.println(id + "님의 사용시간 : " + j );
 			} catch (InterruptedException e) {
 				System.out.println("좌석 사용 종료...");
 				
