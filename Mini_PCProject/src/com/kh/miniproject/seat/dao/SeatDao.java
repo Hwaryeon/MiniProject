@@ -78,7 +78,6 @@ public class SeatDao extends Thread implements ConversionTime{
 
 			}
 
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}catch(EOFException e){

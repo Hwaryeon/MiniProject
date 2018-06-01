@@ -12,7 +12,6 @@ public class Member implements Serializable {
 	private String pNumber;
 
 	private int restTime;		// 잔여 시간
-	private int useTime;		// 사용 시간 -->해당 필드값 사용안해서 수정예정
 	private int accTime;		// 누적 시간
 	private boolean admission;
 
@@ -27,8 +26,8 @@ public class Member implements Serializable {
 		this.pNumber = pNumber;
 	}
 
-	public Member(String name, String id, String pwd, String email, int age, String pNumber, int restTime, int useTime,
-			int accTime, boolean admission) {
+	public Member(String name, String id, String pwd, String email, int age, String pNumber,
+			int restTime, int accTime, boolean admission) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -37,7 +36,6 @@ public class Member implements Serializable {
 		this.age = age;
 		this.pNumber = pNumber;
 		this.restTime = restTime;
-		this.useTime = useTime;
 		this.accTime = accTime;
 		this.admission = admission;
 	}
@@ -98,13 +96,6 @@ public class Member implements Serializable {
 		this.restTime = restTime;
 	}
 
-	public int getUseTime() {
-		return useTime;
-	}
-
-	public void setUseTime(int useTime) {
-		this.useTime = useTime;
-	}
 
 	public int getAccTime() {
 		return accTime;
@@ -125,7 +116,7 @@ public class Member implements Serializable {
 	@Override
 	public String toString() {
 		return name + ", " + id + ", " + pwd + ", " + email + ", " + age
-				+ ", " + pNumber + ", " + restTime + ", " + useTime + ", " + accTime
+				+ ", " + pNumber + ", " + restTime + ", " + accTime
 				+ ", " + admission;
 	}
 

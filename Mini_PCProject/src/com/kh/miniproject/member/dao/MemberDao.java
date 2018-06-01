@@ -20,23 +20,12 @@ public class MemberDao implements ConversionTime {
 
 	public void memberJoin(Member m){
 
-		ml.clear();
-		listInsert();
+		insertList();
 
 		for(int i=0; i<ml.size(); i++){
-
-			Iterator iter = ml.iterator();
-
-			String str[];
-
-			while(iter.hasNext()){
-
-				str = (iter.next().toString()).split(", ");
-
-				if(str[1].equals(m.getId())){
-					System.out.println("ID가 중복되어 가입이 취소됩니다.");
-					return;
-				}
+			if(ml.get(i).getId().equals(m.getId())){
+				System.out.println("ID가 중복되어 가입이 취소됩니다.");
+				return;
 			}
 		}
 
@@ -52,7 +41,6 @@ public class MemberDao implements ConversionTime {
 			dout.writeUTF(m.getpNumber());
 
 			dout.writeInt(m.getRestTime());
-			dout.writeInt(m.getUseTime());
 			dout.writeInt(m.getAccTime());
 			dout.writeBoolean(m.getAdmission());
 
@@ -64,48 +52,32 @@ public class MemberDao implements ConversionTime {
 
 	public void idSearch(String name, String email){
 
-		ml.clear();
-		listInsert();
+		insertList();
 
-		for(int i=0; i<ml.size(); i++){
+		for(int i=0; i < ml.size(); i++){
+			if(ml.get(i).getName().equals(name) &&
+					ml.get(i).getEmail().equals(email)){
 
-			Iterator iter = ml.iterator();
+				System.out.println("찾은 ID : " + ml.get(i).getId());
+				return;
 
-			String str[];
-
-
-			while(iter.hasNext()){
-
-
-				str = (iter.next().toString()).split(", ");
-
-				if(str[0].equals(name) && str[3].equals(email)){
-					System.out.println("찾은 ID : " + str[1]);
-					return;
-				}
 			}
 		}
+
 		System.out.println("해당하는 정보를 가진 유저가 없습니다.");
 	}
 
 	public void pwSearch(String name, String id){
-		ml.clear();
-		listInsert();
+		insertList();
 
-		for(int i=0; i<ml.size(); i++){
+		for(int i=0; i < ml.size(); i++){
+			if(ml.get(i).getName().equals(name) &&
+					ml.get(i).getId().equals(id)){
 
-			Iterator iter = ml.iterator();
+				System.out.println("찾은 PASSWORD : "
+						+ ml.get(i).getPwd());
+				return;
 
-			String str[];
-
-			while(iter.hasNext()){
-
-				str = (iter.next().toString()).split(", ");
-
-				if(str[0].equals(name) && str[1].equals(id)){
-					System.out.println("찾은 PASSWORD : " + str[2]);
-					return;
-				}
 			}
 		}
 		System.out.println("해당하는 정보를 가진 유저가 없습니다.");
@@ -113,52 +85,36 @@ public class MemberDao implements ConversionTime {
 
 	public void memberAdmission(String id){
 
-		ml.clear();
-		listInsert();
+		insertList();
 
 		int check = 0;
 
-		for(int i=0; i<ml.size(); i++){
+		try(DataOutputStream dout
+				= new DataOutputStream(
+						new FileOutputStream("member.txt"))){
 
-			Iterator iter = ml.iterator();
+			for(int i = 0; i < ml.size(); i++){
 
-			String str[];
-
-			try(DataOutputStream dout
-					= new DataOutputStream(
-							new FileOutputStream("member.txt"))){
-				while(iter.hasNext()){
-
-					str = (iter.next().toString()).split(", ");
-
-					if(str[1].equals(id)){
-						str[9] = "true";
-						check = 1;
-					}
-
-					Member m = new Member(str[0], str[1], str[2],
-							str[3], Integer.parseInt(str[4]), str[5],
-							Integer.parseInt(str[6]), Integer.parseInt(str[7]),
-							Integer.parseInt(str[8]), Boolean.parseBoolean(str[9]));
-
-					dout.writeUTF(m.getName());
-					dout.writeUTF(m.getId());
-					dout.writeUTF(m.getPwd());
-					dout.writeUTF(m.getEmail());
-					dout.writeInt(m.getAge());
-					dout.writeUTF(m.getpNumber());
-
-					dout.writeInt(m.getRestTime());
-					dout.writeInt(m.getUseTime());
-					dout.writeInt(m.getAccTime());
-					dout.writeBoolean(m.getAdmission());
-
+				if(ml.get(i).getId().equals(id)){
+					ml.get(i).setAdmission(true);
+					check = 1;
 				}
 
-			}catch(Exception e){
-				e.printStackTrace();
+				dout.writeUTF(ml.get(i).getName());
+				dout.writeUTF(ml.get(i).getId());
+				dout.writeUTF(ml.get(i).getPwd());
+				dout.writeUTF(ml.get(i).getEmail());
+				dout.writeInt(ml.get(i).getAge());
+				dout.writeUTF(ml.get(i).getpNumber());
+
+				dout.writeInt(ml.get(i).getRestTime());
+				dout.writeInt(ml.get(i).getAccTime());
+				dout.writeBoolean(ml.get(i).getAdmission());
+
 			}
 
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 
 		if(check == 1){
@@ -170,79 +126,44 @@ public class MemberDao implements ConversionTime {
 	}
 
 	public void timePlus(String id, int time){
-		ml.clear();
-		listInsert();
+
+		insertList();
 
 		int check = 0;
 
-		for(int i=0; i<ml.size(); i++){
+		try(DataOutputStream dout
+				= new DataOutputStream(
+						new FileOutputStream("member.txt"))){
 
-			Iterator iter = ml.iterator();
-
-			String str[];
-
-
-			try(DataOutputStream dout
-					= new DataOutputStream(
-							new FileOutputStream("member.txt"))){
-				while(iter.hasNext()){
-
-					str = (iter.next().toString()).split(", ");
-
-					/*if(str[1].equals(id)){
-
-						if(Boolean.getBoolean(str[9]) == false){
-
-							System.out.println("가입 승인 상태가 아닙니다.");
-						}else if(Boolean.getBoolean(str[9]) == true){
-							str[6] = ((Integer.parseInt(str[6])
-									+ (time * 60 * 60)) + "");
-							check = 1;
-						}
-
-					}*/
-
-					Member m = new Member(str[0], str[1], str[2],
-							str[3], Integer.parseInt(str[4]), str[5],
-							Integer.parseInt(str[6]), Integer.parseInt(str[7]),
-							Integer.parseInt(str[8]), Boolean.parseBoolean(str[9]));
-
-					if(m.getId().equals(id)){
-
-
-						if(m.getAdmission() == false){
-							System.out.println("가입 승인 상태가 아닙니다.");
-						}else{
-
-							m.setRestTime(
-
-									Integer.parseInt(str[6])
-									+ (time * 60 * 60));
-
-							check = 1;
-						}
-
-
+			for(int i = 0; i < ml.size(); i++){
+				if(ml.get(i).getId().equals(id)){
+					if(ml.get(i).getAdmission() == false){
+						System.out.println("가입 승인 상태가 아닙니다.");
+					}else{
+						ml.get(i).setRestTime(ml.get(i).getRestTime()
+								+ (time * 60 * 60) );
+						check = 1;
 					}
 
-					dout.writeUTF(m.getName());
-					dout.writeUTF(m.getId());
-					dout.writeUTF(m.getPwd());
-					dout.writeUTF(m.getEmail());
-					dout.writeInt(m.getAge());
-					dout.writeUTF(m.getpNumber());
-
-					dout.writeInt(m.getRestTime());
-					dout.writeInt(m.getUseTime());
-					dout.writeInt(m.getAccTime());
-					dout.writeBoolean(m.getAdmission());
 				}
 
-			}catch(Exception e){
-				e.printStackTrace();
+				dout.writeUTF(ml.get(i).getName());
+				dout.writeUTF(ml.get(i).getId());
+				dout.writeUTF(ml.get(i).getPwd());
+				dout.writeUTF(ml.get(i).getEmail());
+				dout.writeInt(ml.get(i).getAge());
+				dout.writeUTF(ml.get(i).getpNumber());
+
+				dout.writeInt(ml.get(i).getRestTime());
+				dout.writeInt(ml.get(i).getAccTime());
+				dout.writeBoolean(ml.get(i).getAdmission());
+
 			}
 
+		}catch(Exception e){
+			e.printStackTrace();
 		}
+
 		if(check == 1){
 			//	System.out.println("충전 성공...");
 			return;
@@ -255,145 +176,65 @@ public class MemberDao implements ConversionTime {
 
 	public Member memberInfo(String id){
 
-		ml.clear();
-		listInsert();
+		insertList();
 
-		Member m;
+		for(int i=0; i< ml.size(); i++){
 
-		for(int i=0; i<ml.size(); i++){
+			if(ml.get(i).getId().equals(id)){
 
-			Iterator iter = ml.iterator();
+				System.out.println();
+				System.out.println("이름 : " + ml.get(i).getName());
+				System.out.println("아이디 : " + ml.get(i).getId());
+				System.out.print("충전 시간 : ");
+				conversionTime(ml.get(i).getRestTime());
+				System.out.println();
+				System.out.print("누적사용시간 : ");
+				conversionTime(ml.get(i).getAccTime());
+				System.out.println();
+				return ml.get(i);
 
-			String str[];
-
-			while(iter.hasNext()){
-
-				str = (iter.next().toString()).split(", ");
-
-				if(str[1].equals(id)){
-					System.out.println();
-					System.out.println("이름 : " + str[0]);
-					System.out.println("아이디 : " + str[1]);
-
-					System.out.print("충전 시간 : ");
-					conversionTime(Integer.parseInt(str[6]));
-					System.out.println();
-					//System.out.println("충전시간 : " + str[6]);
-					//System.out.println("사용시간 : " + str[7]);
-
-					m = new Member(str[0], str[1], str[2],
-							str[3], Integer.parseInt(str[4]), str[5],
-							Integer.parseInt(str[6]),
-							Integer.parseInt(str[7]),
-							Integer.parseInt(str[8]), 
-							Boolean.parseBoolean(str[9]));
-
-					return m;
-					//return Integer.parseInt(str[6]);
-				}
 			}
-
 		}
 		System.out.println("ID 조회 실패...");
-		return (m = new Member());
-
-	}
-
-	public Member memberInfo_time(String id){
-
-		ml.clear();
-		listInsert();
-
-		Member m;
-
-
-		for(int i=0; i<ml.size(); i++){
-
-			Iterator iter = ml.iterator();
-
-			String str[];
-
-			double dTime = 0;
-
-			while(iter.hasNext()){
-
-				str = (iter.next().toString()).split(", ");
-
-				if(str[1].equals(id)){
-					System.out.println();
-					System.out.println("이름 : " + str[0]);
-					System.out.println("아이디 : " + str[1]);
-					System.out.print("충전시간 : ");
-					conversionTime(Integer.parseInt(str[6]));
-					System.out.println();
-					System.out.print("누적사용시간 : ");
-					conversionTime(Integer.parseInt(str[8]));
-					System.out.println();
-
-					m = new Member(str[0], str[1], str[2],
-							str[3], Integer.parseInt(str[4]), str[5],
-							Integer.parseInt(str[6]),
-							Integer.parseInt(str[7]),
-							Integer.parseInt(str[8]), 
-							Boolean.parseBoolean(str[9]));
-
-					return m;
-				}
-			}
-
-		}
-		System.out.println("ID 조회 실패...");
-		return (m = new Member());
+		return new Member();
 
 	}
 
 	public void useTime(String id, int time){
 
-		ml.clear();
-		listInsert();
+		insertList();
 
 		int check = 0;
 
-		for(int i=0; i<ml.size(); i++){
+		try(DataOutputStream dout
+				= new DataOutputStream(
+						new FileOutputStream("member.txt"))){
 
-			Iterator iter = ml.iterator();
+			for(int i=0; i < ml.size(); i++){
 
-			String str[];
+				if(ml.get(i).getId().equals(id)){
+					ml.get(i).setRestTime(ml.get(i).getRestTime()
+							- (time / 60 / 60));
 
-			try(DataOutputStream dout
-					= new DataOutputStream(
-							new FileOutputStream("member.txt"))){
-				while(iter.hasNext()){
-
-					str = (iter.next().toString()).split(", ");
-
-					if(str[1].equals(id)){
-						str[6] = (Integer.parseInt(str[6]) - (time / 60 / 60)) + "";
-						str[8] = (Integer.parseInt(str[8]) + (time / 60 / 60)) + "";
-						check = 1;
-					}
-
-					Member m = new Member(str[0], str[1], str[2],
-							str[3], Integer.parseInt(str[4]), str[5],
-							Integer.parseInt(str[6]), Integer.parseInt(str[7]),
-							Integer.parseInt(str[8]), Boolean.parseBoolean(str[9]));
-
-					dout.writeUTF(m.getName());
-					dout.writeUTF(m.getId());
-					dout.writeUTF(m.getPwd());
-					dout.writeUTF(m.getEmail());
-					dout.writeInt(m.getAge());
-					dout.writeUTF(m.getpNumber());
-
-					dout.writeInt(m.getRestTime());
-					dout.writeInt(m.getUseTime());
-					dout.writeInt(m.getAccTime());
-					dout.writeBoolean(m.getAdmission());
+					ml.get(i).setAccTime(ml.get(i).getAccTime()
+							+ (time / 60 / 60));
+					check = 1;
 				}
-			}catch(Exception e){
-				e.printStackTrace();
+
+				dout.writeUTF(ml.get(i).getName());
+				dout.writeUTF(ml.get(i).getId());
+				dout.writeUTF(ml.get(i).getPwd());
+				dout.writeUTF(ml.get(i).getEmail());
+				dout.writeInt(ml.get(i).getAge());
+				dout.writeUTF(ml.get(i).getpNumber());
+
+				dout.writeInt(ml.get(i).getRestTime());
+				dout.writeInt(ml.get(i).getAccTime());
+				dout.writeBoolean(ml.get(i).getAdmission());
 			}
 
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 
 		if(check == 1){
@@ -406,7 +247,7 @@ public class MemberDao implements ConversionTime {
 
 	}
 
-	public void listInsert(){
+	public void insertList(){
 		ml.clear();
 		String name;
 		String id;
@@ -416,7 +257,6 @@ public class MemberDao implements ConversionTime {
 		String pNumber;
 
 		int restTime;
-		int useTime;
 		int accTime;
 		boolean admission;
 
@@ -436,12 +276,11 @@ public class MemberDao implements ConversionTime {
 				pNumber = din.readUTF();
 
 				restTime = din.readInt();
-				useTime = din.readInt();
 				accTime = din.readInt();
 				admission = din.readBoolean();
 
 				ml.add(new Member(name, id, pwd, email, age, pNumber,
-						restTime, useTime, accTime, admission));
+						restTime, accTime, admission));
 
 			}
 		}catch(EOFException e){
@@ -453,153 +292,75 @@ public class MemberDao implements ConversionTime {
 	}
 
 	public void memberList(){
-		ml.clear();
-		String name;
-		String id;
-		String pwd;
-		String email;
-		int age;
-		String pNumber;
 
-		int restTime;
-		int useTime;
-		int accTime;
-		boolean admission;
+		insertList();
+		int num = 1;
 
-		int i = 1;
+		for(int i = 0; i < ml.size(); i++){
 
-		try(DataInputStream din 
-				= new DataInputStream(
-						new FileInputStream("member.txt"));
-				){
+			System.out.print(num +" : " + ml.get(i).getName() + ", " + ml.get(i).getId()
+					+ ", " + ml.get(i).getPwd()
+					+ ", " + ml.get(i).getEmail() +", " + ml.get(i).getAge()
+					+ ", " + ml.get(i).getpNumber() +", " );
 
-			// member.txt에 아무 정보없을때 에러처리 ---> 일단 나중에 처리
+			conversionTime(ml.get(i).getRestTime());
+			System.out.print(", ");
+			conversionTime(ml.get(i).getAccTime());
 
-			while(true){
-				name = din.readUTF();
-				id = din.readUTF();
-				pwd = din.readUTF();
-				email = din.readUTF();
-				age = din.readInt();
-				pNumber = din.readUTF();
+			System.out.printf(", %b" , ml.get(i).getAdmission());
+			System.out.println();
 
-				restTime = din.readInt();
-				useTime = din.readInt();
-				accTime = din.readInt();
-				admission = din.readBoolean();
-
-				System.out.print(i +" : " + name + ", " + id + ", " + pwd
-						+", " +email+", " +age+", " +pNumber+", " );
-
-				conversionTime(restTime);
-
-				System.out.printf(", %d, " ,useTime);
-
-				conversionTime(accTime);
-
-				System.out.printf(", %b" ,admission);
-				System.out.println();
-				
-				i++;
-			}
-		}catch(EOFException e){
-			//	System.out.println("모든 멤버 출력...");
-		}
-		catch(Exception e){
-			//	e.printStackTrace();
+			num++;
 		}
 
 	}
 
 	public void memberTFList(boolean b){
 
-		ml.clear();
-		String name;
-		String id;
-		String pwd;
-		String email;
-		int age;
-		String pNumber;
+		insertList();
+		int num = 1;
 
-		int restTime;
-		int useTime;
-		int accTime;
-		boolean admission;
-
-		int i = 1;
+		for(int i = 0; i < ml.size(); i++){
 
 
-		try(DataInputStream din 
-				= new DataInputStream(
-						new FileInputStream("member.txt"));
-				){
+			if(ml.get(i).getAdmission() == true && b == true){
+				System.out.print(num +" : " + ml.get(i).getName() + ", " + ml.get(i).getId()
+						+ ", " + ml.get(i).getPwd()
+						+ ", " + ml.get(i).getEmail() +", " + ml.get(i).getAge()
+						+ ", " + ml.get(i).getpNumber() +", " );
 
-			// member.txt에 아무 정보없을때 에러처리 ---> 일단 나중에 처리
+				conversionTime(ml.get(i).getRestTime());
 
-			while(true){
-				name = din.readUTF();
-				id = din.readUTF();
-				pwd = din.readUTF();
-				email = din.readUTF();
-				age = din.readInt();
-				pNumber = din.readUTF();
+				System.out.print(", ");
+				conversionTime(ml.get(i).getAccTime());
 
-				restTime = din.readInt();
-				useTime = din.readInt();
-				accTime = din.readInt();
-				admission = din.readBoolean();
+				System.out.printf(", %b" , ml.get(i).getAdmission());
+				System.out.println();
 
-				if(b == true){
+				num++;
+			}else if(ml.get(i).getAdmission() == false && b == false){
+				System.out.print(num +" : " + ml.get(i).getName() + ", " + ml.get(i).getId()
+						+ ", " + ml.get(i).getPwd()
+						+ ", " + ml.get(i).getEmail() +", " + ml.get(i).getAge()
+						+ ", " + ml.get(i).getpNumber() +", " );
 
-					if(admission == false){
-						continue;
-					}
+				conversionTime(ml.get(i).getRestTime());
 
-					System.out.print(i +" : " + name + ", " + id + ", " + pwd
-							+", " +email+", " +age+", " +pNumber+", " );
+				System.out.print(", ");
+				conversionTime(ml.get(i).getAccTime());
 
-					conversionTime(restTime);
+				System.out.printf(", %b" , ml.get(i).getAdmission());
+				System.out.println();
 
-					System.out.printf(", %d, " ,useTime);
-
-					conversionTime(accTime);
-
-					System.out.printf(", %b" ,admission);
-					System.out.println();
-					
-					i++;
-
-				}else{
-
-					if(admission == true){
-						continue;
-					}
-
-					System.out.print(i +" : " + name + ", " + id + ", " + pwd
-							+", " +email+", " +age+", " +pNumber+", " );
-
-					conversionTime(restTime);
-
-					System.out.printf(", %d, " ,useTime);
-
-					conversionTime(accTime);
-
-					System.out.printf(", %b" ,admission);
-					System.out.println();
-					
-					i++;
-
-				}
+				num++;
 			}
-		}catch(EOFException e){
-			//	System.out.println("모든 멤버 출력...");
+
+
 		}
-		catch(Exception e){
-			//	e.printStackTrace();
-		}
+
 
 	}
-	
+
 	@Override
 	public void conversionTime(int time){
 		long cTime = time;

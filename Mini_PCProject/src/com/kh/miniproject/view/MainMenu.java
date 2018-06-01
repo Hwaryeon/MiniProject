@@ -53,7 +53,7 @@ public class MainMenu {
 			case 6:
 				System.out.print("검색할 ID 입력 : ");
 				id = sc.nextLine();
-				mm.memberInfo_time(id); 
+				mm.memberInfo(id); 
 				break;
 			case 7: md.memberTFList(true); break;
 			case 8: md.memberTFList(false); break;
