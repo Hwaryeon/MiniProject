@@ -166,7 +166,7 @@ public class InuseSeat extends JPanel
 		seatInUse.add(useRestTimeL);
 		JTextField useRestTimeT = new JTextField();
 		
-		//useRestTimeT.setText(md.conversionTime(m.getRestTime()));
+		useRestTimeT.setText(md.conversionTime(m.getRestTime()));
 		
 		useRestTimeT.setBounds(170, 260, 150, 50);
 		useRestTimeT.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 30));
