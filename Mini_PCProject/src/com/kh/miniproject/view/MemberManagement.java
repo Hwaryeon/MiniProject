@@ -12,7 +12,7 @@ import javax.swing.table.TableColumnModel;
 
 import com.kh.miniproject.member.controller.MemberManager;
 
-public class MemberManagement {
+public class MemberManagement extends JPanel{
 	private MemberManager mm = new MemberManager();
 	private MainFrame mf;
 	private MainPanel mp;
@@ -20,11 +20,9 @@ public class MemberManagement {
 	public MemberManagement(MainFrame mf){
 		this.mf = mf;
 
-		JPanel start = new JPanel();
-
-		start.setLayout(null);
-		start.setSize(mf.getWidth(), mf.getHeight());
-		start.setBackground(Color.BLACK);
+		this.setLayout(null);
+		this.setSize(mf.getWidth(), mf.getHeight());
+		this.setBackground(Color.BLACK);
 
 		//상단 회원관리 패널 //패널 위 라벨로 구성
 		JPanel memberManagePanel = new JPanel();
@@ -401,8 +399,8 @@ public class MemberManagement {
 
 
 		
-		mf.add(member);
-		mf.add(memberManagePanel);
-		mf.add(start);
+		this.add(member);
+		this.add(memberManagePanel);
+		mf.add(this);
 	}
 }

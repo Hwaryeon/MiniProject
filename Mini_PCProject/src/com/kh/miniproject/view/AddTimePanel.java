@@ -4,14 +4,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.AttributedCharacterIterator.Attribute;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.swing.*;
 
 import com.kh.miniproject.member.controller.MemberManager;
+import com.kh.miniproject.member.vo.Member;
 
 
-public class AddTimePanel{
+public class AddTimePanel extends JPanel{
 	private MainFrame mf;
 	private JPanel mp;
 	private MemberManager mm = new MemberManager();
@@ -20,11 +22,11 @@ public class AddTimePanel{
 		this.mf = mf;
 
 		//메인 프레임과 같은 사이즈의 패널
-		JPanel start = new JPanel();
+		//JPanel start = new JPanel();
 
-		start.setLayout(null);
-		start.setSize(mf.getSize());
-		start.setBackground(Color.BLACK);
+		this.setLayout(null);
+		this.setSize(mf.getSize());
+		this.setBackground(Color.BLACK);
 
 		//상단 시간추가 패널 //패널 위 라벨로 구성
 		JPanel addTimeText = new JPanel();
@@ -159,15 +161,29 @@ public class AddTimePanel{
 				String checkString = priceChoice.getSelectedItem();
 				int priceCheck = Integer.parseInt(checkString);
 				
+				switch(checkString){
+				case "1000" : priceCheck = Integer.parseInt(checkString); 
+								
+				break;
+				case "2000" : priceCheck = Integer.parseInt(checkString); 
+				break;
+				case "3000" : priceCheck = Integer.parseInt(checkString); break;
+				case "5000" : priceCheck = Integer.parseInt(checkString); break;
+				case "10000" : priceCheck = Integer.parseInt(checkString); break;
+				case "20000" : priceCheck = Integer.parseInt(checkString); break;
+				case "50000" : priceCheck = Integer.parseInt(checkString); break;
+				}
 				
 				try{
 				if(priceCheck >= 1000 && checkUser == 1){
+					//ArrayList<Member> listTF = mm.memberTFList(false);
 					priceMin.setText("");
 					idOverlap.setText("");
 					priceToTime.setText("03:00 충전");
 					insertID.setText("03:00 충전");
 					addTimeDial.setVisible(true);
 				}
+				
 				if(checkUser == 0){
 					idOverlap.setText("존재하지 않는 회원입니다.");
 				}
@@ -235,9 +251,9 @@ public class AddTimePanel{
 		timeMain.add(iconLabel);
 
 
-		mf.add(timeMain);
-		mf.add(addTimeText);
-		mf.add(start);
+		this.add(timeMain);
+		this.add(addTimeText);
+		mf.add(this);
 
 
 

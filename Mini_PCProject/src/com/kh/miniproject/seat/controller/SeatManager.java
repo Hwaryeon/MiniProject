@@ -20,9 +20,9 @@ public class SeatManager {
 	}
 	
 	
-	public void checkSeat(int seatNo){
+	public String checkSeat(int seatNo){
 		
-		sd.checkSeat(seatNo);
+		return sd.checkSeat(seatNo);
 		
 	}
 	

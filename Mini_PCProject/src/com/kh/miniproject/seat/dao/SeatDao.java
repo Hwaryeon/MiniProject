@@ -137,7 +137,7 @@ public class SeatDao extends Thread implements ConversionTime{
 		System.out.println();
 	}
 
-	public void checkSeat(int seatNo){
+	public String checkSeat(int seatNo){
 
 		insertList();
 
@@ -147,22 +147,23 @@ public class SeatDao extends Thread implements ConversionTime{
 				if(sl.get(i).getUseCheck() == true){
 
 
-					mm.memberInfo(sl.get(i).getUserId());
+					
+					/*mm.memberInfo(sl.get(i).getUserId());
 					System.out.println();
 
 					System.out.print("사용시간 : ");
 					conversionTime(iList[seatNo-1]);
-					System.out.println();
+					System.out.println();*/
 					
 					tm.threadNumber = seatNo-1;
 					tm.visibleFrame();
 					
-					return;
+					return sl.get(i).getUserId();
 				}
 			}
 		}
 
-		System.out.println("해당 좌석은 사용중이지 않습니다.");
+		return "";/*System.out.println("해당 좌석은 사용중이지 않습니다.");*/
 
 	}
 

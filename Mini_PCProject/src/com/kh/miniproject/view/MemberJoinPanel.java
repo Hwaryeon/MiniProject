@@ -9,7 +9,7 @@ import javax.swing.*;
 import com.kh.miniproject.member.controller.MemberManager;
 
 
-public class MemberJoinPanel {
+public class MemberJoinPanel extends JPanel{
 	private MainFrame mf;
 	private MainPanel mp;
 	private MemberManager mm = new MemberManager();
@@ -17,11 +17,9 @@ public class MemberJoinPanel {
 	public MemberJoinPanel(MainFrame mf){
 		this.mf = mf;
 
-		JPanel start = new JPanel();
-
-		start.setLayout(null);
-		start.setSize(mf.getWidth(), mf.getHeight());
-		start.setBackground(Color.BLACK);
+		this.setLayout(null);
+		this.setSize(mf.getWidth(), mf.getHeight());
+		this.setBackground(Color.BLACK);
 
 		//상단 회원가입 패널 //패널 위 라벨로 구성
 		JPanel memberJoinText = new JPanel();
@@ -172,9 +170,9 @@ public class MemberJoinPanel {
 		joinMain.add(pwd);
 		joinMain.add(textPwd);
 
-		mf.add(joinMain);
-		mf.add(memberJoinText);
-		mf.add(start);
+		this.add(joinMain);
+		this.add(memberJoinText);
+		mf.add(this);
 
 
 	}

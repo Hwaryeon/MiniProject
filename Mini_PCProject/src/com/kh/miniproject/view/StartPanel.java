@@ -3,35 +3,40 @@ package com.kh.miniproject.view;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
-public class StartPanel extends JFrame
+import com.kh.miniproject.view.decoration.*;
+
+public class StartPanel extends JPanel
 {
 	private MainFrame mf;
-	private JPanel mp;
 	
 	public StartPanel(MainFrame mf)
 	{
 		this.mf = mf;
 		
-		//System.out.println(mf.getWidth() + ", " + mf.getHeight());
-		
-		
-		JPanel start = new JPanel();
-		start.setLayout(null);
-		start.setSize(mf.getWidth(), mf.getHeight());
-		start.setBackground(Color.BLACK);
-		this.mp = start;
+		this.setLayout(null);
+		this.setSize(mf.getWidth(), mf.getHeight());
+		this.setBackground(Color.BLACK);
 		
 		//회원가입 버튼
-		JButton signup = new JButton("회원로그인");
+		JButton signup = new RoundedButton("회원가입");
 		signup.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		signup.setBackground(Color.WHITE);
+		//signup.setBackground(Color.WHITE);
 		signup.setSize(200, 50);
-		start.add(signup);
+		this.add(signup);
 		signup.setLocation(50, 50);
-		signup.addMouseListener(new MyMouseAdapter());
+		signup.addMouseListener(new MouseAdapter()
+				{
+					@Override
+					public void mouseClicked(MouseEvent e)
+					{
+						MemberJoinPanel mjp = new MemberJoinPanel(mf);
+						changePanel(mjp);
+					}
+				});
 		
 		//타이틀
 		JPanel titlep = new JPanel();
@@ -50,7 +55,7 @@ public class StartPanel extends JFrame
 		mode.setForeground(Color.WHITE);
 		mode.setBounds(0, 100, 600, 50);
 		titlep.add(mode);
-		start.add(titlep);
+		this.add(titlep);
 
 		
 		JPanel loginp = new JPanel();
@@ -58,20 +63,29 @@ public class StartPanel extends JFrame
 		loginp.setBounds(400, 350, 400, 300);
 		loginp.setBackground(Color.BLACK);
 		
+		JPanel idPanel = new JPanel();
+		idPanel.setLayout(null);
+		idPanel.setBackground(null);
+		idPanel.setBounds(25, 20, 50, 50);
 		JLabel idicon = new JLabel();
-		Image icon = new ImageIcon("icon/id2.png").getImage().getScaledInstance(50, 50, 0);
+		Image icon = new ImageIcon("icon/user (2).png").getImage().getScaledInstance(50, 50, 0);
 		idicon.setIcon(new ImageIcon(icon));
-		idicon.setBounds(25, 20, 50, 50);
+		idPanel.add(idicon);
+		idicon.setBounds(0, 0, 50, 50);
 		
 		JTextField id = new JTextField(16);
 		id.setBounds(80, 20, 300, 50);
 		id.setEditable(true);
 		
+		JPanel pwPanel = new JPanel();
+		pwPanel.setLayout(null);
+		pwPanel.setBackground(null);
+		pwPanel.setBounds(25, 75, 50, 50);
 		JLabel pwicon = new JLabel();
-		icon = new ImageIcon("icon/password2.png").getImage().getScaledInstance(50, 50, 0);
+		icon = new ImageIcon("icon/pw.png").getImage().getScaledInstance(50, 50, 0);
 		pwicon.setIcon(new ImageIcon(icon));
-		pwicon.setBounds(25, 75, 50, 50);
-		pwicon.setBackground(Color.WHITE);
+		pwPanel.add(pwicon);
+		pwicon.setBounds(0, 0, 50, 50);
 		
 		JPasswordField pw = new JPasswordField(16);
 		pw.setEditable(true);
@@ -79,42 +93,35 @@ public class StartPanel extends JFrame
 		
 		JButton login = new JButton("Login");
 		login.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		login.setBackground(Color.WHITE);
+		//login.setBackground(Color.WHITE);
 		login.setBounds(100,140,190,50);
+		login.addMouseListener(new MouseAdapter() 
+			{
+				@Override
+				public void mouseClicked(MouseEvent e)
+				{
+					MainPanel mp = new MainPanel(mf);
+					changePanel(mp);
+				}
+			});
 		
-		loginp.add(idicon);
-		loginp.add(pwicon);
+		loginp.add(idPanel);
+		loginp.add(pwPanel);
 		loginp.add(id);
 		loginp.add(pw);
 		loginp.add(login);
 		
 		
-		start.add(loginp);
+		this.add(loginp);
 		
-		mf.add(start);
+		mf.add(this);
 		
 	}
 	
-	class MyMouseAdapter extends MouseAdapter 
+	public void changePanel(JPanel panel)
 	{
-		@Override
-		public void mouseClicked(MouseEvent e)
-		{
-			replace();
-		}
-	}
-	
-	public JPanel callMain()
-	{
-		mp = new MainPanel(mf);
-		return mp;
-	}
-	
-	public void replace()
-	{
-		this.remove(mp);
-		this.mp = callMain();
-		this.add(mp);
-		this.repaint();
+		mf.remove(this);
+		mf.add(panel);
+		mf.repaint();
 	}
 }
