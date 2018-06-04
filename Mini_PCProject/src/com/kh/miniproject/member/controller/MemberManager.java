@@ -32,31 +32,17 @@ public class MemberManager {
 
 	}
 
-	public void idSearch(){
+	public String idSearch(String name, String email){
 
-		System.out.println();
-		System.out.println("아이디 찾기위해 해당 정보를 입력해주세요.");
-		System.out.print("NAME : ");
-		String name = sc.nextLine();
-		System.out.print("EMAIL : ");
-		String email = sc.nextLine();
-
-		md.idSearch(name, email);
+		return md.idSearch(name, email);
 
 	}
 
-	public void pwSearch(){
-
-		System.out.println();
-		System.out.println("아이디 찾기위해 해당 정보를 입력해주세요.");
-		System.out.print("NAME : ");
-		String name = sc.nextLine();
-		System.out.print("ID : ");
-		String id = sc.nextLine();
-
-		md.pwSearch(name, id);
-
-	}
+	public String pwSearch(String id, String name){
+		
+				return md.pwSearch(name, id);
+		
+			}
 
 	public void memberAdmission(String id){
 
@@ -77,6 +63,8 @@ public class MemberManager {
 
 	public void timePlus(String id, int time){
 
+		System.out.println("시간추가");
+		
 		md.timePlus(id, time);
 	}
 

@@ -50,38 +50,42 @@ public class MemberDao implements ConversionTime {
 
 	}
 
-	public void idSearch(String name, String email){
+	public String idSearch(String name, String email){
 
 		insertList();
+
+		System.out.println(ml.get(0).getName());
 
 		for(int i=0; i < ml.size(); i++){
 			if(ml.get(i).getName().equals(name) &&
 					ml.get(i).getEmail().equals(email)){
 
-				System.out.println("찾은 ID : " + ml.get(i).getId());
-				return;
+				//System.out.println("찾은 ID : " + ml.get(i).getId());
+				return ml.get(i).getId();
 
 			}
 		}
 
-		System.out.println("해당하는 정보를 가진 유저가 없습니다.");
+		return "잘못 입력하셨습니다.";
 	}
 
-	public void pwSearch(String name, String id){
-		insertList();
-
-		for(int i=0; i < ml.size(); i++){
-			if(ml.get(i).getName().equals(name) &&
-					ml.get(i).getId().equals(id)){
-
-				System.out.println("찾은 PASSWORD : "
-						+ ml.get(i).getPwd());
-				return;
-
-			}
-		}
-		System.out.println("해당하는 정보를 가진 유저가 없습니다.");
-	}
+	public String pwSearch(String name, String id){
+				insertList();
+		
+				for(int i=0; i < ml.size(); i++){
+					if(ml.get(i).getName().equals(name) &&
+							ml.get(i).getId().equals(id)){
+		
+						/*System.out.println("찾은 PASSWORD : "
+								+ ml.get(i).getPwd());*/
+						
+						
+						return ml.get(i).getPwd();
+		
+		 			}
+		 		}
+				return "잘못 입력하셨습니다.";
+		 	}
 
 	public void memberAdmission(String id){
 
@@ -129,6 +133,8 @@ public class MemberDao implements ConversionTime {
 
 		insertList();
 
+		System.out.println("id : " + id);
+		
 		int check = 0;
 
 		try(DataOutputStream dout

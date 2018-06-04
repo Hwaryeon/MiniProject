@@ -111,17 +111,17 @@ public class MemberJoinPanel {
 		overlap.addActionListener(new ActionListener(){	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				int check = mm.checkUser(textId.getText());
 
 				System.out.println("check : "  + check);
-				
+
 				if(check == 0){		// 중복 x
 					checkOverlap.setText("사용 가능한 아이디입니다.");
 				}else if(check == 1){	// 중복 o
 					checkOverlap.setText("중복된 아이디 입니다.");
 				}
-				
+
 				overlapDialog.setVisible(true);
 
 
@@ -154,21 +154,25 @@ public class MemberJoinPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				if(textName.getText() != "" && textId.getText() != "" &&
-						textPwd.getText() != "" && textEmail.getText() != "" &&
-						textPhoneNum.getText() != "" ){
-					
-					System.out.println("모든 정보를 입력하셔야합니다.");
-					
+
+				if(textName.getText().equals("") || textId.getText().equals("")
+						|| textPwd.getText().equals("")
+						|| textEmail.getText().equals("")
+						|| textPhoneNum.getText().equals("")
+						
+						){
+
+					checkOverlap.setText("모든 정보를 입력하셔야합니다.");
+					overlapDialog.setVisible(true);
 				}else{
 					
 					mm.memberJoin(textName.getText(), textId.getText(),
 							textPwd.getText(), textEmail.getText(),
 							textPhoneNum.getText());
 				}
-				
-				
+
+
+
 			}
 
 		});
