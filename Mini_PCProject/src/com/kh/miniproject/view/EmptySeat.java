@@ -12,7 +12,7 @@ public class EmptySeat extends JPanel
 {
 	private MainFrame mf;
 
-	public EmptySeat(MainFrame mf) 
+	public EmptySeat(MainFrame mf, int seatNo) 
 	{
 		this.mf = mf;
 		this.setSize(mf.getWidth(), mf.getHeight());
@@ -73,7 +73,7 @@ public class EmptySeat extends JPanel
 		iconp.setBounds(0, 110, 400, 425);
 		iconp.setBackground(Color.LIGHT_GRAY);
 		Font font = new Font("¸¼Àº°íµñ", Font.BOLD, 18);
-		// ½Ã°£Ãß°¡ ¹öÆ°
+		// ÁÂ¼®Ãß°¡ ¹öÆ°
 		JButton seatPlus = new JButton();
 		Image clock = new ImageIcon("icon/addSeat.PNG").getImage().getScaledInstance(150, 150, 0);
 		seatPlus.setIcon(new ImageIcon(clock));
@@ -112,11 +112,13 @@ public class EmptySeat extends JPanel
 		seatTitle.setBounds(0, 0, 650, 100);
 		seatP.add(seatTitle);
 		
-		JLabel seatNo = new JLabel("1");
-		seatNo.setHorizontalAlignment(JLabel.CENTER);
-		seatNo.setBounds(10,100,100,100);
-		seatNo.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 40));
-		seatP.add(seatNo);
+		
+		
+		JLabel seatNoLabel = new JLabel(seatNo+"");
+		seatNoLabel.setHorizontalAlignment(JLabel.CENTER);
+		seatNoLabel.setBounds(10,100,100,100);
+		seatNoLabel.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 40));
+		seatP.add(seatNoLabel);
 		
 		JLabel seatUse = new JLabel("Empty");
 		seatUse.setHorizontalAlignment(JLabel.CENTER);

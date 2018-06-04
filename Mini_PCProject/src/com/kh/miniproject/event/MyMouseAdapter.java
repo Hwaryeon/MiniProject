@@ -24,6 +24,8 @@ public abstract class MyMouseAdapter extends JFrame implements MouseListener, Mo
 	@Override
 	public abstract void mouseClicked(MouseEvent e);
 
+	
+	
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub

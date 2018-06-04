@@ -13,6 +13,7 @@ public class MainFrame extends JFrame{
 		//new MemberJoinPanel(this);
 		//new MemberManagement(this);
 		//new EmptySeat(this);
+		//new InuseSeat(this);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

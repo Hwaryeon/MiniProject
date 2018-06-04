@@ -22,7 +22,7 @@ public class SeatDao extends Thread implements ConversionTime{
 	Scanner sc = new Scanner(System.in);
 
 	MemberManager mm = new MemberManager();
-	TimerMake tm = new TimerMake();
+	//TimerMake tm = new TimerMake();
 	ArrayList<Seat> sl = new ArrayList<Seat>();
 
 	final static int MAX_SEAT = 12;
@@ -115,9 +115,9 @@ public class SeatDao extends Thread implements ConversionTime{
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		}catch(EOFException e){
+		} catch(EOFException e){
 			//System.out.println("모든 좌석 출력...");
-		}catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
@@ -155,15 +155,15 @@ public class SeatDao extends Thread implements ConversionTime{
 					conversionTime(iList[seatNo-1]);
 					System.out.println();*/
 					
-					tm.threadNumber = seatNo-1;
-					tm.visibleFrame();
+					/*tm.threadNumber = seatNo-1;
+					tm.visibleFrame();*/
 					
 					return sl.get(i).getUserId();
 				}
 			}
 		}
 
-		return "";/*System.out.println("해당 좌석은 사용중이지 않습니다.");*/
+		return null;/*System.out.println("해당 좌석은 사용중이지 않습니다.");*/
 
 	}
 
