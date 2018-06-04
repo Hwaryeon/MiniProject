@@ -285,12 +285,12 @@ public class MemberManagement {
 		//회원 찾기 패널에 올라갈 아이디 관련 컴포넌트 생성
 		JLabel idLabel = new JLabel("회원 이름");
 		JTextField idSearch = new JTextField();
-		JLabel phoneLabel = new JLabel("전화번호");
-		JTextField phoneSearch = new JTextField();
+		JLabel emailLabel = new JLabel("이메일");
+		JTextField emailSearch = new JTextField();
 
 		JLabel idField = new JLabel("아이디 : ");
 		//
-		JTextField idResult = new JTextField("User01");
+		JTextField idResult = new JTextField();
 		JButton idSearchBtn = new JButton("아이디 찾기");
 
 		//컴포넌트 ID부분 세부설정
@@ -301,12 +301,12 @@ public class MemberManagement {
 		idSearch.setBounds(15, 50, 200, 35);
 		idSearch.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 
-		phoneLabel.setBounds(15, 100, 100, 50);
-		phoneLabel.setBackground(Color.WHITE);
-		phoneLabel.setFont(new Font("맑은 고딕", Font.BOLD, 14));
+		emailLabel.setBounds(15, 100, 100, 50);
+		emailLabel.setBackground(Color.WHITE);
+		emailLabel.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 
-		phoneSearch.setBounds(15, 150, 200, 35);
-		phoneSearch.setFont(new Font("맑은 고딕", Font.BOLD, 14));
+		emailSearch.setBounds(15, 150, 200, 35);
+		emailSearch.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 
 		idField.setBounds(10, 220, 100, 50);
 		idField.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -323,7 +323,10 @@ public class MemberManagement {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				idResult.setText("아이디");
+				/*System.out.println(idSearch.getText());
+						System.out.println(emailSearch.getText());*/
+				idResult.setText(mm.idSearch(idSearch.getText(), emailSearch.getText()));
+				//mm.idSearch(idSearch.getText(), emailSearch.getText());
 
 			}
 
@@ -337,7 +340,7 @@ public class MemberManagement {
 
 		JLabel pwdField = new JLabel("비밀번호 : ");
 		//
-		JTextField pwdResult = new JTextField("Pass01");
+		JTextField pwdResult = new JTextField();
 		JButton pwdSearchBtn = new JButton("비밀번호 찾기");
 
 		//컴포넌트 PWD 부분 세부 설정
@@ -371,7 +374,7 @@ public class MemberManagement {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				pwdResult.setText("패스워드");
+				pwdResult.setText(mm.pwSearch(pwdSearch.getText(), nameSearch.getText()));
 
 			}
 
@@ -394,8 +397,8 @@ public class MemberManagement {
 
 		memberSearch.add(idResult);
 		memberSearch.add(idField);
-		memberSearch.add(phoneSearch);
-		memberSearch.add(phoneLabel);
+		memberSearch.add(emailSearch);
+		memberSearch.add(emailLabel);
 		memberSearch.add(idSearch);
 		memberSearch.add(idLabel);
 		memberSearch.add(idSearchBtn);

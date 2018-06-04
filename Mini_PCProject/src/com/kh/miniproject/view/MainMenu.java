@@ -43,8 +43,8 @@ public class MainMenu {
 			
 			switch(num){
 			case 1: //mm.memberJoin();	break;
-			case 2: mm.idSearch(); 		break;
-			case 3: mm.pwSearch(); 		break;
+		//	case 2: mm.idSearch(); 		break;
+		//	case 3: mm.pwSearch(); 		break;
 			case 4:
 				System.out.print("승인할 ID 입력 : ");
 				id = sc.nextLine();
