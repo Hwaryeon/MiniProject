@@ -2,52 +2,40 @@ package com.kh.miniproject.member.vo;
 
 import java.io.Serializable;
 
-public class Member implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5413208096723960205L;
+public class Member implements Serializable {
+
 	private String name;
 	private String id;
 	private String pwd;
 	private String email;
 	private int age;
-	private String phoneNumber;
-	private int restTime;
-	private int useTime;
-	private int accTime;
+	private String pNumber;
+
+	private int restTime;		// 잔여 시간
+	private int accTime;		// 누적 시간
 	private boolean admission;
-	
-	@Override
-	public String toString() {
-		return "Member [name=" + name + ", id=" + id + ", pwd=" + pwd + ", email=" + email + ", age=" + age
-				+ ", phoneNumber=" + phoneNumber + ", restTime=" + restTime + ", useTime=" + useTime + ", accTime="
-				+ accTime + ", admission=" + admission + "]";
-	}
 
-	public Member(){}
-	
-	public Member(String name, String id, String pwd, String email, int age, 
-			String phoneNumber) {
+	public Member(){this.id = "";}
+
+	public Member(String name, String id, String pwd, String email, int age, String pNumber) {
 		this.name = name;
 		this.id = id;
 		this.pwd = pwd;
 		this.email = email;
 		this.age = age;
-		this.phoneNumber = phoneNumber;
+		this.pNumber = pNumber;
 	}
 
-	public Member(String name, String id, String pwd, String email, int age, 
-			String phoneNumber, int restTime,
-			int useTime, int accTime, boolean admission) {
+	public Member(String name, String id, String pwd, String email, int age, String pNumber,
+			int restTime, int accTime, boolean admission) {
+		super();
 		this.name = name;
 		this.id = id;
 		this.pwd = pwd;
 		this.email = email;
 		this.age = age;
-		this.phoneNumber = phoneNumber;
+		this.pNumber = pNumber;
 		this.restTime = restTime;
-		this.useTime = useTime;
 		this.accTime = accTime;
 		this.admission = admission;
 	}
@@ -92,12 +80,12 @@ public class Member implements Serializable{
 		this.age = age;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getpNumber() {
+		return pNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setpNumber(String pNumber) {
+		this.pNumber = pNumber;
 	}
 
 	public int getRestTime() {
@@ -108,13 +96,6 @@ public class Member implements Serializable{
 		this.restTime = restTime;
 	}
 
-	public int getUseTime() {
-		return useTime;
-	}
-
-	public void setUseTime(int useTime) {
-		this.useTime = useTime;
-	}
 
 	public int getAccTime() {
 		return accTime;
@@ -124,16 +105,21 @@ public class Member implements Serializable{
 		this.accTime = accTime;
 	}
 
-	public boolean isAdmission() {
+	public boolean getAdmission() {
 		return admission;
 	}
 
 	public void setAdmission(boolean admission) {
 		this.admission = admission;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return name + ", " + id + ", " + pwd + ", " + email + ", " + age
+				+ ", " + pNumber + ", " + restTime + ", " + accTime
+				+ ", " + admission;
+	}
+
 	
 	
 	

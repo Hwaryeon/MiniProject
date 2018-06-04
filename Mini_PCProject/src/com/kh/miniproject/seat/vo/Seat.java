@@ -1,35 +1,64 @@
 package com.kh.miniproject.seat.vo;
 
 public class Seat {
-	private boolean useCheck;
-	private String useUserInfo;
+
 	private int seatNo;
-	
-	
-	
-	
-	@Override
-	public String toString() {
-		return "Seat [useCheck=" + useCheck + ", useUserInfo=" + useUserInfo + ", seatNo=" + seatNo + "]";
+	private String userId;
+	private boolean useCheck = false;
+	private int userTime;
+
+	public Seat(){}
+
+	public Seat(int seatNo){
+		this.seatNo = seatNo;
 	}
-	public boolean isUseCheck() {
-		return useCheck;
-	}
-	public void setUseCheck(boolean useCheck) {
+
+	public Seat(int seatNo, String userId, boolean useCheck, int userTime){
+
+		this.seatNo = seatNo;
+		this.userId = userId;
 		this.useCheck = useCheck;
+		this.userTime = userTime;
 	}
-	public String getUseUserInfo() {
-		return useUserInfo;
-	}
-	public void setUseUserInfo(String useUserInfo) {
-		this.useUserInfo = useUserInfo;
-	}
+
 	public int getSeatNo() {
 		return seatNo;
 	}
+
 	public void setSeatNo(int seatNo) {
 		this.seatNo = seatNo;
 	}
-	
-	
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public boolean getUseCheck() {
+		return useCheck;
+	}
+
+	public void setUseCheck(boolean useCheck) {
+		this.useCheck = useCheck;
+	}
+
+	public int getUserTime() {
+		return userTime;
+	}
+
+	public void setUserTime(int userTime) {
+		this.userTime = userTime;
+	}
+
+	@Override
+	public String toString() {
+		return seatNo + ", " + userId + ", " + useCheck + ", " + userTime;
+	}
+
+
+
+
 }
