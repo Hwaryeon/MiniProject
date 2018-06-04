@@ -8,11 +8,13 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import com.kh.miniproject.member.dao.MemberDao;
 import com.kh.miniproject.member.vo.Member;
 
 public class InuseSeat extends JPanel 
 {
 	private MainFrame mf;
+	private MemberDao md = new MemberDao();
 
 	public InuseSeat(MainFrame mf, Member m, int seatNo) 
 	{
@@ -95,16 +97,9 @@ public class InuseSeat extends JPanel
 		timePlusL.setFont(font);
 		timePlusL.setHorizontalAlignment(JLabel.CENTER);
 		timePlusL.setBounds(120, 260, 150, 25);
-		
-		/*JLabel seatPlusL = new JLabel("ÁÂ¼®Ãß°¡");
-		seatPlusL.setFont(font);
-		seatPlusL.setHorizontalAlignment(JLabel.CENTER);
-		seatPlusL.setBounds(120, 260, 150, 25);*/
-		
 
 		iconp.add(timePlus);
 		iconp.add(timePlusL);
-		
 
 		// ÁÂ¼®ÆÐ³Î
 		JPanel seatP = new JPanel();
@@ -129,18 +124,18 @@ public class InuseSeat extends JPanel
 		JPanel seatInUse = new JPanel();
 		seatInUse.setLayout(null);
 		seatInUse.setBackground(Color.LIGHT_GRAY);
-		seatInUse.setBounds(15, 180, 620, 330);
+		seatInUse.setBounds(15, 110, 620, 410);
 		seatP.add(seatInUse);
 		//¾ÆÀÌµð Ãâ·Â
 		JTextField useIDL = new JTextField("¾ÆÀÌµð");
-		useIDL.setBounds(10, 50, 150, 50);
+		useIDL.setBounds(10, 120, 150, 50);
 		useIDL.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 30));
 		useIDL.setBackground(Color.BLACK);
 		useIDL.setForeground(Color.WHITE);
 		useIDL.setEditable(false);
 		seatInUse.add(useIDL);
 		JTextField useIDT = new JTextField(m.getId());
-		useIDT.setBounds(170, 50, 150, 50);
+		useIDT.setBounds(170, 120, 150, 50);
 		useIDT.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 30));
 		useIDT.setBackground(Color.BLACK);
 		useIDT.setForeground(Color.WHITE);
@@ -148,14 +143,14 @@ public class InuseSeat extends JPanel
 		seatInUse.add(useIDT);
 		//ÀÌ¸§ Ãâ·Â
 		JTextField useNameL = new JTextField("ÀÌ¸§");
-		useNameL.setBounds(10, 120, 150, 50);
+		useNameL.setBounds(10, 190, 150, 50);
 		useNameL.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 30));
 		useNameL.setBackground(Color.BLACK);
 		useNameL.setForeground(Color.WHITE);
 		useNameL.setEditable(false);
 		seatInUse.add(useNameL);
 		JTextField useNameT = new JTextField(m.getName());
-		useNameT.setBounds(170, 120, 150, 50);
+		useNameT.setBounds(170, 190, 150, 50);
 		useNameT.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 30));
 		useNameT.setBackground(Color.BLACK);
 		useNameT.setForeground(Color.WHITE);
@@ -163,14 +158,17 @@ public class InuseSeat extends JPanel
 		seatInUse.add(useNameT);
 		//ÀÜ¿©½Ã°£ Ãâ·Â
 		JTextField useRestTimeL = new JTextField("ÀÜ¿©½Ã°£");
-		useRestTimeL.setBounds(10, 190, 150, 50);
+		useRestTimeL.setBounds(10, 260, 150, 50);
 		useRestTimeL.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 30));
 		useRestTimeL.setBackground(Color.BLACK);
 		useRestTimeL.setForeground(Color.WHITE);
 		useRestTimeL.setEditable(false);
 		seatInUse.add(useRestTimeL);
-		JTextField useRestTimeT = new JTextField(m.getRestTime()+"");
-		useRestTimeT.setBounds(170, 190, 150, 50);
+		JTextField useRestTimeT = new JTextField();
+		
+		//useRestTimeT.setText(md.conversionTime(m.getRestTime()));
+		
+		useRestTimeT.setBounds(170, 260, 150, 50);
 		useRestTimeT.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 30));
 		useRestTimeT.setBackground(Color.BLACK);
 		useRestTimeT.setForeground(Color.WHITE);
@@ -178,14 +176,14 @@ public class InuseSeat extends JPanel
 		seatInUse.add(useRestTimeT);
 		//»ç¿ë½Ã°£ Ãâ·Â
 		JTextField useAccTimeL = new JTextField("»ç¿ë½Ã°£");
-		useAccTimeL.setBounds(10, 260, 150, 50);
+		useAccTimeL.setBounds(10, 330, 150, 50);
 		useAccTimeL.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 30));
 		useAccTimeL.setBackground(Color.BLACK);
 		useAccTimeL.setForeground(Color.WHITE);
 		useAccTimeL.setEditable(false);
 		seatInUse.add(useAccTimeL);
 		JTextField useAccTimeT = new JTextField(m.getAccTime()+"");
-		useAccTimeT.setBounds(170, 260, 150, 50);
+		useAccTimeT.setBounds(170, 330, 150, 50);
 		useAccTimeT.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 30));
 		useAccTimeT.setBackground(Color.BLACK);
 		useAccTimeT.setForeground(Color.WHITE);
@@ -193,18 +191,12 @@ public class InuseSeat extends JPanel
 		seatInUse.add(useAccTimeT);
 		
 		JLabel guksuImage = new JLabel();
-		Image guksu = new ImageIcon("icon/guksu.PNG").getImage().getScaledInstance(270, 350, 0);
+		Image guksu = new ImageIcon("icon/guksu.PNG").getImage().getScaledInstance(270, 390, 0);
 		guksuImage.setIcon(new ImageIcon(guksu));
-		guksuImage.setBounds(340, 0, 270, 350);
+		guksuImage.setBounds(340, 10, 270, 390);
 			
 		seatInUse.add(guksuImage);
-		/*JLabel seatUse = new JLabel("Empty");
-		seatUse.setHorizontalAlignment(JLabel.CENTER);
-		seatUse.setBounds(225, 200, 200, 200);
-		seatUse.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 44));
-		seatP.add(seatUse);*/
-		
-		
+			
 		menu.add(iconp);
 
 		this.add(menu);
@@ -213,10 +205,6 @@ public class InuseSeat extends JPanel
 		mf.add(this);
 
 	}
-	
-	
-	
-
 
 	public void changePanel(JPanel panel)
 	{
