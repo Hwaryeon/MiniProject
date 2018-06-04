@@ -42,7 +42,7 @@ public class MainMenu {
 			sc.nextLine();
 			
 			switch(num){
-			case 1: mm.memberJoin();	break;
+			case 1: //mm.memberJoin();	break;
 			case 2: mm.idSearch(); 		break;
 			case 3: mm.pwSearch(); 		break;
 			case 4:

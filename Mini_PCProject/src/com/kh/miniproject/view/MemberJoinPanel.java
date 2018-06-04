@@ -1,16 +1,27 @@
 package com.kh.miniproject.view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dialog;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import com.kh.miniproject.member.controller.MemberManager;
 
 
 public class MemberJoinPanel {
 	private MainFrame mf;
 	private MainPanel mp;
-	
+
+	MemberManager mm = new MemberManager();
+
 	public MemberJoinPanel(MainFrame mf){
 		this.mf = mf;
 
@@ -93,13 +104,24 @@ public class MemberJoinPanel {
 
 		JLabel checkOverlap = new JLabel("중복된 아이디 입니다.");
 		checkOverlap.setHorizontalAlignment(JLabel.CENTER);
-		
+
 		overlapDialog.add(dialogClose, "South");
 		overlapDialog.add(checkOverlap, "North");
 		//중복 검사 팝업창 //checkOverlap 기능 연결하여 중복 검사 필요
 		overlap.addActionListener(new ActionListener(){	
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				int check = mm.checkUser(textId.getText());
+
+				System.out.println("check : "  + check);
+				
+				if(check == 0){		// 중복 x
+					checkOverlap.setText("사용 가능한 아이디입니다.");
+				}else if(check == 1){	// 중복 o
+					checkOverlap.setText("중복된 아이디 입니다.");
+				}
+				
 				overlapDialog.setVisible(true);
 
 
@@ -111,13 +133,15 @@ public class MemberJoinPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
+
 				overlapDialog.setVisible(false);
 
 			}
 
 		});
-		
-		
+
+
 
 		//시간 추가 버튼
 		JButton join = new JButton("가입");
@@ -131,9 +155,22 @@ public class MemberJoinPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				if(textName.getText() != "" && textId.getText() != "" &&
+						textPwd.getText() != "" && textEmail.getText() != "" &&
+						textPhoneNum.getText() != "" ){
+					
+					System.out.println("모든 정보를 입력하셔야합니다.");
+					
+				}else{
+					
+					mm.memberJoin(textName.getText(), textId.getText(),
+							textPwd.getText(), textEmail.getText(),
+							textPhoneNum.getText());
+				}
+				
 				
 			}
-			
+
 		});
 
 		//광고창

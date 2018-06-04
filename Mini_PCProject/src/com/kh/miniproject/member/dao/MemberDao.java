@@ -291,7 +291,7 @@ public class MemberDao implements ConversionTime {
 		}
 	}
 
-	public void memberList(){
+	public ArrayList<Member> memberList(){
 
 		insertList();
 		int num = 1;
@@ -313,12 +313,16 @@ public class MemberDao implements ConversionTime {
 			num++;
 		}
 
+		return ml;
+
 	}
 
-	public void memberTFList(boolean b){
+	public ArrayList<Member> memberTFList(boolean b){
 
 		insertList();
 		int num = 1;
+
+		ArrayList<Member> tf = new ArrayList<Member>();
 
 		for(int i = 0; i < ml.size(); i++){
 
@@ -337,7 +341,25 @@ public class MemberDao implements ConversionTime {
 				System.out.printf(", %b" , ml.get(i).getAdmission());
 				System.out.println();
 
+				/*this.name = name;
+				this.id = id;
+				this.pwd = pwd;
+				this.email = email;
+				this.age = age;
+				this.pNumber = pNumber;
+				this.restTime = restTime;
+				this.accTime = accTime;
+				this.admission = admission;*/
+
+				tf.add(new Member(ml.get(i).getName(), ml.get(i).getId(),
+						ml.get(i).getPwd(),
+						ml.get(i).getEmail(), ml.get(i).getAge(),
+						ml.get(i).getpNumber(), ml.get(i).getRestTime(),
+						ml.get(i).getAccTime(), ml.get(i).getAdmission()
+						));
 				num++;
+
+
 			}else if(ml.get(i).getAdmission() == false && b == false){
 				System.out.print(num +" : " + ml.get(i).getName() + ", " + ml.get(i).getId()
 						+ ", " + ml.get(i).getPwd()
@@ -351,13 +373,18 @@ public class MemberDao implements ConversionTime {
 
 				System.out.printf(", %b" , ml.get(i).getAdmission());
 				System.out.println();
-
+				tf.add(new Member(ml.get(i).getName(), ml.get(i).getId(),
+						ml.get(i).getPwd(),
+						ml.get(i).getEmail(), ml.get(i).getAge(),
+						ml.get(i).getpNumber(), ml.get(i).getRestTime(),
+						ml.get(i).getAccTime(), ml.get(i).getAdmission()
+						));
 				num++;
 			}
 
 
 		}
-
+		return tf;
 
 	}
 
@@ -370,6 +397,25 @@ public class MemberDao implements ConversionTime {
 		long hour = (long) ((cTime / ( 60 * 60)));
 
 		System.out.printf("%02d:%02d:%02d", hour, minute, second);
+	}
+
+	public int checkUser(String id){
+
+		insertList();
+
+		for(int i = 0; i < ml.size(); i++){
+
+			if(ml.get(i).getId().equals(id)){
+				System.out.println("아이디 확인");
+				return 1;
+
+			}
+
+		}
+
+		System.out.println("아이디 없음 ");
+		return 0;
+
 	}
 
 }
