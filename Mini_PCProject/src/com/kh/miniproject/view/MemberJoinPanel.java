@@ -22,8 +22,8 @@ import com.kh.miniproject.view.decoration.RoundedButton;
 public class MemberJoinPanel extends JPanel {
 	private MainFrame mf;
 	private MainPanel mp;
-
 	MemberManager mm = new MemberManager();
+	boolean overlapCheck = false;
 
 	public MemberJoinPanel(MainFrame mf){
 		this.mf = mf;
@@ -32,6 +32,7 @@ public class MemberJoinPanel extends JPanel {
 		this.setSize(mf.getWidth(), mf.getHeight());
 		this.setBackground(Color.BLACK);
 
+		
 		
 		// 뒤로가기 버튼
 		JButton goback = new JButton();
@@ -113,6 +114,12 @@ public class MemberJoinPanel extends JPanel {
 		JTextField textEmail = new JTextField();
 		textEmail.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		textEmail.setBounds(30, 390, 200, 30);
+		
+	/*	JLabel joinSuccess = new JLabel();
+		joinSuccess.setBounds(250, 435, 250, 50);
+		joinSuccess.setBackground(Color.WHITE);
+		joinSuccess.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+		joinSuccess.setForeground(Color.RED);*/
 
 		JButton overlap = new RoundedButton("ID 중복확인");
 		overlap.setBounds(250, 70, 130, 30);
@@ -128,7 +135,10 @@ public class MemberJoinPanel extends JPanel {
 
 		JLabel checkOverlap = new JLabel("중복된 아이디 입니다.");
 		checkOverlap.setHorizontalAlignment(JLabel.CENTER);
-
+		
+		
+		//boolean overlapCheck = false;
+		
 		overlapDialog.add(dialogClose, "South");
 		overlapDialog.add(checkOverlap, "North");
 		//중복 검사 팝업창 //checkOverlap 기능 연결하여 중복 검사 필요
@@ -141,9 +151,11 @@ public class MemberJoinPanel extends JPanel {
 				System.out.println("check : "  + check);
 
 				if(check == 0){		// 중복 x
+					overlapCheck = true;
 					checkOverlap.setText("사용 가능한 아이디입니다.");
 				}else if(check == 1){	// 중복 o
 					checkOverlap.setText("중복된 아이디 입니다.");
+					overlapCheck = false;
 				}
 
 				overlapDialog.setVisible(true);
@@ -183,16 +195,17 @@ public class MemberJoinPanel extends JPanel {
 						|| textPwd.getText().equals("")
 						|| textEmail.getText().equals("")
 						|| textPhoneNum.getText().equals("")
-						
+						|| overlapCheck == false
 						){
 
-					checkOverlap.setText("모든 정보를 입력하셔야합니다.");
+					checkOverlap.setText("정보 입력이 잘못되었습니다.");
 					overlapDialog.setVisible(true);
-				}else{
-					
+				}else if(overlapCheck == true){
+					checkOverlap.setText("가입 완료되었습니다");
 					mm.memberJoin(textName.getText(), textId.getText(),
 							textPwd.getText(), textEmail.getText(),
 							textPhoneNum.getText());
+					overlapDialog.setVisible(true);
 				}
 
 
@@ -209,7 +222,7 @@ public class MemberJoinPanel extends JPanel {
 
 
 
-
+		//joinMain.add(joinSuccess);
 		joinMain.add(join);
 		joinMain.add(capture);
 		joinMain.add(overlap);

@@ -24,39 +24,63 @@ public class ImageTest extends Thread{
 	public void run() {
 
 		int sw = 0;
-		
+
 		Image capImage;
 
 		while(true){
 
-			try {
-				Thread.sleep(3000);		//	3초
+			if(pageNum == 1){
 
-				if(sw == 0){
-					//gif 파일
-					capImage = new ImageIcon("icon/hos.gif").getImage().getScaledInstance(350, 400, 0);
-					sw = 1;
-				}else if(sw == 1){
+				try {
+					Thread.sleep(3500);		//	3초
 
-					//png 파일
-					capImage = new ImageIcon("icon/iPhone.png").getImage().getScaledInstance(350, 400, 0);
-					sw = 2;
-				}else{
-					
-					//png 파일
-					capImage = new ImageIcon("icon/capture.PNG").getImage().getScaledInstance(350, 400, 0);
-					sw = 0;
-					
+					if(sw == 0){
+						//gif 파일
+						capImage = new ImageIcon("icon/hos.gif").getImage().getScaledInstance(350, 400, 0);
+						sw = 1;
+					}else if(sw == 1){
+
+						//png 파일
+						capImage = new ImageIcon("icon/iPhone.png").getImage().getScaledInstance(350, 400, 0);
+						sw = 2;
+					}else{
+
+						//png 파일
+						capImage = new ImageIcon("icon/capture.PNG").getImage().getScaledInstance(350, 400, 0);
+						sw = 0;
+
+					}
+
+					label.setIcon(new ImageIcon(capImage));
+
+				} catch (InterruptedException e){
+					System.out.println("사진변경 스레드 종료...");
+					this.stop();
+
+				}
+			}else if(pageNum == 2){
+				
+				try {
+					Thread.sleep(3500);		//	3초
+
+					if(sw == 0){
+						capImage = new ImageIcon("icon/guksu2.png").getImage().getScaledInstance(270, 390, 0);
+						sw = 1;
+					}else{
+						capImage = new ImageIcon("icon/guksu.png").getImage().getScaledInstance(270, 390, 0);
+						sw = 0;
+					}
+
+					label.setIcon(new ImageIcon(capImage));
+
+				} catch (InterruptedException e){
+					System.out.println("사진변경 스레드 종료...");
+					this.stop();
+
 				}
 				
-				label.setIcon(new ImageIcon(capImage));
-
-			} catch (InterruptedException e){
-				System.out.println("사진변경 스레드 종료...");
-				this.stop();
-
+				
 			}
-
 
 		}
 

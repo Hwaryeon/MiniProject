@@ -25,9 +25,9 @@ public class MainPanel extends JPanel
 	private SeatManager sm = new SeatManager();
 	private MemberManager mm = new MemberManager();
 	private SeatDao sd = new SeatDao();
-	
+
 	public ArrayList<Thread> thList = new ArrayList(20);
-	
+
 	public MainPanel(MainFrame mf) 
 	{
 		this.mf = mf;
@@ -177,17 +177,17 @@ public class MainPanel extends JPanel
 		seatTitle.setBorder(eborder);
 		seatTitle.setBounds(0, 0, 650, 100);
 		seatP.add(seatTitle);
-		
+
 		seatTitle.addMouseListener(new MyMouseAdapter(){
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				sd.seatLeset();
 				System.out.println("ÁÂ¼® ÃÊ±âÈ­...");
-				
+
 				MainPanel mp = new MainPanel(mf);
 				changePanel(mp);
-				
+
 			}
 		});
 
@@ -1272,6 +1272,14 @@ public class MainPanel extends JPanel
 
 	}
 
+	public int thEnd(){
+		for(int i = 0; i < thList.size(); i++){
+
+			thList.get(i).interrupt();
+
+		}
+		return 0;
+	}
 
 	public void changePanel(JPanel panel)
 	{
@@ -1280,10 +1288,10 @@ public class MainPanel extends JPanel
 		mf.repaint();
 
 		for(int i = 0; i < thList.size(); i++){
-			
+
 			thList.get(i).interrupt();
-			
+
 		}
-		
+
 	}
 }
