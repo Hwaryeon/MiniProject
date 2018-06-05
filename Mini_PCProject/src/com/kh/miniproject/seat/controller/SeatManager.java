@@ -28,6 +28,11 @@ public class SeatManager {
 
 	}
 	
+	public boolean useUser(String id){
+		
+		return sd.useUser(id);
+	}
+	
 	public void useSeat(JFrame mf, String id, int seatNo){
 
 		Member m = mm.memberInfo(id);

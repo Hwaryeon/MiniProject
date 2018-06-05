@@ -1256,7 +1256,14 @@ public class MainPanel extends JPanel
 		mf.add(this);
 
 	}
-
+	public int thEnd(){
+		for(int i = 0; i < thList.size(); i++){
+			
+			thList.get(i).interrupt();
+			
+		}
+		return 0;
+	}
 
 	public void changePanel(JPanel panel)
 	{

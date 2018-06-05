@@ -18,7 +18,7 @@ public class EmptySeat extends JPanel
 		this.setSize(mf.getWidth(), mf.getHeight());
 		this.setLayout(null);
 		this.setBackground(Color.BLACK);
-		
+
 		//뒤로가기 버튼
 		JButton goback = new JButton();
 		Image back = new ImageIcon("icon/pointer.png").getImage().getScaledInstance(100, 100, 0);
@@ -27,31 +27,36 @@ public class EmptySeat extends JPanel
 		goback.setBorderPainted(false);
 		goback.setBackground(null);
 		goback.addMouseListener(new MouseAdapter()
-				{
-					@Override
-					public void mouseClicked(MouseEvent e)
-						{
-						MainPanel mp = new MainPanel(mf);
-						changePanel(mp);
-						}
-				});
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				MainPanel mp = new MainPanel(mf);
+				changePanel(mp);
+			}
+		});
 		this.add(goback);
-		
+
 		//상단 제목 패널 //패널 위 라벨로 구성
-		JPanel title = new JPanel();
-		title.setLayout(null);
-		title.setLocation(300, 50);
-		title.setBackground(Color.WHITE);
-		title.setSize(600,100);
+		JPanel emptyPanel = new JPanel();
+		emptyPanel.setLayout(null);
+		emptyPanel.setLocation(300, 50);
+		emptyPanel.setBackground(Color.WHITE);
+		emptyPanel.setSize(600,100);
+		JLabel titleLayer = new JLabel();
+		Image titleLayerI = new ImageIcon("icon/titleLayer.png").getImage().getScaledInstance(600, 100, 0);
+		titleLayer.setIcon(new ImageIcon(titleLayerI));
+		titleLayer.setBounds(0, 0, 600, 100);
 		//패널 위 제목 라벨
 		JLabel text = new JLabel("비어있는 좌석");
-		text.setSize(600, 50);
-		text.setLocation(5, 25);
+		text.setSize(300, 50);
+		text.setLocation(150, 25);
 		text.setBackground(Color.GREEN);
 		text.setFont(new Font("맑은 고딕", Font.BOLD, 40));
 		text.setHorizontalAlignment(JTextField.CENTER);
-		title.add(text);
-		this.add(title);
+		emptyPanel.add(text);
+		emptyPanel.add(titleLayer);
+
 
 		// 메뉴패널
 		JPanel menu = new JPanel();
@@ -81,24 +86,24 @@ public class EmptySeat extends JPanel
 		seatPlus.setBounds(120, 110, 150, 150);
 		seatPlus.setBorderPainted(false);
 		seatPlus.addMouseListener(new MouseAdapter()
-				{
-					@Override
-					public void mouseClicked(MouseEvent e)
-					{
-						UseSeat atp = new UseSeat(mf, seatNo);
-						//changePanel(atp);
-						changePanel(atp);
-					}
-				});
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				UseSeat atp = new UseSeat(mf, seatNo);
+				//changePanel(atp);
+				changePanel(atp);
+			}
+		});
 		JLabel seatPlusL = new JLabel("좌석추가");
 		seatPlusL.setFont(font);
 		seatPlusL.setHorizontalAlignment(JLabel.CENTER);
 		seatPlusL.setBounds(120, 260, 150, 25);
-		
+
 
 		iconp.add(seatPlus);
 		iconp.add(seatPlusL);
-		
+
 
 		// 좌석패널
 		JPanel seatP = new JPanel();
@@ -111,32 +116,32 @@ public class EmptySeat extends JPanel
 		seatTitle.setBorder(eborder);
 		seatTitle.setBounds(0, 0, 650, 100);
 		seatP.add(seatTitle);
-		
-		
-		
+
+
+
 		JLabel seatNoLabel = new JLabel(seatNo+"");
 		seatNoLabel.setHorizontalAlignment(JLabel.CENTER);
 		seatNoLabel.setBounds(10,100,100,100);
 		seatNoLabel.setFont(new Font("맑은고딕", Font.BOLD, 40));
 		seatP.add(seatNoLabel);
-		
+
 		JLabel seatUse = new JLabel("Empty");
 		seatUse.setHorizontalAlignment(JLabel.CENTER);
 		seatUse.setBounds(225, 200, 200, 200);
 		seatUse.setFont(new Font("맑은고딕", Font.BOLD, 44));
 		seatP.add(seatUse);
-		
-		
+
+
 		menu.add(iconp);
 
 		this.add(menu);
 		this.add(seatP);
-
+		this.add(emptyPanel);
 		mf.add(this);
 
 	}
-	
-	
+
+
 	public void changePanel(JPanel panel)
 	{
 		mf.remove(this);

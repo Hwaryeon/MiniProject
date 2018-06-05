@@ -24,6 +24,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.member.vo.Member;
+import com.kh.miniproject.view.decoration.RoundedButton;
 
 public class MemberManagement extends JPanel implements ConversionTime{
 	private MainFrame mf;
@@ -231,7 +232,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 
 		Dialog approveDialog = new Dialog(mf);
 		approveDialog.setLayout(null);
-		approveDialog.setBounds(500, 400, 300, 200);
+		approveDialog.setBounds(500, 400, 300, 180);
 		approveDialog.setBackground(Color.LIGHT_GRAY);
 
 
@@ -274,6 +275,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 			public void actionPerformed(ActionEvent e) {
 				mm.memberAdmission(insertID.getText());
 				System.out.println("승인되었습니다");
+				insertID.setText("승인되었습니다");
 
 			}
 
@@ -311,7 +313,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 		JLabel idField = new JLabel("아이디 : ");
 		//
 		JTextField idResult = new JTextField();
-		JButton idSearchBtn = new JButton("아이디 찾기");
+		JButton idSearchBtn = new RoundedButton("아이디 찾기");
 
 		//컴포넌트 ID부분 세부설정
 		idLabel.setBounds(15, 0, 100, 50);
@@ -336,6 +338,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 		idResult.setEditable(false);
 
 		idSearchBtn.setBounds(50, 330, 150, 50);
+		idSearchBtn.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		idSearchBtn.setBackground(Color.BLACK);
 		idSearchBtn.setForeground(Color.WHITE);
 
@@ -361,7 +364,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 		JLabel pwdField = new JLabel("비밀번호 : ");
 		//
 		JTextField pwdResult = new JTextField();
-		JButton pwdSearchBtn = new JButton("비밀번호 찾기");
+		JButton pwdSearchBtn = new RoundedButton("비밀번호 찾기");
 
 		//컴포넌트 PWD 부분 세부 설정
 		pwdLabel.setBounds(280, 0, 100, 50);
@@ -386,6 +389,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 		pwdResult.setEditable(false);
 
 		pwdSearchBtn.setBounds(330, 330, 150, 50);
+		pwdSearchBtn.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		pwdSearchBtn.setBackground(Color.BLACK);
 		pwdSearchBtn.setForeground(Color.WHITE);
 

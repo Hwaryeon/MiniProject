@@ -27,11 +27,17 @@ public class SeatDao extends Thread implements ConversionTime{
 	TimerMake tm = new TimerMake();
 	ArrayList<Seat> sl = new ArrayList<Seat>();
 
-	final static int MAX_SEAT = 12;
+	final static int MAX_SEAT = 20;
 
 	public static Thread[] tList = new Thread[MAX_SEAT];
 	public static int[] iList = new int[MAX_SEAT];
 
+	/*Timer timer = new Timer(0, "", 0);
+	Thread t1 = timer;
+	public void seatExit(){
+		t1.interrupt();
+	}*/
+	
 
 	public void seatLeset(){
 		int num = 1;
@@ -167,6 +173,23 @@ public class SeatDao extends Thread implements ConversionTime{
 		return null;/*System.out.println("해당 좌석은 사용중이지 않습니다.");*/
 
 	}
+	
+	public boolean useUser(String id){
+		
+		insertList();
+		
+		if(sl.size() == 0){
+			return true;
+		}
+		for(int i=0; i < MAX_SEAT; i++){
+			if(sl.get(i).getUserId().equals(id)){
+				return false;
+				
+			}
+		}
+		
+		return true;
+	}
 
 	
 	public void useSeat(JFrame mf, int seatNo, String id, int time){
@@ -215,6 +238,7 @@ public class SeatDao extends Thread implements ConversionTime{
 						Timer timer = new Timer(sl.get(i).getSeatNo(),
 								sl.get(i).getUserId(), sl.get(i).getUserTime());
 						Thread t1 = timer;
+						t1.setDaemon(true);
 
 						tList[sl.get(i).getSeatNo()-1] = t1;
 
@@ -279,7 +303,6 @@ public class SeatDao extends Thread implements ConversionTime{
 		long hour = (long) ((cTime / ( 60 * 60)));
 		String s = null;
 		
-		//System.out.printf("%02d:%02d:%02d", hour, minute, second);
 		s = String.format("%02d:%02d:%02d", hour, minute, second);
 		
 		System.out.print(s);
