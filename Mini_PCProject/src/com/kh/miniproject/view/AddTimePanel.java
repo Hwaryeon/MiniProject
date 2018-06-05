@@ -25,7 +25,9 @@ import com.kh.miniproject.view.decoration.RoundedButton;
 public class AddTimePanel extends JPanel{
 	private MainFrame mf;
 	private MemberManager mm = new MemberManager();
-
+	private ImageTest tc;
+	
+	
 	public AddTimePanel(MainFrame mf){
 		this.mf = mf;
 		//메인 프레임과 같은 사이즈의 패널
@@ -290,6 +292,9 @@ public class AddTimePanel extends JPanel{
 		capture.setIcon(new ImageIcon(capImage));
 		capture.setBounds(600, 50, 350, 400);
 
+		
+		tc = new ImageTest(capture, 1);
+		tc.start();
 
 
 		timeMain.add(capture);
@@ -316,6 +321,7 @@ public class AddTimePanel extends JPanel{
 		mf.remove(this);
 		mf.add(panel);
 		mf.repaint();
+		tc.interrupt();
 	}
 
 }
