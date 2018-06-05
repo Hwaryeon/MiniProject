@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -22,7 +24,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.member.vo.Member;
 
-public class MemberManagement {
+public class MemberManagement extends JPanel{
 	private MainFrame mf;
 	private MainPanel mp;
 
@@ -31,18 +33,20 @@ public class MemberManagement {
 	public MemberManagement(MainFrame mf){
 		this.mf = mf;
 
-		JPanel start = new JPanel();
-
-		start.setLayout(null);
-		start.setSize(mf.getWidth(), mf.getHeight());
-		start.setBackground(Color.BLACK);
-
+		this.setLayout(null);
+		this.setSize(mf.getWidth(), mf.getHeight());
+		this.setBackground(Color.BLACK);
+		
 		//상단 회원관리 패널 //패널 위 라벨로 구성
 		JPanel memberManagePanel = new JPanel();
 		memberManagePanel.setLayout(null);
 		memberManagePanel.setLocation(300, 50);
 		memberManagePanel.setBackground(Color.WHITE);
 		memberManagePanel.setSize(600,100);
+		JLabel titleLayer = new JLabel();
+		Image titleLayerI = new ImageIcon("icon/titleLayer.png").getImage().getScaledInstance(600, 100, 0);
+		titleLayer.setIcon(new ImageIcon(titleLayerI));
+		titleLayer.setBounds(0, 0, 600, 100);
 		//패널 위 "회원가입" 라벨
 		JLabel text = new JLabel("회원관리");
 		text.setSize(200, 50);
@@ -51,7 +55,22 @@ public class MemberManagement {
 		text.setFont(new Font("맑은 고딕", Font.BOLD, 40));
 		text.setHorizontalAlignment(JTextField.CENTER);
 		memberManagePanel.add(text);
+		memberManagePanel.add(titleLayer);
 
+		// 뒤로가기 버튼
+		JButton goback = new JButton();
+		Image back = new ImageIcon("icon/pointer.png").getImage().getScaledInstance(100, 100, 0);
+		goback.setIcon(new ImageIcon(back));
+		goback.setBorderPainted(false);
+		goback.setBounds(25, 25, 100, 100);
+		goback.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainPanel mp = new MainPanel(mf);
+				changePanel(mp);
+			}
+		});
+		this.add(goback);
 
 		//라디오 버튼
 		JRadioButton list = new JRadioButton("회원 리스트");
@@ -454,8 +473,15 @@ public class MemberManagement {
 
 
 
-		mf.add(member);
-		mf.add(memberManagePanel);
-		mf.add(start);
+		this.add(member);
+		this.add(memberManagePanel);
+		mf.add(this);
+	}
+	
+	public void changePanel(JPanel panel)
+	{
+		mf.remove(this);
+		mf.add(panel);
+		mf.repaint();
 	}
 }
