@@ -21,10 +21,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.member.vo.Member;
 
-public class MemberManagement extends JPanel{
+public class MemberManagement extends JPanel implements ConversionTime{
 	private MainFrame mf;
 	private MainPanel mp;
 
@@ -125,11 +126,11 @@ public class MemberManagement extends JPanel{
 					break;
 				case 2 :
 					listContents[i][j]
-							= new String(mList.get(i).getRestTime()+"");
+							= new String(conversionTime(mList.get(i).getRestTime()));
 					break;
 				case 3 :
 					listContents[i][j]
-							= new String(mList.get(i).getAccTime()+"");
+							= new String(conversionTime(mList.get(i).getAccTime()));
 					break;
 				}
 			}
@@ -483,5 +484,22 @@ public class MemberManagement extends JPanel{
 		mf.remove(this);
 		mf.add(panel);
 		mf.repaint();
+	}
+
+	@Override
+	public String conversionTime(int time){
+		long cTime = time;
+
+		long second = (long) ((cTime ) % 60);
+		long minute = (long) ((cTime / (  60)) % 60);
+		long hour = (long) ((cTime / ( 60 * 60)));
+		String s = null;
+		
+		//System.out.printf("%02d:%02d:%02d", hour, minute, second);
+		s = String.format("%02d:%02d:%02d", hour, minute, second);
+		
+		System.out.print(s);
+		
+		return s;
 	}
 }
