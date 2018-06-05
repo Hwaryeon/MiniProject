@@ -38,8 +38,8 @@ public class Timer extends Thread implements ConversionTime{
 //	@SuppressWarnings("deprecation")
 	@Override
 	public void run() {
-		System.out.println("mf : " + mf);
-		System.out.println("panel :" + panel);
+		/*System.out.println("mf : " + mf);
+		System.out.println("panel :" + panel);*/
 	/*	
 		JTextField label = new JTextField("");
 		label.setBounds(500, 500, 100, 100);
@@ -81,6 +81,7 @@ public class Timer extends Thread implements ConversionTime{
 				
 				SeatDao.iList[seatNum-1] = count;
 				System.out.println(id + "님의 사용시간 : " + j );
+				
 			} catch (InterruptedException e) {
 				System.out.println("좌석 사용 종료...");
 
@@ -97,7 +98,7 @@ public class Timer extends Thread implements ConversionTime{
 
 		System.out.println();
 		System.out.println(id + "님의 사용시간종료");
-
+		
 	}
 
 	@Override

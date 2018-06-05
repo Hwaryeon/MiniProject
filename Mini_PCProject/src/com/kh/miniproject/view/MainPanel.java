@@ -188,18 +188,18 @@ public class MainPanel extends JPanel
 		seat1.add(seatl01);
 
 		
-		JPanel seatT = new JPanel();
+		/*JPanel seatT = new JPanel();
 		seatT.setBounds(10, 50, 70, 10);
-		seatT.setBackground(Color.WHITE);
+		seatT.setBackground(Color.WHITE);*/
 
-		JTextField test = new JTextField();
-		test.setText("왜안나와");
 		
-		seatT.add(test);
+		//test.setText();
 		
-		seat1.add(seatT);
+		//seatT.add(test);
+		
+		/*seat1.add(seatT);
 
-		seatT.setVisible(true);
+		seatT.setVisible(true);*/
 		
 		seatGP.add(seat1);
 		if(sm.checkSeat(1, seat1, mf) != null){
@@ -209,17 +209,21 @@ public class MainPanel extends JPanel
 			seat1u.setHorizontalAlignment(JLabel.CENTER);
 			seat1u.setBackground(Color.RED);
 			seat1.add(seat1u);
+			JTextField test = new JTextField();
+			test.setBounds(10, 50, 50, 20);
+			test.setBackground(Color.GREEN);
+			seat1.add(test);
 			
-			test.setText("체크포인트");
+			//test.setText("체크포인트");
 			
 			TestC tc = new TestC(mf, test);
 			
 		//	tc.test();
 			
-			seatT.setBounds(10, 50, 70, 30);
+			/*seatT.setBounds(10, 50, 70, 30);
 			seat1.add(seatT);
 
-			seatT.setVisible(true);
+			seatT.setVisible(true);*/
 
 		}else{
 			JLabel seat1e = new JLabel();
