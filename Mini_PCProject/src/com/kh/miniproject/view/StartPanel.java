@@ -6,37 +6,32 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
-import com.kh.miniproject.view.decoration.*;
-
-
-public class StartPanel extends JPanel
+public class StartPanel extends JFrame
 {
 	private MainFrame mf;
+	private JPanel mp;
 	
 	public StartPanel(MainFrame mf)
 	{
 		this.mf = mf;
 		
-		this.setLayout(null);
-		this.setSize(mf.getWidth(), mf.getHeight());
-		this.setBackground(Color.BLACK);
+		//System.out.println(mf.getWidth() + ", " + mf.getHeight());
+		
+		
+		JPanel start = new JPanel();
+		start.setLayout(null);
+		start.setSize(mf.getWidth(), mf.getHeight());
+		start.setBackground(Color.BLACK);
+		this.mp = start;
 		
 		//회원가입 버튼
-		JButton signup = new RoundedButton("회원로그인");
+		JButton signup = new JButton("회원로그인");
 		signup.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		signup.setBackground(Color.WHITE);
 		signup.setSize(200, 50);
+		start.add(signup);
 		signup.setLocation(50, 50);
-		signup.addMouseListener(new MouseAdapter()
-		{
-			@Override
-			public void mouseClicked(MouseEvent e)
-			{
-				MemberJoinPanel mjp = new MemberJoinPanel(mf);
-				changePanel(mjp);
-			}
-		});
-		this.add(signup);
+		signup.addMouseListener(new MyMouseAdapter());
 		
 		//타이틀
 		JPanel titlep = new JPanel();
@@ -55,7 +50,7 @@ public class StartPanel extends JPanel
 		mode.setForeground(Color.WHITE);
 		mode.setBounds(0, 100, 600, 50);
 		titlep.add(mode);
-		this.add(titlep);
+		start.add(titlep);
 
 		
 		JPanel loginp = new JPanel();
@@ -64,7 +59,7 @@ public class StartPanel extends JPanel
 		loginp.setBackground(Color.BLACK);
 		
 		JLabel idicon = new JLabel();
-		Image icon = new ImageIcon("icon/id.png").getImage().getScaledInstance(50, 50, 0);
+		Image icon = new ImageIcon("icon/id2.png").getImage().getScaledInstance(50, 50, 0);
 		idicon.setIcon(new ImageIcon(icon));
 		idicon.setBounds(25, 20, 50, 50);
 		
@@ -73,7 +68,7 @@ public class StartPanel extends JPanel
 		id.setEditable(true);
 		
 		JLabel pwicon = new JLabel();
-		icon = new ImageIcon("icon/pw.png").getImage().getScaledInstance(50, 50, 0);
+		icon = new ImageIcon("icon/password2.png").getImage().getScaledInstance(50, 50, 0);
 		pwicon.setIcon(new ImageIcon(icon));
 		pwicon.setBounds(25, 75, 50, 50);
 		pwicon.setBackground(Color.WHITE);
@@ -82,19 +77,10 @@ public class StartPanel extends JPanel
 		pw.setEditable(true);
 		pw.setBounds(80,75,300,50);
 		
-		JButton login = new RoundedButton("Login");
+		JButton login = new JButton("Login");
 		login.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		login.setBackground(Color.WHITE);
 		login.setBounds(100,140,190,50);
-		login.addMouseListener(new MouseAdapter() 
-		{
-			@Override
-			public void mouseClicked(MouseEvent e)
-			{
-				MainPanel mp = new MainPanel(mf);
-				changePanel(mp);
-			}
-		});
 		
 		loginp.add(idicon);
 		loginp.add(pwicon);
@@ -103,16 +89,32 @@ public class StartPanel extends JPanel
 		loginp.add(login);
 		
 		
-		this.add(loginp);
+		start.add(loginp);
 		
-		mf.add(this);
+		mf.add(start);
 		
 	}
 	
-	public void changePanel(JPanel panel)
+	class MyMouseAdapter extends MouseAdapter 
 	{
-		mf.remove(this);
-		mf.add(panel);
-		mf.repaint();
+		@Override
+		public void mouseClicked(MouseEvent e)
+		{
+			replace();
+		}
+	}
+	
+	public JPanel callMain()
+	{
+		mp = new MainPanel(mf);
+		return mp;
+	}
+	
+	public void replace()
+	{
+		this.remove(mp);
+		this.mp = callMain();
+		this.add(mp);
+		this.repaint();
 	}
 }
