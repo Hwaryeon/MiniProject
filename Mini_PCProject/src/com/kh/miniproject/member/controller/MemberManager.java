@@ -1,6 +1,9 @@
 package com.kh.miniproject.member.controller;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.JTextField;
 
 import com.kh.miniproject.member.dao.MemberDao;
 import com.kh.miniproject.member.vo.Member;
@@ -11,27 +14,21 @@ public class MemberManager {
 
 	MemberDao md = new MemberDao();
 
-	public void memberJoin(){
+	public void memberJoin(String textName, String textId, String textPwd
+			, String textEmail, String textPhoneNum){
 
-		System.out.println();
 
-		System.out.print("NAME : ");
-		String name = sc.nextLine();
-		System.out.print("ID : ");
-		String id = sc.nextLine();
-		System.out.print("PASSWORD : ");
-		String pwd = sc.nextLine();
-		System.out.print("EMAIL : ");
-		String email = sc.nextLine();
-		System.out.print("AGE : ");
-		int age = sc.nextInt();
-		sc.nextLine();
-		System.out.print("PHONENUMBER : ");
-		String pNumber = sc.nextLine();
+		String name = textName;
+		String id = textId;
+		String pwd = textPwd;
+		String email = textEmail;
+		int age = 20;
+		String pNumber = textPhoneNum;
 
 		Member m = new Member(name, id, pwd, email, age, pNumber);
 
 		md.memberJoin(m);
+		System.out.println(m.toString());
 
 	}
 
@@ -42,22 +39,15 @@ public class MemberManager {
 	}
 
 	public String pwSearch(String id, String name){
-
-		return md.pwSearch(name, id);
-
-	}
+		
+				return md.pwSearch(name, id);
+		
+			}
 
 	public void memberAdmission(String id){
 
-		System.out.print("해당  " + id + "의 회원가입을 승인하시겠습니까 ? (y,n) : ");
-		char ch = sc.next().charAt(0);
-
-		if(ch == 'y' || ch == 'Y'){
 			md.memberAdmission(id);
-		}else{
-			System.out.println("승인이 취소되었습니다.");
 			return;
-		}
 
 	}
 
@@ -73,6 +63,8 @@ public class MemberManager {
 
 	public void timePlus(String id, int time){
 
+		System.out.println("시간추가");
+		
 		md.timePlus(id, time);
 	}
 
@@ -97,20 +89,27 @@ public class MemberManager {
 
 	}
 
-	public void memberTFList(boolean b){
+	public ArrayList<Member> memberTFList(boolean b){
 
 
-		md.memberTFList(b);
+		return md.memberTFList(b);
 
 
 
 	}
+
+	public ArrayList<Member> memberList(){
+	
+		
+		return md.memberList();
+	}
+	
 	
 	public int checkUser(String id){
-	      
-	      return md.checkUser(id);
-	      
-	   }
-
+		
+		return md.checkUser(id);
+		
+	}
+	
 
 }

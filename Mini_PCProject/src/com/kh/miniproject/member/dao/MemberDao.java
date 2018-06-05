@@ -55,7 +55,7 @@ public class MemberDao implements ConversionTime {
 		insertList();
 
 		System.out.println(ml.get(0).getName());
-		
+
 		for(int i=0; i < ml.size(); i++){
 			if(ml.get(i).getName().equals(name) &&
 					ml.get(i).getEmail().equals(email)){
@@ -70,22 +70,22 @@ public class MemberDao implements ConversionTime {
 	}
 
 	public String pwSearch(String name, String id){
-		insertList();
-
-		for(int i=0; i < ml.size(); i++){
-			if(ml.get(i).getName().equals(name) &&
-					ml.get(i).getId().equals(id)){
-
-				/*System.out.println("찾은 PASSWORD : "
-						+ ml.get(i).getPwd());*/
-				
-				
-				return ml.get(i).getPwd();
-
-			}
-		}
-		return "잘못 입력하셨습니다.";
-	}
+				insertList();
+		
+				for(int i=0; i < ml.size(); i++){
+					if(ml.get(i).getName().equals(name) &&
+							ml.get(i).getId().equals(id)){
+		
+						/*System.out.println("찾은 PASSWORD : "
+								+ ml.get(i).getPwd());*/
+						
+						
+						return ml.get(i).getPwd();
+		
+		 			}
+		 		}
+				return "잘못 입력하셨습니다.";
+		 	}
 
 	public void memberAdmission(String id){
 
@@ -133,6 +133,8 @@ public class MemberDao implements ConversionTime {
 
 		insertList();
 
+		System.out.println("id : " + id);
+		
 		int check = 0;
 
 		try(DataOutputStream dout
@@ -295,7 +297,7 @@ public class MemberDao implements ConversionTime {
 		}
 	}
 
-	public void memberList(){
+	public ArrayList<Member> memberList(){
 
 		insertList();
 		int num = 1;
@@ -317,12 +319,16 @@ public class MemberDao implements ConversionTime {
 			num++;
 		}
 
+		return ml;
+
 	}
 
-	public void memberTFList(boolean b){
+	public ArrayList<Member> memberTFList(boolean b){
 
 		insertList();
 		int num = 1;
+
+		ArrayList<Member> tf = new ArrayList<Member>();
 
 		for(int i = 0; i < ml.size(); i++){
 
@@ -341,7 +347,25 @@ public class MemberDao implements ConversionTime {
 				System.out.printf(", %b" , ml.get(i).getAdmission());
 				System.out.println();
 
+				/*this.name = name;
+				this.id = id;
+				this.pwd = pwd;
+				this.email = email;
+				this.age = age;
+				this.pNumber = pNumber;
+				this.restTime = restTime;
+				this.accTime = accTime;
+				this.admission = admission;*/
+
+				tf.add(new Member(ml.get(i).getName(), ml.get(i).getId(),
+						ml.get(i).getPwd(),
+						ml.get(i).getEmail(), ml.get(i).getAge(),
+						ml.get(i).getpNumber(), ml.get(i).getRestTime(),
+						ml.get(i).getAccTime(), ml.get(i).getAdmission()
+						));
 				num++;
+
+
 			}else if(ml.get(i).getAdmission() == false && b == false){
 				System.out.print(num +" : " + ml.get(i).getName() + ", " + ml.get(i).getId()
 						+ ", " + ml.get(i).getPwd()
@@ -355,13 +379,18 @@ public class MemberDao implements ConversionTime {
 
 				System.out.printf(", %b" , ml.get(i).getAdmission());
 				System.out.println();
-
+				tf.add(new Member(ml.get(i).getName(), ml.get(i).getId(),
+						ml.get(i).getPwd(),
+						ml.get(i).getEmail(), ml.get(i).getAge(),
+						ml.get(i).getpNumber(), ml.get(i).getRestTime(),
+						ml.get(i).getAccTime(), ml.get(i).getAdmission()
+						));
 				num++;
 			}
 
 
 		}
-
+		return tf;
 
 	}
 
@@ -377,24 +406,28 @@ public class MemberDao implements ConversionTime {
 		//System.out.printf("%02d:%02d:%02d", hour, minute, second);
 		s = String.format("%02d:%02d:%02d", hour, minute, second);
 		
+		System.out.print(s);
+		
 		return s;
 	}
-	
+
 	public int checkUser(String id){
 
-	      insertList();
-	      
-	      for(int i = 0; i < ml.size(); i++){
-	         
-	         if(ml.get(i).getId().equals(id)){
-	            return 1;
-	            
-	         }
-	         
-	      }
-	     
-	      return 0;
+		insertList();
 
-	   }
+		for(int i = 0; i < ml.size(); i++){
+
+			if(ml.get(i).getId().equals(id)){
+				System.out.println("아이디 확인");
+				return 1;
+
+			}
+
+		}
+
+		System.out.println("아이디 없음 ");
+		return 0;
+
+	}
 
 }

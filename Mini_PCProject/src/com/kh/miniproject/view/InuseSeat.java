@@ -10,12 +10,16 @@ import javax.swing.border.TitledBorder;
 
 import com.kh.miniproject.member.dao.MemberDao;
 import com.kh.miniproject.member.vo.Member;
+import com.kh.miniproject.seat.controller.SeatManager;
 
 public class InuseSeat extends JPanel 
 {
 	private MainFrame mf;
 	private MemberDao md = new MemberDao();
+	private SeatManager sm = new SeatManager();
 
+	useTimeCheck tc;
+	
 	public InuseSeat(MainFrame mf, Member m, int seatNo) 
 	{
 		this.mf = mf;
@@ -35,8 +39,8 @@ public class InuseSeat extends JPanel
 					@Override
 					public void mouseClicked(MouseEvent e)
 						{
-							StartPanel start = new StartPanel(mf);
-							changePanel(start);
+						MainPanel mp = new MainPanel(mf);
+						changePanel(mp);
 						}
 				});
 		this.add(goback);
@@ -82,7 +86,7 @@ public class InuseSeat extends JPanel
 		Image clock = new ImageIcon("icon/addSeat.PNG").getImage().getScaledInstance(150, 150, 0);
 		timePlus.setIcon(new ImageIcon(clock));
 		timePlus.setBackground(null);
-		timePlus.setBounds(120, 110, 150, 150);
+		timePlus.setBounds(20, 110, 150, 150);
 		timePlus.setBorderPainted(false);
 		timePlus.addMouseListener(new MouseAdapter()
 				{
@@ -96,11 +100,36 @@ public class InuseSeat extends JPanel
 		JLabel timePlusL = new JLabel("시간추가");
 		timePlusL.setFont(font);
 		timePlusL.setHorizontalAlignment(JLabel.CENTER);
-		timePlusL.setBounds(120, 260, 150, 25);
+		timePlusL.setBounds(20, 260, 150, 25);
 
 		iconp.add(timePlus);
 		iconp.add(timePlusL);
 
+		//사용종료 버튼
+		JButton endBtn = new JButton();
+		Image monitor = new ImageIcon("icon/enduse.PNG").getImage().getScaledInstance(150, 150, 0);
+		endBtn.setIcon(new ImageIcon(monitor));
+		endBtn.setBackground(null);
+		endBtn.setBounds(200, 110, 150, 150);
+		endBtn.setBorderPainted(false);
+		endBtn.addMouseListener(new MouseAdapter()
+				{
+					@Override
+					public void mouseClicked(MouseEvent e)
+					{
+						sm.exitSeat(seatNo);
+						MainPanel mp = new MainPanel(mf);
+						changePanel(mp);
+					}
+				});
+		JLabel endBtnL = new JLabel("사용종료");
+		endBtnL.setFont(font);
+		endBtnL.setHorizontalAlignment(JLabel.CENTER);
+		endBtnL.setBounds(200, 260, 150, 25);
+		
+		iconp.add(endBtn);
+		iconp.add(endBtnL);
+		
 		// 좌석패널
 		JPanel seatP = new JPanel();
 		seatP.setLayout(null);
@@ -182,7 +211,13 @@ public class InuseSeat extends JPanel
 		useAccTimeL.setForeground(Color.WHITE);
 		useAccTimeL.setEditable(false);
 		seatInUse.add(useAccTimeL);
-		JTextField useAccTimeT = new JTextField(m.getAccTime()+"");
+		
+		
+		JTextField useAccTimeT = new JTextField("");
+		
+		tc = new useTimeCheck(mf, useAccTimeT, seatNo);
+		tc.start();
+		
 		useAccTimeT.setBounds(170, 330, 150, 50);
 		useAccTimeT.setFont(new Font("맑은고딕", Font.BOLD, 30));
 		useAccTimeT.setBackground(Color.BLACK);
@@ -211,5 +246,7 @@ public class InuseSeat extends JPanel
 		mf.remove(this);
 		mf.add(panel);
 		mf.repaint();
+		tc.interrupt();
+		
 	}
 }

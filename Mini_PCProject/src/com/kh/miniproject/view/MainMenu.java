@@ -42,9 +42,9 @@ public class MainMenu {
 			sc.nextLine();
 			
 			switch(num){
-			case 1: mm.memberJoin();	break;
-			case 2: /*mm.idSearch();*/ 		break;
-			case 3: //mm.pwSearch(); 		break;
+			case 1: //mm.memberJoin();	break;
+		//	case 2: mm.idSearch(); 		break;
+		//	case 3: mm.pwSearch(); 		break;
 			case 4:
 				System.out.print("승인할 ID 입력 : ");
 				id = sc.nextLine();
@@ -105,7 +105,7 @@ public class MainMenu {
 					System.out.println("없는 좌석입니다.");
 					break;
 				}
-				sm.useSeat(num);
+			//	sm.useSeat(num);
 				break;
 			case 4:
 				System.out.print("추가할 회원ID : ");

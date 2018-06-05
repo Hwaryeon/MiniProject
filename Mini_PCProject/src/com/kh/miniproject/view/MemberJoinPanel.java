@@ -1,19 +1,30 @@
 package com.kh.miniproject.view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dialog;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import com.kh.miniproject.member.controller.MemberManager;
+import com.kh.miniproject.view.decoration.RoundedButton;
 
 
-public class MemberJoinPanel extends JPanel{
+public class MemberJoinPanel extends JPanel {
 	private MainFrame mf;
 	private MainPanel mp;
-	private MemberManager mm = new MemberManager();
-	
+
+	MemberManager mm = new MemberManager();
+
 	public MemberJoinPanel(MainFrame mf){
 		this.mf = mf;
 
@@ -21,20 +32,44 @@ public class MemberJoinPanel extends JPanel{
 		this.setSize(mf.getWidth(), mf.getHeight());
 		this.setBackground(Color.BLACK);
 
+		boolean overlapCheck = false;
+		
+		// 뒤로가기 버튼
+		JButton goback = new JButton();
+		Image back = new ImageIcon("icon/pointer.png").getImage().getScaledInstance(100, 100, 0);
+		goback.setIcon(new ImageIcon(back));
+		goback.setBorderPainted(false);
+		goback.setBounds(25, 25, 100, 100);
+		goback.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				StartPanel sp = new StartPanel(mf);
+				changePanel(sp);
+			}
+		});
+		this.add(goback);
+
 		//상단 회원가입 패널 //패널 위 라벨로 구성
 		JPanel memberJoinText = new JPanel();
 		memberJoinText.setLayout(null);
 		memberJoinText.setLocation(300, 50);
 		memberJoinText.setBackground(Color.WHITE);
 		memberJoinText.setSize(600,100);
+		JLabel titleLayer = new JLabel();
+		Image titleLayerI = new ImageIcon("icon/titleLayer.png").getImage().getScaledInstance(600, 100, 0);
+		titleLayer.setIcon(new ImageIcon(titleLayerI));
+		titleLayer.setBounds(0, 0, 600, 100);
 		//패널 위 "회원가입" 라벨
 		JLabel text = new JLabel("회원가입");
-		text.setSize(200, 50);
-		text.setLocation(200, 25);
-		text.setBackground(Color.GREEN);
+		//text.setSize(200, 50);
+		//text.setLocation(200, 25);
+		text.setBounds(0, 0, 600, 100);
 		text.setFont(new Font("맑은 고딕", Font.BOLD, 40));
 		text.setHorizontalAlignment(JTextField.CENTER);
 		memberJoinText.add(text);
+		memberJoinText.add(titleLayer);
 
 		//회원 가입 메인 패널 //
 		JPanel joinMain = new JPanel();
@@ -79,8 +114,14 @@ public class MemberJoinPanel extends JPanel{
 		JTextField textEmail = new JTextField();
 		textEmail.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		textEmail.setBounds(30, 390, 200, 30);
+		
+		JLabel joinSuccess = new JLabel();
+		joinSuccess.setBounds(250, 435, 250, 50);
+		joinSuccess.setBackground(Color.WHITE);
+		joinSuccess.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+		joinSuccess.setForeground(Color.RED);
 
-		JButton overlap = new JButton("ID 중복확인");
+		JButton overlap = new RoundedButton("ID 중복확인");
 		overlap.setBounds(250, 70, 130, 30);
 		overlap.setForeground(Color.WHITE);
 		overlap.setBackground(Color.black);
@@ -89,11 +130,14 @@ public class MemberJoinPanel extends JPanel{
 		Dialog overlapDialog = new Dialog(mf);
 		overlapDialog.setBounds(500, 380, 200, 100);
 
-		JButton dialogClose = new JButton("닫기");
+		JButton dialogClose = new RoundedButton("닫기");
 		dialogClose.setBounds(50, 125, 50, 50);
 
 		JLabel checkOverlap = new JLabel("중복된 아이디 입니다.");
 		checkOverlap.setHorizontalAlignment(JLabel.CENTER);
+		
+		
+		//boolean overlapCheck = false;
 		
 		overlapDialog.add(dialogClose, "South");
 		overlapDialog.add(checkOverlap, "North");
@@ -101,16 +145,19 @@ public class MemberJoinPanel extends JPanel{
 		overlap.addActionListener(new ActionListener(){	
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				int check = mm.checkUser(textId.getText());
 
-	            //System.out.println("check : "  + check);
-	            
-	            if(check == 0){      // 중복 x
-	               checkOverlap.setText("사용 가능한 아이디입니다.");
-	            }else if(check == 1){   // 중복 o
-	               checkOverlap.setText("중복된 아이디 입니다.");
-	            }
-				
+				System.out.println("check : "  + check);
+
+				if(check == 0){		// 중복 x
+					boolean overlapCheck = true;
+					checkOverlap.setText("사용 가능한 아이디입니다.");
+				}else if(check == 1){	// 중복 o
+					checkOverlap.setText("중복된 아이디 입니다.");
+					boolean overlapCheck = false;
+				}
+
 				overlapDialog.setVisible(true);
 
 
@@ -122,16 +169,18 @@ public class MemberJoinPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
+
 				overlapDialog.setVisible(false);
 
 			}
 
 		});
-		
-		
+
+
 
 		//시간 추가 버튼
-		JButton join = new JButton("가입");
+		JButton join = new RoundedButton("가입");
 		join.setBounds(30, 435, 100, 50);
 		join.setBackground(Color.BLACK);
 		join.setForeground(Color.WHITE);
@@ -141,10 +190,27 @@ public class MemberJoinPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
+
+				if(textName.getText().equals("") || textId.getText().equals("")
+						|| textPwd.getText().equals("")
+						|| textEmail.getText().equals("")
+						|| textPhoneNum.getText().equals("")
+						|| overlapCheck == false
+						){
+
+					checkOverlap.setText("모든 정보를 입력하셔야합니다.");
+					overlapDialog.setVisible(true);
+				}else{
+					joinSuccess.setText("가입 완료되었습니다");
+					mm.memberJoin(textName.getText(), textId.getText(),
+							textPwd.getText(), textEmail.getText(),
+							textPhoneNum.getText());
+				}
+
+
+
 			}
-			
+
 		});
 
 		//광고창
@@ -155,7 +221,7 @@ public class MemberJoinPanel extends JPanel{
 
 
 
-
+		joinMain.add(joinSuccess);
 		joinMain.add(join);
 		joinMain.add(capture);
 		joinMain.add(overlap);
@@ -174,9 +240,14 @@ public class MemberJoinPanel extends JPanel{
 		this.add(memberJoinText);
 		mf.add(this);
 
-
 	}
 
+	public void changePanel(JPanel panel)
+	{
+		mf.remove(this);
+		mf.add(panel);
+		mf.repaint();
+	}
 
 
 }

@@ -53,15 +53,20 @@ public class Timer extends Thread implements ConversionTime{
 	}
 
 	@Override
-	public void conversionTime(int time){
+	public String conversionTime(int time){
 		long cTime = time;
-
 
 		long second = (long) ((cTime ) % 60);
 		long minute = (long) ((cTime / (  60)) % 60);
 		long hour = (long) ((cTime / ( 60 * 60)));
-
-		System.out.printf("%02d:%02d:%02d", hour, minute, second);
+		String s = null;
+		
+		//System.out.printf("%02d:%02d:%02d", hour, minute, second);
+		s = String.format("%02d:%02d:%02d", hour, minute, second);
+		
+		System.out.print(s);
+		
+		return s;
 	}
 
 

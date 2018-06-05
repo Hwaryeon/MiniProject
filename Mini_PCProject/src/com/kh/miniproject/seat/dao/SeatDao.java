@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.seat.vo.Seat;
@@ -22,7 +24,7 @@ public class SeatDao extends Thread implements ConversionTime{
 	Scanner sc = new Scanner(System.in);
 
 	MemberManager mm = new MemberManager();
-	//TimerMake tm = new TimerMake();
+	TimerMake tm = new TimerMake();
 	ArrayList<Seat> sl = new ArrayList<Seat>();
 
 	final static int MAX_SEAT = 12;
@@ -115,9 +117,9 @@ public class SeatDao extends Thread implements ConversionTime{
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch(EOFException e){
+		}catch(EOFException e){
 			//System.out.println("모든 좌석 출력...");
-		} catch (IOException e) {
+		}catch (IOException e) {
 			e.printStackTrace();
 		}
 
@@ -148,13 +150,12 @@ public class SeatDao extends Thread implements ConversionTime{
 
 
 					
-					/*mm.memberInfo(sl.get(i).getUserId());
+					mm.memberInfo(sl.get(i).getUserId());
 					System.out.println();
 
 					System.out.print("사용시간 : ");
 					conversionTime(iList[seatNo-1]);
-					System.out.println();*/
-					
+					System.out.println();
 					/*tm.threadNumber = seatNo-1;
 					tm.visibleFrame();*/
 					
@@ -168,7 +169,7 @@ public class SeatDao extends Thread implements ConversionTime{
 	}
 
 	
-	public void useSeat(int seatNo, String id, int time){
+	public void useSeat(JFrame mf, int seatNo, String id, int time){
 
 		insertList();
 
@@ -212,8 +213,7 @@ public class SeatDao extends Thread implements ConversionTime{
 					if(sl.get(i).getUserTime() > 0){
 
 						Timer timer = new Timer(sl.get(i).getSeatNo(),
-								sl.get(i).getUserId(),
-								sl.get(i).getUserTime());
+								sl.get(i).getUserId(), sl.get(i).getUserTime());
 						Thread t1 = timer;
 
 						tList[sl.get(i).getSeatNo()-1] = t1;
@@ -274,13 +274,16 @@ public class SeatDao extends Thread implements ConversionTime{
 	public String conversionTime(int time){
 		long cTime = time;
 
-
 		long second = (long) ((cTime ) % 60);
 		long minute = (long) ((cTime / (  60)) % 60);
 		long hour = (long) ((cTime / ( 60 * 60)));
 		String s = null;
-		String.format("%02d:%02d:%02d", hour, minute, second);
+		
+		//System.out.printf("%02d:%02d:%02d", hour, minute, second);
+		s = String.format("%02d:%02d:%02d", hour, minute, second);
+		
+		System.out.print(s);
+		
 		return s;
 	}
-
 }

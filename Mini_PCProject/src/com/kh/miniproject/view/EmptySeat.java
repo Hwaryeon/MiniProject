@@ -31,8 +31,8 @@ public class EmptySeat extends JPanel
 					@Override
 					public void mouseClicked(MouseEvent e)
 						{
-							StartPanel start = new StartPanel(mf);
-							changePanel(start);
+						MainPanel mp = new MainPanel(mf);
+						changePanel(mp);
 						}
 				});
 		this.add(goback);
@@ -85,7 +85,7 @@ public class EmptySeat extends JPanel
 					@Override
 					public void mouseClicked(MouseEvent e)
 					{
-						AddTimePanel atp = new AddTimePanel(mf);
+						UseSeat atp = new UseSeat(mf, seatNo);
 						//changePanel(atp);
 						changePanel(atp);
 					}
