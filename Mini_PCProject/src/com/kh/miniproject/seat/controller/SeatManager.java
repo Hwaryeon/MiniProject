@@ -17,6 +17,10 @@ public class SeatManager {
 	
 	SeatDao sd = new SeatDao();
 	
+	public void seatLeset(){
+		sd.seatLeset();
+	}
+	
 	public void printAllSeat(){
 		sd.printAllSeat();
 	}

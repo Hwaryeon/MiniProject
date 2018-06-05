@@ -17,13 +17,15 @@ import javax.swing.border.EtchedBorder;
 import com.kh.miniproject.event.MyMouseAdapter;
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.seat.controller.SeatManager;
+import com.kh.miniproject.seat.dao.SeatDao;
 
 public class MainPanel extends JPanel 
 {
 	private MainFrame mf;
 	private SeatManager sm = new SeatManager();
 	private MemberManager mm = new MemberManager();
-
+	private SeatDao sd = new SeatDao();
+	
 	public ArrayList<Thread> thList = new ArrayList(20);
 	
 	public MainPanel(MainFrame mf) 
@@ -175,6 +177,19 @@ public class MainPanel extends JPanel
 		seatTitle.setBorder(eborder);
 		seatTitle.setBounds(0, 0, 650, 100);
 		seatP.add(seatTitle);
+		
+		seatTitle.addMouseListener(new MyMouseAdapter(){
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				sd.seatLeset();
+				System.out.println("좌석 초기화...");
+				
+				MainPanel mp = new MainPanel(mf);
+				changePanel(mp);
+				
+			}
+		});
 
 		// 비어있음(empty)
 		Image empty = new ImageIcon("icon/empty.png").getImage().getScaledInstance(100, 45, 0);

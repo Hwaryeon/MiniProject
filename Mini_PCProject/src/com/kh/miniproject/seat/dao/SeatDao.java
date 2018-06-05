@@ -27,7 +27,7 @@ public class SeatDao extends Thread implements ConversionTime{
 	TimerMake tm = new TimerMake();
 	ArrayList<Seat> sl = new ArrayList<Seat>();
 
-	final static int MAX_SEAT = 12;
+	final static int MAX_SEAT = 20;
 
 	public static Thread[] tList = new Thread[MAX_SEAT];
 	public static int[] iList = new int[MAX_SEAT];
@@ -53,6 +53,8 @@ public class SeatDao extends Thread implements ConversionTime{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println("좌석 초기화 완료...");
 
 	}
 
@@ -130,7 +132,8 @@ public class SeatDao extends Thread implements ConversionTime{
 			}else{
 				System.out.print(sl.get(i).getSeatNo() + " : X\t");
 			}
-			if(i == 3 || i == 7){
+			if(i == 3 || i == 7 ||
+					i == 11 || i == 15){
 				System.out.println();
 			}
 
