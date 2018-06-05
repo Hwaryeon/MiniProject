@@ -7,7 +7,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,20 +17,43 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.kh.miniproject.member.controller.MemberManager;
-import com.kh.miniproject.member.vo.Member;
+import com.kh.miniproject.seat.controller.SeatManager;
 
 
-public class AddTimePanel extends JPanel{
+public class UseSeat extends JPanel{
 	private MainFrame mf;
 	private JPanel mp;
 	private MemberManager mm = new MemberManager();
-
-	public AddTimePanel(MainFrame mf){
+	
+	private SeatManager sm = new SeatManager();
+	
+	public UseSeat(MainFrame mf, int seatNo){
 		this.mf = mf;
 
 		//메인 프레임과 같은 사이즈의 패널
 		//JPanel start = new JPanel();
 
+		//뒤로가기 버튼
+		JButton goback = new JButton();
+		Image back = new ImageIcon("icon/pointer.png").getImage().getScaledInstance(100, 100, 0);
+		goback.setIcon(new ImageIcon(back));
+		goback.setBounds(25, 25, 100, 100);
+		goback.setBorderPainted(false);
+		goback.setBackground(null);
+		goback.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				MainPanel mPanel = new MainPanel(mf);
+				changePanel(mPanel);
+			}
+		});
+		this.add(goback);
+		
+		
+		System.out.println("seatNo : " + seatNo);
+		
 		this.setLayout(null);
 		this.setSize(mf.getSize());
 		this.setBackground(Color.BLACK);
@@ -41,7 +65,7 @@ public class AddTimePanel extends JPanel{
 		addTimeText.setBackground(Color.WHITE);
 		addTimeText.setSize(600,100);
 		//패널 위 "결제화면" 라벨
-		JLabel text = new JLabel("결제화면");
+		JLabel text = new JLabel("좌석 사용");
 		text.setSize(200, 50);
 		text.setLocation(200, 25);
 		text.setBackground(Color.GREEN);
@@ -61,7 +85,7 @@ public class AddTimePanel extends JPanel{
 		iconLabel.setIcon(new ImageIcon(icon));
 		iconLabel.setBounds(20, 20, 100, 100);
 		//"시간추가" 텍스트필드
-		JTextField addTime = new JTextField("시간 추가");
+		JTextField addTime = new JTextField("좌석 사용");
 		addTime.setSize(300,100);
 		addTime.setLocation(150, 20);
 		addTime.setBackground(Color.BLACK);
@@ -79,7 +103,10 @@ public class AddTimePanel extends JPanel{
 		JTextField textId = new JTextField();
 		textId.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		textId.setBounds(30, 200, 200, 30);
-
+		
+		/*String[] prices = 
+			{"1000", "2000", "3000", "5000", "10000", "20000", "50000"};*/
+		
 		Choice priceChoice = new Choice();
 		priceChoice.add("1000");
 		priceChoice.add("2000");
@@ -89,7 +116,7 @@ public class AddTimePanel extends JPanel{
 		priceChoice.add("20000");
 		priceChoice.add("50000");
 		priceChoice.setBounds(30, 270, 200, 20);
-
+		
 		//priceList.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 		/*JScrollPane priceScroll = new JScrollPane(priceChoice);
 		//priceScroll.setPreferredSize(new Dimension(200, 30));
@@ -161,64 +188,29 @@ public class AddTimePanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int checkUser = mm.checkUser(textId.getText());
-				String checkString = priceChoice.getSelectedItem();
-				int priceCheck = Integer.parseInt(checkString);
-				boolean checkAprov = true;
 
-				ArrayList<Member> mList = mm.memberTFList(false);
-				
-				for(int i = 0; i < mList.size(); i++){
-					if(mList.get(i).getId().equals(textId.getText())){
-						checkAprov = false;
-						idOverlap.setText("비승인된 회원입니다.");
-						
-					}
-					
-				}
-				
-				
-				String str = "";
-				
-				switch(checkString){
-				case "1000" : str = "01 : 00 충전 "; break;
-				case "2000" : str = "02 : 00 충전 "; break;
-				case "3000" : str = "03 : 00 충전 "; break;
-				case "5000" : str = "05 : 00 충전 "; break;
-				case "10000" : str = "10 : 00 충전 "; break;
-				case "20000" : str = "20 : 00 충전 "; break;
-				case "50000" : str = "50 : 00 충전 "; break;
-				}
-				
-
-				try{
-					if(priceCheck >= 1000 && checkUser == 1 && checkAprov == true){
-						priceMin.setText("");
-						idOverlap.setText("");
-						priceToTime.setText(str);
-						insertID.setText(str);
-						addTimeDial.setVisible(true);
-					}
-					if(checkUser == 0){
-						idOverlap.setText("존재하지 않는 회원입니다.");
-					}
-					if(priceCheck < 1000){
-						priceMin.setText("최소 1000원 이상 입력해야 합니다.");
-					}
-
-				}catch (NumberFormatException e1){
+				if(checkUser == 0){
 					idOverlap.setText("존재하지 않는 회원입니다.");
-					priceMin.setText("최소 1000원 이상 입력해야 합니다");
+				}else{
+					idOverlap.setText("");
+					
+					sm.useSeat(mf, textId.getText(), seatNo);
+					
+					MainPanel mPanel = new MainPanel(mf);
+					changePanel(mPanel);
 				}
+				
+				
+				
+			
 			}
 		});
-
 
 		//시간추가 팝업창 닫기 버튼
 		dialogClose.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				priceMin.setText("");
 				idOverlap.setText("");
 				priceToTime.setText("");
@@ -229,32 +221,12 @@ public class AddTimePanel extends JPanel{
 			}
 
 		});
-
+		
 		selectAdd.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				//System.out.println("idfield : " + textId.getText());
-
-				String checkString = priceChoice.getSelectedItem();
-
-				int checkUser = mm.checkUser(textId.getText());
-				String checkString1 = priceChoice.getSelectedItem();
-
-
-				switch(checkString){
-				case "1000" : mm.timePlus(textId.getText(), 1); break;
-				case "2000" : mm.timePlus(textId.getText(), 2); break;
-				case "3000" : mm.timePlus(textId.getText(), 3); break;
-				case "5000" : mm.timePlus(textId.getText(), 5); break;
-				case "10000" : mm.timePlus(textId.getText(), 10); ; break;
-				case "20000" : mm.timePlus(textId.getText(), 20); break;
-				case "50000" : mm.timePlus(textId.getText(), 50); break;
-				}
-
-				//	mm.timePlus(textId.getText(), 1);
-
+				
 				priceMin.setText("");
 				idOverlap.setText("");
 				priceToTime.setText("");
@@ -262,7 +234,7 @@ public class AddTimePanel extends JPanel{
 				//textPrice.setText("");
 				addTimeDial.setVisible(false);
 			}
-
+			
 		});
 
 		//광고창
@@ -287,13 +259,18 @@ public class AddTimePanel extends JPanel{
 		timeMain.add(iconLabel);
 
 
-		mf.add(timeMain);
-		mf.add(addTimeText);
+		this.add(timeMain);
+		this.add(addTimeText);
 		mf.add(this);
 
 
 
 	}
 
-
+	public void changePanel(JPanel panel)
+	{
+		mf.remove(this);
+		mf.add(panel);
+		mf.repaint();
+	}
 }

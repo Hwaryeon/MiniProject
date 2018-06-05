@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.member.vo.Member;
 
-public class MemberManagement {
+public class MemberManagement extends JPanel{
 	private MainFrame mf;
 	private MainPanel mp;
 
@@ -31,11 +31,11 @@ public class MemberManagement {
 	public MemberManagement(MainFrame mf){
 		this.mf = mf;
 
-		JPanel start = new JPanel();
+		//JPanel start = new JPanel();
 
-		start.setLayout(null);
-		start.setSize(mf.getWidth(), mf.getHeight());
-		start.setBackground(Color.BLACK);
+		this.setLayout(null);
+		this.setSize(mf.getWidth(), mf.getHeight());
+		this.setBackground(Color.BLACK);
 
 		//상단 회원관리 패널 //패널 위 라벨로 구성
 		JPanel memberManagePanel = new JPanel();
@@ -456,6 +456,6 @@ public class MemberManagement {
 
 		mf.add(member);
 		mf.add(memberManagePanel);
-		mf.add(start);
+		mf.add(this);
 	}
 }

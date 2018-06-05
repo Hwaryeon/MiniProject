@@ -1,59 +1,68 @@
 package com.kh.miniproject.view;
 
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import com.kh.miniproject.iTime.ConversionTime;
-import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.seat.controller.SeatManager;
 import com.kh.miniproject.seat.dao.SeatDao;
 
-public class Timer extends Thread implements ConversionTime{
-
-	private int seatNum;
-	private String id;
-	private int time;
-
-	private int count;
-
-	MemberManager mm = new MemberManager();
-	SeatManager sm = new SeatManager();
+public class useTimeCheck extends Thread implements ConversionTime {
 	
-	public Timer(int seatNum, String id, int time){
-		this.seatNum = seatNum;
-		this.id = id;
-		this.time = time;
-	}
+	
+	private MainFrame mf;
+	private JPanel seat;
+	
+	private JTextField jf;
+	
+	private int seatNo;
+	
+	SeatManager sm = new SeatManager();
 
-	@SuppressWarnings("deprecation")
+	public useTimeCheck(MainFrame mf, JPanel seat1, JTextField test, int seatNo) {
+
+	
+		this.mf = mf;
+		this.seat = seat1;
+		this.jf = test;
+		this.seatNo = seatNo;
+	
+	}
+	
 	@Override
 	public void run() {
-		System.out.println();
-
-		for(int j = 0; j < time; j++){
+		
+		int count = 0;
+		
+		//String id = sm.checkSeat(seatNo);
+		
+		while(true){
 			try {
 				Thread.sleep(1000);	// 1초
-				count++;
-				SeatDao.iList[seatNum-1] = count;
-			//	System.out.println(id + "님의 사용시간 : " + j );
+				count = SeatDao.iList[seatNo-1];
+				System.out.println("사용시간test : " + count );
+				
+				jf.setText(conversionTime(count));
+				mf.repaint();
+				
+				
+				
+				
 			} catch (InterruptedException e) {
 				System.out.println("좌석 사용 종료...");
-				
+
 				System.out.print("종료전까지 사용시간 : ");
-				conversionTime(SeatDao.iList[seatNum-1]);
+				//conversionTime(SeatDao.iList[seatNum-1]);
 				System.out.println();
 				//this.interrupt();
 				this.stop();
 			}
 
 		}
-
-		sm.exitSeat(seatNum);
-
-		System.out.println();
-		System.out.println(id + "님의 사용시간종료");
-
 	}
 
 	@Override
-	public String conversionTime(int time){
+	public String conversionTime(int time) {
 		long cTime = time;
 
 
@@ -70,7 +79,5 @@ public class Timer extends Thread implements ConversionTime{
 
 		return s;
 	}
-
-
-
+	
 }

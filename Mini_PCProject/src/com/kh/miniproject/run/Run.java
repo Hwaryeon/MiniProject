@@ -20,13 +20,13 @@ public class Run {
 		
 		//폰트 종류 확인
 		/*GraphicsEnvironment ge = null;
-		ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		ge = Graphics
+		Environment.getLocalGraphicsEnvironment();
 		Font[] fonts = ge.getAllFonts();
 		for(int i=0;i<fonts.length;i++)
 		{
 			System.out.println(fonts[i].getFontName());
 		}*/
-		
 		
 	}
 
