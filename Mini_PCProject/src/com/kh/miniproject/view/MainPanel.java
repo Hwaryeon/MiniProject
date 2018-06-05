@@ -1,30 +1,31 @@
 package com.kh.miniproject.view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
 
 import com.kh.miniproject.event.MyMouseAdapter;
 import com.kh.miniproject.member.controller.MemberManager;
-import com.kh.miniproject.member.vo.Member;
 import com.kh.miniproject.seat.controller.SeatManager;
-
-
 
 public class MainPanel extends JPanel 
 {
 	private MainFrame mf;
 	private SeatManager sm = new SeatManager();
 	private MemberManager mm = new MemberManager();
-	
-	public ArrayList<Thread> thList = new ArrayList(20);
 
+	public ArrayList<Thread> thList = new ArrayList(20);
+	
 	public MainPanel(MainFrame mf) 
 	{
 		this.mf = mf;
@@ -56,14 +57,19 @@ public class MainPanel extends JPanel
 		title.setLocation(300, 50);
 		title.setBackground(Color.WHITE);
 		title.setSize(600,100);
+		JLabel titleLayer = new JLabel();
+		Image titleLayerI = new ImageIcon("icon/titleLayer.png").getImage().getScaledInstance(600, 100, 0);
+		titleLayer.setIcon(new ImageIcon(titleLayerI));
+		titleLayer.setBounds(0, 0, 600, 100);
 		//패널 위 제목 라벨
 		JLabel text = new JLabel("앗! 피시방비가 타이어보다 싸다!");
 		text.setSize(600, 50);
-		text.setLocation(5, 25);
+		text.setLocation(0, 25);
 		text.setBackground(Color.GREEN);
 		text.setFont(new Font("맑은 고딕", Font.BOLD, 40));
-		text.setHorizontalAlignment(JTextField.CENTER);
+		text.setHorizontalAlignment(JLabel.CENTER);
 		title.add(text);
+		title.add(titleLayer);
 		this.add(title);
 
 		// 메뉴패널
@@ -99,7 +105,6 @@ public class MainPanel extends JPanel
 			public void mouseClicked(MouseEvent e)
 			{
 				AddTimePanel atp = new AddTimePanel(mf);
-				//changePanel(atp);
 				changePanel(atp);
 			}
 		});
@@ -191,8 +196,8 @@ public class MainPanel extends JPanel
 
 		seat1.add(seatl01);
 
-		
-		
+
+
 		seatGP.add(seat1);
 		if(sm.checkSeat(1) != null){
 			JTextField useTime = new JTextField("사용시간");
@@ -212,14 +217,14 @@ public class MainPanel extends JPanel
 			useTimeCheck tc = new useTimeCheck(mf, /*seat1, */useTime, 1);
 			thList.add(tc);
 			tc.start();
-			
+
 
 		}else{
 			JLabel seat1e = new JLabel();
 			seat1e.setIcon(new ImageIcon(empty));
 			seat1e.setBounds(10, 30, 90, 45);
 			seat1.add(seat1e);
-			
+
 		}
 
 
@@ -251,11 +256,11 @@ public class MainPanel extends JPanel
 		seatl02.setBounds(10, 10, 20, 20);
 
 		seat2.add(seatl02);
-		
-		
+
+
 		seatGP.add(seat2);
 
-		
+
 		if(sm.checkSeat(2) != null){
 			JTextField useTime2 = new JTextField("사용시간");
 			useTime2.setBounds(10, 50, 70, 20);
@@ -265,13 +270,14 @@ public class MainPanel extends JPanel
 			useTime2.setForeground(Color.WHITE);
 			useTime2.setEditable(false);
 			seat2.add(useTime2);
-			
+
 			JLabel seat2u = new JLabel(sm.checkSeat(2));
 			seat2u.setBounds(10, 30, 50, 20);
 			seat2u.setHorizontalAlignment(JLabel.CENTER);
 			seat2u.setBackground(Color.white);
 			seat2.add(seat2u);
 			useTimeCheck tc = new useTimeCheck(mf,useTime2, 2);
+			thList.add(tc);
 			tc.start();
 		}else{
 			JLabel seat2e = new JLabel();
@@ -307,8 +313,8 @@ public class MainPanel extends JPanel
 		seatl03.setBounds(10, 10, 20, 20);
 
 		seat3.add(seatl03);
-		
-		
+
+
 		seatGP.add(seat3);
 
 		if(sm.checkSeat(3) != null){
@@ -326,6 +332,7 @@ public class MainPanel extends JPanel
 			seat3u.setBackground(Color.white);
 			seat3.add(seat3u);
 			useTimeCheck tc = new useTimeCheck(mf,  useTime3, 3);
+			thList.add(tc);
 			tc.start();
 
 		}else{
@@ -361,7 +368,7 @@ public class MainPanel extends JPanel
 
 		seat4.add(seatl04);
 		seatGP.add(seat4);
-		
+
 
 		if(sm.checkSeat(4) != null){
 			JTextField useTime4 = new JTextField("사용시간");
@@ -378,8 +385,9 @@ public class MainPanel extends JPanel
 			seat4u.setBackground(Color.white);
 			seat4.add(seat4u);
 			useTimeCheck tc = new useTimeCheck(mf, useTime4, 4);
+			thList.add(tc);
 			tc.start();
-			
+
 
 		}else{
 			JLabel seat4e = new JLabel();
@@ -416,7 +424,7 @@ public class MainPanel extends JPanel
 		seatGP.add(seat5);
 
 		if(sm.checkSeat(5) != null){
-			
+
 			JTextField useTime5 = new JTextField("사용시간");
 			useTime5.setBounds(10, 50, 70, 20);
 			useTime5.setFont(new Font("맑은고딕", Font.BOLD, 13));
@@ -431,6 +439,7 @@ public class MainPanel extends JPanel
 			seat5u.setBackground(Color.white);
 			seat5.add(seat5u);
 			useTimeCheck tc = new useTimeCheck(mf, useTime5, 5);
+			thList.add(tc);
 			tc.start();
 
 		}else{
@@ -484,6 +493,7 @@ public class MainPanel extends JPanel
 			seat6u.setBackground(Color.white);
 			seat6.add(seat6u);
 			useTimeCheck tc = new useTimeCheck(mf, useTime6, 6);
+			thList.add(tc);
 			tc.start();
 
 		}else{
@@ -535,6 +545,7 @@ public class MainPanel extends JPanel
 			seat7u.setBackground(Color.white);
 			seat7.add(seat7u);
 			useTimeCheck tc = new useTimeCheck(mf,  useTime7, 7);
+			thList.add(tc);
 			tc.start();
 
 		}else{
@@ -586,6 +597,7 @@ public class MainPanel extends JPanel
 			seat8u.setBackground(Color.white);
 			seat8.add(seat8u);
 			useTimeCheck tc = new useTimeCheck(mf, useTime8, 8);
+			thList.add(tc);
 			tc.start();
 
 		}else{
@@ -637,6 +649,7 @@ public class MainPanel extends JPanel
 			seat9u.setBackground(Color.white);
 			seat9.add(seat9u);
 			useTimeCheck tc = new useTimeCheck(mf, useTime9, 9);
+			thList.add(tc);
 			tc.start();
 
 		}else{
@@ -688,6 +701,7 @@ public class MainPanel extends JPanel
 			seat10u.setBackground(Color.white);
 			seat10.add(seat10u);
 			useTimeCheck tc = new useTimeCheck(mf, useTime10, 10);
+			thList.add(tc);
 			tc.start();
 
 		}else{
@@ -739,6 +753,7 @@ public class MainPanel extends JPanel
 			seat11u.setBackground(Color.white);
 			seat11.add(seat11u);
 			useTimeCheck tc = new useTimeCheck(mf, useTime11, 11);
+			thList.add(tc);
 			tc.start();
 
 		}else{
@@ -790,6 +805,7 @@ public class MainPanel extends JPanel
 			seat12u.setBackground(Color.white);
 			seat12.add(seat12u);
 			useTimeCheck tc = new useTimeCheck(mf,  useTime12, 12);
+			thList.add(tc);
 			tc.start();
 
 		}else{
@@ -841,6 +857,7 @@ public class MainPanel extends JPanel
 			seat13u.setBackground(Color.white);
 			seat13.add(seat13u);
 			useTimeCheck tc = new useTimeCheck(mf,  useTime13, 13);
+			thList.add(tc);
 			tc.start();
 		}else{
 			JLabel seat13e = new JLabel();
@@ -891,6 +908,7 @@ public class MainPanel extends JPanel
 			seat14u.setBackground(Color.white);
 			seat14.add(seat14u);
 			useTimeCheck tc = new useTimeCheck(mf,  useTime14, 14);
+			thList.add(tc);
 			tc.start();
 
 		}else{
@@ -942,6 +960,7 @@ public class MainPanel extends JPanel
 			seat15u.setBackground(Color.white);
 			seat15.add(seat15u);
 			useTimeCheck tc = new useTimeCheck(mf, useTime15, 15);
+			thList.add(tc);
 			tc.start();
 
 		}else{
@@ -993,6 +1012,7 @@ public class MainPanel extends JPanel
 			seat16u.setBackground(Color.white);
 			seat16.add(seat16u);
 			useTimeCheck tc = new useTimeCheck(mf, useTime16, 16);
+			thList.add(tc);
 			tc.start();
 
 		}else{
@@ -1044,6 +1064,7 @@ public class MainPanel extends JPanel
 			seat17u.setBackground(Color.white);
 			seat17.add(seat17u);
 			useTimeCheck tc = new useTimeCheck(mf,useTime17, 17);
+			thList.add(tc);
 			tc.start();
 
 		}else{
@@ -1095,6 +1116,7 @@ public class MainPanel extends JPanel
 			seat18u.setBackground(Color.white);
 			seat18.add(seat18u);
 			useTimeCheck tc = new useTimeCheck(mf, useTime18, 18);
+			thList.add(tc);
 			tc.start();
 
 		}else{
@@ -1146,6 +1168,7 @@ public class MainPanel extends JPanel
 			seat19u.setBackground(Color.white);
 			seat19.add(seat19u);
 			useTimeCheck tc = new useTimeCheck(mf, useTime19, 19);
+			thList.add(tc);
 			tc.start();
 
 		}else{
@@ -1197,6 +1220,7 @@ public class MainPanel extends JPanel
 			seat20u.setBackground(Color.white);
 			seat20.add(seat20u);
 			useTimeCheck tc = new useTimeCheck(mf, useTime20, 20);
+			thList.add(tc);
 			tc.start();
 
 		}else{
@@ -1220,7 +1244,9 @@ public class MainPanel extends JPanel
 				}
 			}
 		});
-		 
+
+
+
 		seatP.add(seatGP);
 		menu.add(iconp);
 
@@ -1228,8 +1254,9 @@ public class MainPanel extends JPanel
 		this.add(seatP);
 
 		mf.add(this);
-		
+
 	}
+
 
 	public void changePanel(JPanel panel)
 	{

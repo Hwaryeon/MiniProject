@@ -27,7 +27,7 @@ public class SeatDao extends Thread implements ConversionTime{
 	TimerMake tm = new TimerMake();
 	ArrayList<Seat> sl = new ArrayList<Seat>();
 
-	final static int MAX_SEAT = 20;
+	final static int MAX_SEAT = 12;
 
 	public static Thread[] tList = new Thread[MAX_SEAT];
 	public static int[] iList = new int[MAX_SEAT];
@@ -130,8 +130,7 @@ public class SeatDao extends Thread implements ConversionTime{
 			}else{
 				System.out.print(sl.get(i).getSeatNo() + " : X\t");
 			}
-			if(i == 3 || i == 7 || i == 11
-					|| i == 15){
+			if(i == 3 || i == 7){
 				System.out.println();
 			}
 
@@ -275,11 +274,10 @@ public class SeatDao extends Thread implements ConversionTime{
 	public String conversionTime(int time){
 		long cTime = time;
 
-
 		long second = (long) ((cTime ) % 60);
 		long minute = (long) ((cTime / (  60)) % 60);
 		long hour = (long) ((cTime / ( 60 * 60)));
-	String s = null;
+		String s = null;
 		
 		//System.out.printf("%02d:%02d:%02d", hour, minute, second);
 		s = String.format("%02d:%02d:%02d", hour, minute, second);
@@ -288,5 +286,4 @@ public class SeatDao extends Thread implements ConversionTime{
 		
 		return s;
 	}
-
 }

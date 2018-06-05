@@ -19,47 +19,45 @@ import javax.swing.JTextField;
 
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.member.vo.Member;
+import com.kh.miniproject.view.decoration.RoundedButton;
 
 
 public class AddTimePanel extends JPanel{
 	private MainFrame mf;
-	private JPanel mp;
 	private MemberManager mm = new MemberManager();
 
 	public AddTimePanel(MainFrame mf){
 		this.mf = mf;
-
 		//메인 프레임과 같은 사이즈의 패널
-		//JPanel start = new JPanel();
-
 		this.setLayout(null);
 		this.setSize(mf.getSize());
 		this.setBackground(Color.BLACK);
 
-		//뒤로가기 버튼
+		// 뒤로가기 버튼
 		JButton goback = new JButton();
 		Image back = new ImageIcon("icon/pointer.png").getImage().getScaledInstance(100, 100, 0);
 		goback.setIcon(new ImageIcon(back));
 		goback.setBounds(25, 25, 100, 100);
 		goback.setBorderPainted(false);
 		goback.setBackground(null);
-		goback.addMouseListener(new MouseAdapter()
-				{
-					@Override
-					public void mouseClicked(MouseEvent e)
-						{
-							StartPanel start = new StartPanel(mf);
-							changePanel(start);
-						}
-				});
+		goback.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainPanel mp = new MainPanel(mf);
+				changePanel(mp);
+			}
+		});
 		this.add(goback);
 		
 		//상단 시간추가 패널 //패널 위 라벨로 구성
 		JPanel addTimeText = new JPanel();
 		addTimeText.setLayout(null);
-		addTimeText.setLocation(300, 50);
+		addTimeText.setBounds(300, 50, 600, 100);
 		addTimeText.setBackground(Color.WHITE);
-		addTimeText.setSize(600,100);
+		JLabel titleLayer = new JLabel();
+		Image titleLayerI = new ImageIcon("icon/titleLayer.png").getImage().getScaledInstance(600, 100, 0);
+		titleLayer.setIcon(new ImageIcon(titleLayerI));
+		titleLayer.setBounds(0, 0, 600, 100);
 		//패널 위 "결제화면" 라벨
 		JLabel text = new JLabel("결제화면");
 		text.setSize(200, 50);
@@ -68,6 +66,7 @@ public class AddTimePanel extends JPanel{
 		text.setFont(new Font("맑은 고딕", Font.BOLD, 40));
 		text.setHorizontalAlignment(JTextField.CENTER);
 		addTimeText.add(text);
+		addTimeText.add(titleLayer);
 
 		//시간추가 메인 패널 //
 		JPanel timeMain = new JPanel();
@@ -136,7 +135,7 @@ public class AddTimePanel extends JPanel{
 		priceToTime.setHorizontalAlignment(JLabel.CENTER);
 		labelLayout.add(priceToTime);
 		//시간 추가 버튼
-		JButton add = new JButton("추가");
+		JButton add = new RoundedButton("추가");
 		add.setBounds(30, 400, 150, 70);
 		add.setBackground(Color.BLACK);
 		add.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -307,12 +306,9 @@ public class AddTimePanel extends JPanel{
 		timeMain.add(iconLabel);
 
 
-		mf.add(timeMain);
-		mf.add(addTimeText);
+		this.add(timeMain);
+		this.add(addTimeText);
 		mf.add(this);
-
-
-
 	}
 
 	public void changePanel(JPanel panel)

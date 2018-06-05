@@ -12,21 +12,21 @@ public class Run {
 	public static void main(String[] args) {
 
 		
-		MainMenu mm = new MainMenu();
-		mm.mainMenu();
+		//MainMenu mm = new MainMenu();
+		//mm.mainMenu();
 		
 		new MainFrame();
 		
 		
 		//폰트 종류 확인
 		/*GraphicsEnvironment ge = null;
-		ge = Graphics
-		Environment.getLocalGraphicsEnvironment();
+		ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		Font[] fonts = ge.getAllFonts();
 		for(int i=0;i<fonts.length;i++)
 		{
 			System.out.println(fonts[i].getFontName());
 		}*/
+		
 		
 	}
 
