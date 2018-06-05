@@ -395,20 +395,14 @@ public class MemberDao implements ConversionTime {
 	}
 
 	@Override
-	public String conversionTime(int time){
+	public void conversionTime(int time){
 		long cTime = time;
 
 		long second = (long) ((cTime ) % 60);
 		long minute = (long) ((cTime / (  60)) % 60);
 		long hour = (long) ((cTime / ( 60 * 60)));
-		String s = null;
-		
-		//System.out.printf("%02d:%02d:%02d", hour, minute, second);
-		s = String.format("%02d:%02d:%02d", hour, minute, second);
-		
-		System.out.print(s);
-		
-		return s;
+
+		System.out.printf("%02d:%02d:%02d", hour, minute, second);
 	}
 
 	public int checkUser(String id){
