@@ -16,6 +16,8 @@ public class InuseSeat extends JPanel
 	private MainFrame mf;
 	private MemberDao md = new MemberDao();
 
+	useTimeCheck tc;
+	
 	public InuseSeat(MainFrame mf, Member m, int seatNo) 
 	{
 		this.mf = mf;
@@ -182,7 +184,13 @@ public class InuseSeat extends JPanel
 		useAccTimeL.setForeground(Color.WHITE);
 		useAccTimeL.setEditable(false);
 		seatInUse.add(useAccTimeL);
-		JTextField useAccTimeT = new JTextField(m.getAccTime()+"");
+		
+		
+		JTextField useAccTimeT = new JTextField("");
+		
+		tc = new useTimeCheck(mf, useAccTimeT, seatNo);
+		tc.start();
+		
 		useAccTimeT.setBounds(170, 330, 150, 50);
 		useAccTimeT.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 30));
 		useAccTimeT.setBackground(Color.BLACK);
@@ -211,5 +219,7 @@ public class InuseSeat extends JPanel
 		mf.remove(this);
 		mf.add(panel);
 		mf.repaint();
+		tc.interrupt();
+		
 	}
 }

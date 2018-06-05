@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -34,6 +36,24 @@ public class AddTimePanel extends JPanel{
 		this.setSize(mf.getSize());
 		this.setBackground(Color.BLACK);
 
+		//뒤로가기 버튼
+		JButton goback = new JButton();
+		Image back = new ImageIcon("icon/pointer.png").getImage().getScaledInstance(100, 100, 0);
+		goback.setIcon(new ImageIcon(back));
+		goback.setBounds(25, 25, 100, 100);
+		goback.setBorderPainted(false);
+		goback.setBackground(null);
+		goback.addMouseListener(new MouseAdapter()
+				{
+					@Override
+					public void mouseClicked(MouseEvent e)
+						{
+							StartPanel start = new StartPanel(mf);
+							changePanel(start);
+						}
+				});
+		this.add(goback);
+		
 		//상단 시간추가 패널 //패널 위 라벨로 구성
 		JPanel addTimeText = new JPanel();
 		addTimeText.setLayout(null);
@@ -295,5 +315,11 @@ public class AddTimePanel extends JPanel{
 
 	}
 
+	public void changePanel(JPanel panel)
+	{
+		mf.remove(this);
+		mf.add(panel);
+		mf.repaint();
+	}
 
 }

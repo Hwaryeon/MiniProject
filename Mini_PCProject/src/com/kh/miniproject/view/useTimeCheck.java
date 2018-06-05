@@ -11,7 +11,7 @@ public class useTimeCheck extends Thread implements ConversionTime {
 	
 	
 	private MainFrame mf;
-	private JPanel seat;
+	//private JPanel seat;
 	
 	private JTextField jf;
 	
@@ -19,11 +19,11 @@ public class useTimeCheck extends Thread implements ConversionTime {
 	
 	SeatManager sm = new SeatManager();
 
-	public useTimeCheck(MainFrame mf, JPanel seat1, JTextField test, int seatNo) {
+	public useTimeCheck(MainFrame mf, /*JPanel seat1,*/ JTextField test, int seatNo) {
 
 	
 		this.mf = mf;
-		this.seat = seat1;
+		//this.seat = seat1;
 		this.jf = test;
 		this.seatNo = seatNo;
 	
@@ -40,7 +40,7 @@ public class useTimeCheck extends Thread implements ConversionTime {
 			try {
 				Thread.sleep(1000);	// 1초
 				count = SeatDao.iList[seatNo-1];
-				System.out.println("사용시간test : " + count );
+				System.out.println("사용시간 : " + count );
 				
 				jf.setText(conversionTime(count));
 				mf.repaint();
@@ -50,11 +50,6 @@ public class useTimeCheck extends Thread implements ConversionTime {
 				
 			} catch (InterruptedException e) {
 				System.out.println("좌석 사용 종료...");
-
-				System.out.print("종료전까지 사용시간 : ");
-				//conversionTime(SeatDao.iList[seatNum-1]);
-				System.out.println();
-				//this.interrupt();
 				this.stop();
 			}
 

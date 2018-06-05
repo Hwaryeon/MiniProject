@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -21,6 +22,8 @@ public class MainPanel extends JPanel
 	private MainFrame mf;
 	private SeatManager sm = new SeatManager();
 	private MemberManager mm = new MemberManager();
+	
+	public ArrayList<Thread> thList = new ArrayList(20);
 
 	public MainPanel(MainFrame mf) 
 	{
@@ -206,7 +209,8 @@ public class MainPanel extends JPanel
 			seat1u.setHorizontalAlignment(JLabel.CENTER);
 			seat1u.setBackground(Color.RED);
 			seat1.add(seat1u);
-			useTimeCheck tc = new useTimeCheck(mf, seat1, useTime, 1);
+			useTimeCheck tc = new useTimeCheck(mf, /*seat1, */useTime, 1);
+			thList.add(tc);
 			tc.start();
 			
 
@@ -267,7 +271,7 @@ public class MainPanel extends JPanel
 			seat2u.setHorizontalAlignment(JLabel.CENTER);
 			seat2u.setBackground(Color.white);
 			seat2.add(seat2u);
-			useTimeCheck tc = new useTimeCheck(mf, seat2, useTime2, 2);
+			useTimeCheck tc = new useTimeCheck(mf,useTime2, 2);
 			tc.start();
 		}else{
 			JLabel seat2e = new JLabel();
@@ -304,24 +308,24 @@ public class MainPanel extends JPanel
 
 		seat3.add(seatl03);
 		
-		JTextField useTime3 = new JTextField("»ç¿ë½Ã°£");
-		useTime3.setBounds(10, 50, 70, 20);
-		useTime3.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime3.setHorizontalAlignment(JLabel.CENTER);
-		useTime3.setBackground(Color.BLACK);
-		useTime3.setForeground(Color.WHITE);
-		useTime3.setEditable(false);
-		seat3.add(useTime3);
 		
 		seatGP.add(seat3);
 
 		if(sm.checkSeat(3) != null){
+			JTextField useTime3 = new JTextField("»ç¿ë½Ã°£");
+			useTime3.setBounds(10, 50, 70, 20);
+			useTime3.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime3.setHorizontalAlignment(JLabel.CENTER);
+			useTime3.setBackground(Color.BLACK);
+			useTime3.setForeground(Color.WHITE);
+			useTime3.setEditable(false);
+			seat3.add(useTime3);
 			JLabel seat3u = new JLabel(sm.checkSeat(3));
 			seat3u.setBounds(10, 30, 50, 20);
 			seat3u.setHorizontalAlignment(JLabel.CENTER);
 			seat3u.setBackground(Color.white);
 			seat3.add(seat3u);
-			useTimeCheck tc = new useTimeCheck(mf, seat3, useTime3, 3);
+			useTimeCheck tc = new useTimeCheck(mf,  useTime3, 3);
 			tc.start();
 
 		}else{
@@ -356,24 +360,24 @@ public class MainPanel extends JPanel
 		seatl04.setBounds(10, 10, 20, 20);
 
 		seat4.add(seatl04);
-		
-		JTextField useTime4 = new JTextField("»ç¿ë½Ã°£");
-		useTime4.setBounds(10, 50, 70, 20);
-		useTime4.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime4.setHorizontalAlignment(JLabel.CENTER);
-		useTime4.setBackground(Color.BLACK);
-		useTime4.setForeground(Color.WHITE);
-		useTime4.setEditable(false);
-		seat4.add(useTime4);
 		seatGP.add(seat4);
+		
 
 		if(sm.checkSeat(4) != null){
+			JTextField useTime4 = new JTextField("»ç¿ë½Ã°£");
+			useTime4.setBounds(10, 50, 70, 20);
+			useTime4.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime4.setHorizontalAlignment(JLabel.CENTER);
+			useTime4.setBackground(Color.BLACK);
+			useTime4.setForeground(Color.WHITE);
+			useTime4.setEditable(false);
+			seat4.add(useTime4);
 			JLabel seat4u = new JLabel(sm.checkSeat(4));
 			seat4u.setBounds(10, 30, 50, 20);
 			seat4u.setHorizontalAlignment(JLabel.CENTER);
 			seat4u.setBackground(Color.white);
 			seat4.add(seat4u);
-			useTimeCheck tc = new useTimeCheck(mf, seat4, useTime4, 4);
+			useTimeCheck tc = new useTimeCheck(mf, useTime4, 4);
 			tc.start();
 			
 
@@ -409,24 +413,24 @@ public class MainPanel extends JPanel
 		seatl05.setBounds(10, 10, 20, 20);
 
 		seat5.add(seatl05);
-		
-		JTextField useTime5 = new JTextField("»ç¿ë½Ã°£");
-		useTime5.setBounds(10, 50, 70, 20);
-		useTime5.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime5.setHorizontalAlignment(JLabel.CENTER);
-		useTime5.setBackground(Color.BLACK);
-		useTime5.setForeground(Color.WHITE);
-		useTime5.setEditable(false);
-		seat5.add(useTime5);
 		seatGP.add(seat5);
 
 		if(sm.checkSeat(5) != null){
+			
+			JTextField useTime5 = new JTextField("»ç¿ë½Ã°£");
+			useTime5.setBounds(10, 50, 70, 20);
+			useTime5.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime5.setHorizontalAlignment(JLabel.CENTER);
+			useTime5.setBackground(Color.BLACK);
+			useTime5.setForeground(Color.WHITE);
+			useTime5.setEditable(false);
+			seat5.add(useTime5);
 			JLabel seat5u = new JLabel(sm.checkSeat(5));
 			seat5u.setBounds(10, 30, 50, 20);
 			seat5u.setHorizontalAlignment(JLabel.CENTER);
 			seat5u.setBackground(Color.white);
 			seat5.add(seat5u);
-			useTimeCheck tc = new useTimeCheck(mf, seat5, useTime5, 5);
+			useTimeCheck tc = new useTimeCheck(mf, useTime5, 5);
 			tc.start();
 
 		}else{
@@ -463,23 +467,23 @@ public class MainPanel extends JPanel
 		seatl06.setBounds(10, 10, 20, 20);
 
 		seat6.add(seatl06);
-		JTextField useTime6 = new JTextField("»ç¿ë½Ã°£");
-		useTime6.setBounds(10, 50, 70, 20);
-		useTime6.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime6.setHorizontalAlignment(JLabel.CENTER);
-		useTime6.setBackground(Color.BLACK);
-		useTime6.setForeground(Color.WHITE);
-		useTime6.setEditable(false);
-		seat6.add(useTime6);
 		seatGP.add(seat6);
 
 		if(sm.checkSeat(6) != null){
+			JTextField useTime6 = new JTextField("»ç¿ë½Ã°£");
+			useTime6.setBounds(10, 50, 70, 20);
+			useTime6.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime6.setHorizontalAlignment(JLabel.CENTER);
+			useTime6.setBackground(Color.BLACK);
+			useTime6.setForeground(Color.WHITE);
+			useTime6.setEditable(false);
+			seat6.add(useTime6);
 			JLabel seat6u = new JLabel(sm.checkSeat(6));
 			seat6u.setBounds(10, 30, 50, 20);
 			seat6u.setHorizontalAlignment(JLabel.CENTER);
 			seat6u.setBackground(Color.white);
 			seat6.add(seat6u);
-			useTimeCheck tc = new useTimeCheck(mf, seat6, useTime6, 6);
+			useTimeCheck tc = new useTimeCheck(mf, useTime6, 6);
 			tc.start();
 
 		}else{
@@ -514,23 +518,23 @@ public class MainPanel extends JPanel
 		seatl07.setBounds(10, 10, 20, 20);
 
 		seat7.add(seatl07);
-		JTextField useTime7 = new JTextField("»ç¿ë½Ã°£");
-		useTime7.setBounds(10, 50, 70, 20);
-		useTime7.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime7.setHorizontalAlignment(JLabel.CENTER);
-		useTime7.setBackground(Color.BLACK);
-		useTime7.setForeground(Color.WHITE);
-		useTime7.setEditable(false);
-		seat7.add(useTime7);
 		seatGP.add(seat7);
 
 		if(sm.checkSeat(7) != null){
+			JTextField useTime7 = new JTextField("»ç¿ë½Ã°£");
+			useTime7.setBounds(10, 50, 70, 20);
+			useTime7.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime7.setHorizontalAlignment(JLabel.CENTER);
+			useTime7.setBackground(Color.BLACK);
+			useTime7.setForeground(Color.WHITE);
+			useTime7.setEditable(false);
+			seat7.add(useTime7);
 			JLabel seat7u = new JLabel(sm.checkSeat(7));
 			seat7u.setBounds(10, 30, 50, 20);
 			seat7u.setHorizontalAlignment(JLabel.CENTER);
 			seat7u.setBackground(Color.white);
 			seat7.add(seat7u);
-			useTimeCheck tc = new useTimeCheck(mf, seat7, useTime7, 7);
+			useTimeCheck tc = new useTimeCheck(mf,  useTime7, 7);
 			tc.start();
 
 		}else{
@@ -565,23 +569,23 @@ public class MainPanel extends JPanel
 		seatl08.setBounds(10, 10, 20, 20);
 
 		seat8.add(seatl08);
-		JTextField useTime8 = new JTextField("»ç¿ë½Ã°£");
-		useTime8.setBounds(10, 50, 70, 20);
-		useTime8.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime8.setHorizontalAlignment(JLabel.CENTER);
-		useTime8.setBackground(Color.BLACK);
-		useTime8.setForeground(Color.WHITE);
-		useTime8.setEditable(false);
-		seat8.add(useTime8);
 		seatGP.add(seat8);
 
 		if(sm.checkSeat(8) != null){
+			JTextField useTime8 = new JTextField("»ç¿ë½Ã°£");
+			useTime8.setBounds(10, 50, 70, 20);
+			useTime8.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime8.setHorizontalAlignment(JLabel.CENTER);
+			useTime8.setBackground(Color.BLACK);
+			useTime8.setForeground(Color.WHITE);
+			useTime8.setEditable(false);
+			seat8.add(useTime8);
 			JLabel seat8u = new JLabel(sm.checkSeat(8));
 			seat8u.setBounds(10, 30, 50, 20);
 			seat8u.setHorizontalAlignment(JLabel.CENTER);
 			seat8u.setBackground(Color.white);
 			seat8.add(seat8u);
-			useTimeCheck tc = new useTimeCheck(mf, seat8, useTime8, 8);
+			useTimeCheck tc = new useTimeCheck(mf, useTime8, 8);
 			tc.start();
 
 		}else{
@@ -616,23 +620,23 @@ public class MainPanel extends JPanel
 		seatl09.setBounds(10, 10, 20, 20);
 
 		seat9.add(seatl09);
-		JTextField useTime9 = new JTextField("»ç¿ë½Ã°£");
-		useTime9.setBounds(10, 50, 70, 20);
-		useTime9.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime9.setHorizontalAlignment(JLabel.CENTER);
-		useTime9.setBackground(Color.BLACK);
-		useTime9.setForeground(Color.WHITE);
-		useTime9.setEditable(false);
-		seat9.add(useTime9);
 		seatGP.add(seat9);
 
 		if(sm.checkSeat(9) != null){
+			JTextField useTime9 = new JTextField("»ç¿ë½Ã°£");
+			useTime9.setBounds(10, 50, 70, 20);
+			useTime9.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime9.setHorizontalAlignment(JLabel.CENTER);
+			useTime9.setBackground(Color.BLACK);
+			useTime9.setForeground(Color.WHITE);
+			useTime9.setEditable(false);
+			seat9.add(useTime9);
 			JLabel seat9u = new JLabel(sm.checkSeat(9));
 			seat9u.setBounds(10, 30, 50, 20);
 			seat9u.setHorizontalAlignment(JLabel.CENTER);
 			seat9u.setBackground(Color.white);
 			seat9.add(seat9u);
-			useTimeCheck tc = new useTimeCheck(mf, seat9, useTime9, 9);
+			useTimeCheck tc = new useTimeCheck(mf, useTime9, 9);
 			tc.start();
 
 		}else{
@@ -667,23 +671,23 @@ public class MainPanel extends JPanel
 		seatl10.setBounds(10, 10, 20, 20);
 
 		seat10.add(seatl10);
-		JTextField useTime10 = new JTextField("»ç¿ë½Ã°£");
-		useTime10.setBounds(10, 50, 70, 20);
-		useTime10.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime10.setHorizontalAlignment(JLabel.CENTER);
-		useTime10.setBackground(Color.BLACK);
-		useTime10.setForeground(Color.WHITE);
-		useTime10.setEditable(false);
-		seat10.add(useTime10);
 		seatGP.add(seat10);
 
 		if(sm.checkSeat(10) != null){
+			JTextField useTime10 = new JTextField("»ç¿ë½Ã°£");
+			useTime10.setBounds(10, 50, 70, 20);
+			useTime10.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime10.setHorizontalAlignment(JLabel.CENTER);
+			useTime10.setBackground(Color.BLACK);
+			useTime10.setForeground(Color.WHITE);
+			useTime10.setEditable(false);
+			seat10.add(useTime10);
 			JLabel seat10u = new JLabel(sm.checkSeat(10));
 			seat10u.setBounds(10, 30, 50, 20);
 			seat10u.setHorizontalAlignment(JLabel.CENTER);
 			seat10u.setBackground(Color.white);
 			seat10.add(seat10u);
-			useTimeCheck tc = new useTimeCheck(mf, seat10, useTime10, 10);
+			useTimeCheck tc = new useTimeCheck(mf, useTime10, 10);
 			tc.start();
 
 		}else{
@@ -718,23 +722,23 @@ public class MainPanel extends JPanel
 		seatl11.setBounds(10, 10, 20, 20);
 
 		seat11.add(seatl11);
-		JTextField useTime11 = new JTextField("»ç¿ë½Ã°£");
-		useTime11.setBounds(10, 50, 70, 20);
-		useTime11.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime11.setHorizontalAlignment(JLabel.CENTER);
-		useTime11.setBackground(Color.BLACK);
-		useTime11.setForeground(Color.WHITE);
-		useTime11.setEditable(false);
-		seat11.add(useTime11);
 		seatGP.add(seat11);
 
 		if(sm.checkSeat(11) != null){
+			JTextField useTime11 = new JTextField("»ç¿ë½Ã°£");
+			useTime11.setBounds(10, 50, 70, 20);
+			useTime11.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime11.setHorizontalAlignment(JLabel.CENTER);
+			useTime11.setBackground(Color.BLACK);
+			useTime11.setForeground(Color.WHITE);
+			useTime11.setEditable(false);
+			seat11.add(useTime11);
 			JLabel seat11u = new JLabel(sm.checkSeat(11));
 			seat11u.setBounds(10, 30, 50, 20);
 			seat11u.setHorizontalAlignment(JLabel.CENTER);
 			seat11u.setBackground(Color.white);
 			seat11.add(seat11u);
-			useTimeCheck tc = new useTimeCheck(mf, seat11, useTime11, 11);
+			useTimeCheck tc = new useTimeCheck(mf, useTime11, 11);
 			tc.start();
 
 		}else{
@@ -769,23 +773,23 @@ public class MainPanel extends JPanel
 		seatl12.setBounds(10, 10, 20, 20);
 
 		seat12.add(seatl12);
-		JTextField useTime12 = new JTextField("»ç¿ë½Ã°£");
-		useTime12.setBounds(10, 50, 70, 20);
-		useTime12.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime12.setHorizontalAlignment(JLabel.CENTER);
-		useTime12.setBackground(Color.BLACK);
-		useTime12.setForeground(Color.WHITE);
-		useTime12.setEditable(false);
-		seat12.add(useTime12);
 		seatGP.add(seat12);
 
 		if(sm.checkSeat(12) != null){
+			JTextField useTime12 = new JTextField("»ç¿ë½Ã°£");
+			useTime12.setBounds(10, 50, 70, 20);
+			useTime12.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime12.setHorizontalAlignment(JLabel.CENTER);
+			useTime12.setBackground(Color.BLACK);
+			useTime12.setForeground(Color.WHITE);
+			useTime12.setEditable(false);
+			seat12.add(useTime12);
 			JLabel seat12u = new JLabel(sm.checkSeat(12));
 			seat12u.setBounds(10, 30, 50, 20);
 			seat12u.setHorizontalAlignment(JLabel.CENTER);
 			seat12u.setBackground(Color.white);
 			seat12.add(seat12u);
-			useTimeCheck tc = new useTimeCheck(mf, seat12, useTime12, 12);
+			useTimeCheck tc = new useTimeCheck(mf,  useTime12, 12);
 			tc.start();
 
 		}else{
@@ -820,23 +824,23 @@ public class MainPanel extends JPanel
 		seatl13.setBounds(10, 10, 20, 20);
 
 		seat13.add(seatl13);
-		JTextField useTime13 = new JTextField("»ç¿ë½Ã°£");
-		useTime13.setBounds(10, 50, 70, 20);
-		useTime13.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime13.setHorizontalAlignment(JLabel.CENTER);
-		useTime13.setBackground(Color.BLACK);
-		useTime13.setForeground(Color.WHITE);
-		useTime13.setEditable(false);
-		seat13.add(useTime13);
 		seatGP.add(seat13);
 
 		if(sm.checkSeat(13) != null){
+			JTextField useTime13 = new JTextField("»ç¿ë½Ã°£");
+			useTime13.setBounds(10, 50, 70, 20);
+			useTime13.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime13.setHorizontalAlignment(JLabel.CENTER);
+			useTime13.setBackground(Color.BLACK);
+			useTime13.setForeground(Color.WHITE);
+			useTime13.setEditable(false);
+			seat13.add(useTime13);
 			JLabel seat13u = new JLabel(sm.checkSeat(13));
 			seat13u.setBounds(10, 30, 50, 20);
 			seat13u.setHorizontalAlignment(JLabel.CENTER);
 			seat13u.setBackground(Color.white);
 			seat13.add(seat13u);
-			useTimeCheck tc = new useTimeCheck(mf, seat13, useTime13, 13);
+			useTimeCheck tc = new useTimeCheck(mf,  useTime13, 13);
 			tc.start();
 		}else{
 			JLabel seat13e = new JLabel();
@@ -870,23 +874,23 @@ public class MainPanel extends JPanel
 		seatl14.setBounds(10, 10, 20, 20);
 
 		seat14.add(seatl14);
-		JTextField useTime14 = new JTextField("»ç¿ë½Ã°£");
-		useTime14.setBounds(10, 50, 70, 20);
-		useTime14.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime14.setHorizontalAlignment(JLabel.CENTER);
-		useTime14.setBackground(Color.BLACK);
-		useTime14.setForeground(Color.WHITE);
-		useTime14.setEditable(false);
-		seat14.add(useTime14);
 		seatGP.add(seat14);
 
 		if(sm.checkSeat(14) != null){
+			JTextField useTime14 = new JTextField("»ç¿ë½Ã°£");
+			useTime14.setBounds(10, 50, 70, 20);
+			useTime14.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime14.setHorizontalAlignment(JLabel.CENTER);
+			useTime14.setBackground(Color.BLACK);
+			useTime14.setForeground(Color.WHITE);
+			useTime14.setEditable(false);
+			seat14.add(useTime14);
 			JLabel seat14u = new JLabel(sm.checkSeat(14));
 			seat14u.setBounds(10, 30, 50, 20);
 			seat14u.setHorizontalAlignment(JLabel.CENTER);
 			seat14u.setBackground(Color.white);
 			seat14.add(seat14u);
-			useTimeCheck tc = new useTimeCheck(mf, seat14, useTime14, 14);
+			useTimeCheck tc = new useTimeCheck(mf,  useTime14, 14);
 			tc.start();
 
 		}else{
@@ -921,23 +925,23 @@ public class MainPanel extends JPanel
 		seatl15.setBounds(10, 10, 20, 20);
 
 		seat15.add(seatl15);
-		JTextField useTime15 = new JTextField("»ç¿ë½Ã°£");
-		useTime15.setBounds(10, 50, 70, 20);
-		useTime15.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime15.setHorizontalAlignment(JLabel.CENTER);
-		useTime15.setBackground(Color.BLACK);
-		useTime15.setForeground(Color.WHITE);
-		useTime15.setEditable(false);
-		seat15.add(useTime15);
 		seatGP.add(seat15);
 
 		if(sm.checkSeat(15) != null){
+			JTextField useTime15 = new JTextField("»ç¿ë½Ã°£");
+			useTime15.setBounds(10, 50, 70, 20);
+			useTime15.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime15.setHorizontalAlignment(JLabel.CENTER);
+			useTime15.setBackground(Color.BLACK);
+			useTime15.setForeground(Color.WHITE);
+			useTime15.setEditable(false);
+			seat15.add(useTime15);
 			JLabel seat15u = new JLabel(sm.checkSeat(15));
 			seat15u.setBounds(10, 30, 50, 20);
 			seat15u.setHorizontalAlignment(JLabel.CENTER);
 			seat15u.setBackground(Color.white);
 			seat15.add(seat15u);
-			useTimeCheck tc = new useTimeCheck(mf, seat15, useTime15, 15);
+			useTimeCheck tc = new useTimeCheck(mf, useTime15, 15);
 			tc.start();
 
 		}else{
@@ -972,23 +976,23 @@ public class MainPanel extends JPanel
 		seatl16.setBounds(10, 10, 20, 20);
 
 		seat16.add(seatl16);
-		JTextField useTime16 = new JTextField("»ç¿ë½Ã°£");
-		useTime16.setBounds(10, 50, 70, 20);
-		useTime16.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime16.setHorizontalAlignment(JLabel.CENTER);
-		useTime16.setBackground(Color.BLACK);
-		useTime16.setForeground(Color.WHITE);
-		useTime16.setEditable(false);
-		seat16.add(useTime16);
 		seatGP.add(seat16);
 
 		if(sm.checkSeat(16) != null){
+			JTextField useTime16 = new JTextField("»ç¿ë½Ã°£");
+			useTime16.setBounds(10, 50, 70, 20);
+			useTime16.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime16.setHorizontalAlignment(JLabel.CENTER);
+			useTime16.setBackground(Color.BLACK);
+			useTime16.setForeground(Color.WHITE);
+			useTime16.setEditable(false);
+			seat16.add(useTime16);
 			JLabel seat16u = new JLabel(sm.checkSeat(16));
 			seat16u.setBounds(10, 30, 50, 20);
 			seat16u.setHorizontalAlignment(JLabel.CENTER);
 			seat16u.setBackground(Color.white);
 			seat16.add(seat16u);
-			useTimeCheck tc = new useTimeCheck(mf, seat16, useTime16, 16);
+			useTimeCheck tc = new useTimeCheck(mf, useTime16, 16);
 			tc.start();
 
 		}else{
@@ -1023,23 +1027,23 @@ public class MainPanel extends JPanel
 		seatl17.setBounds(10, 10, 20, 20);
 
 		seat17.add(seatl17);
-		JTextField useTime17 = new JTextField("»ç¿ë½Ã°£");
-		useTime17.setBounds(10, 50, 70, 20);
-		useTime17.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime17.setHorizontalAlignment(JLabel.CENTER);
-		useTime17.setBackground(Color.BLACK);
-		useTime17.setForeground(Color.WHITE);
-		useTime17.setEditable(false);
-		seat17.add(useTime17);
 		seatGP.add(seat17);
 
 		if(sm.checkSeat(17) != null){
+			JTextField useTime17 = new JTextField("»ç¿ë½Ã°£");
+			useTime17.setBounds(10, 50, 70, 20);
+			useTime17.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime17.setHorizontalAlignment(JLabel.CENTER);
+			useTime17.setBackground(Color.BLACK);
+			useTime17.setForeground(Color.WHITE);
+			useTime17.setEditable(false);
+			seat17.add(useTime17);
 			JLabel seat17u = new JLabel(sm.checkSeat(17));
 			seat17u.setBounds(10, 30, 50, 20);
 			seat17u.setHorizontalAlignment(JLabel.CENTER);
 			seat17u.setBackground(Color.white);
 			seat17.add(seat17u);
-			useTimeCheck tc = new useTimeCheck(mf, seat17, useTime17, 17);
+			useTimeCheck tc = new useTimeCheck(mf,useTime17, 17);
 			tc.start();
 
 		}else{
@@ -1074,23 +1078,23 @@ public class MainPanel extends JPanel
 		seatl18.setBounds(10, 10, 20, 20);
 
 		seat18.add(seatl18);
-		JTextField useTime18 = new JTextField("»ç¿ë½Ã°£");
-		useTime18.setBounds(10, 50, 70, 20);
-		useTime18.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime18.setHorizontalAlignment(JLabel.CENTER);
-		useTime18.setBackground(Color.BLACK);
-		useTime18.setForeground(Color.WHITE);
-		useTime18.setEditable(false);
-		seat18.add(useTime18);
 		seatGP.add(seat18);
 
 		if(sm.checkSeat(18) != null){
+			JTextField useTime18 = new JTextField("»ç¿ë½Ã°£");
+			useTime18.setBounds(10, 50, 70, 20);
+			useTime18.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime18.setHorizontalAlignment(JLabel.CENTER);
+			useTime18.setBackground(Color.BLACK);
+			useTime18.setForeground(Color.WHITE);
+			useTime18.setEditable(false);
+			seat18.add(useTime18);
 			JLabel seat18u = new JLabel(sm.checkSeat(18));
 			seat18u.setBounds(10, 30, 50, 20);
 			seat18u.setHorizontalAlignment(JLabel.CENTER);
 			seat18u.setBackground(Color.white);
 			seat18.add(seat18u);
-			useTimeCheck tc = new useTimeCheck(mf, seat18, useTime18, 18);
+			useTimeCheck tc = new useTimeCheck(mf, useTime18, 18);
 			tc.start();
 
 		}else{
@@ -1125,23 +1129,23 @@ public class MainPanel extends JPanel
 		seatl19.setBounds(10, 10, 20, 20);
 
 		seat19.add(seatl19);
-		JTextField useTime19 = new JTextField("»ç¿ë½Ã°£");
-		useTime19.setBounds(10, 50, 70, 20);
-		useTime19.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime19.setHorizontalAlignment(JLabel.CENTER);
-		useTime19.setBackground(Color.BLACK);
-		useTime19.setForeground(Color.WHITE);
-		useTime19.setEditable(false);
-		seat19.add(useTime19);
 		seatGP.add(seat19);
 
 		if(sm.checkSeat(19) != null){
+			JTextField useTime19 = new JTextField("»ç¿ë½Ã°£");
+			useTime19.setBounds(10, 50, 70, 20);
+			useTime19.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime19.setHorizontalAlignment(JLabel.CENTER);
+			useTime19.setBackground(Color.BLACK);
+			useTime19.setForeground(Color.WHITE);
+			useTime19.setEditable(false);
+			seat19.add(useTime19);
 			JLabel seat19u = new JLabel(sm.checkSeat(19));
 			seat19u.setBounds(10, 30, 50, 20);
 			seat19u.setHorizontalAlignment(JLabel.CENTER);
 			seat19u.setBackground(Color.white);
 			seat19.add(seat19u);
-			useTimeCheck tc = new useTimeCheck(mf, seat19, useTime19, 19);
+			useTimeCheck tc = new useTimeCheck(mf, useTime19, 19);
 			tc.start();
 
 		}else{
@@ -1176,23 +1180,23 @@ public class MainPanel extends JPanel
 		seatl20.setBounds(10, 10, 20, 20);
 
 		seat20.add(seatl20);
-		JTextField useTime20 = new JTextField("»ç¿ë½Ã°£");
-		useTime20.setBounds(10, 50, 70, 20);
-		useTime20.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
-		useTime20.setHorizontalAlignment(JLabel.CENTER);
-		useTime20.setBackground(Color.BLACK);
-		useTime20.setForeground(Color.WHITE);
-		useTime20.setEditable(false);
-		seat20.add(useTime20);
 		seatGP.add(seat20);
 
 		if(sm.checkSeat(20) != null){
+			JTextField useTime20 = new JTextField("»ç¿ë½Ã°£");
+			useTime20.setBounds(10, 50, 70, 20);
+			useTime20.setFont(new Font("¸¼Àº°íµñ", Font.BOLD, 13));
+			useTime20.setHorizontalAlignment(JLabel.CENTER);
+			useTime20.setBackground(Color.BLACK);
+			useTime20.setForeground(Color.WHITE);
+			useTime20.setEditable(false);
+			seat20.add(useTime20);
 			JLabel seat20u = new JLabel(sm.checkSeat(20));
 			seat20u.setBounds(10, 30, 50, 20);
 			seat20u.setHorizontalAlignment(JLabel.CENTER);
 			seat20u.setBackground(Color.white);
 			seat20.add(seat20u);
-			useTimeCheck tc = new useTimeCheck(mf, seat20, useTime20, 20);
+			useTimeCheck tc = new useTimeCheck(mf, useTime20, 20);
 			tc.start();
 
 		}else{
@@ -1224,14 +1228,20 @@ public class MainPanel extends JPanel
 		this.add(seatP);
 
 		mf.add(this);
-
+		
 	}
-
 
 	public void changePanel(JPanel panel)
 	{
 		mf.remove(this);
 		mf.add(panel);
 		mf.repaint();
+
+		for(int i = 0; i < thList.size(); i++){
+			
+			thList.get(i).interrupt();
+			
+		}
+		
 	}
 }
