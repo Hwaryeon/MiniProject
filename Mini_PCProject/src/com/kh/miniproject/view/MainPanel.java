@@ -14,6 +14,8 @@ import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.member.vo.Member;
 import com.kh.miniproject.seat.controller.SeatManager;
 
+
+
 public class MainPanel extends JPanel 
 {
 	private MainFrame mf;
@@ -177,28 +179,54 @@ public class MainPanel extends JPanel
 		JPanel seat1 = new JPanel();
 		seat1.setLayout(null);
 		seat1.setBackground(Color.GRAY);
-		seat1.setBounds(25, 25, 100, 75);
+
+		seat1.setBounds(25, 25, 100, 80);
 		JLabel seatl01 = new JLabel("1");
 		seatl01.setHorizontalAlignment(JLabel.CENTER);
 		seatl01.setBounds(10, 10, 20, 20);
 
 		seat1.add(seatl01);
 
-		seatGP.add(seat1);
-		if(sm.checkSeat(1) != null){
+		
+		JPanel seatT = new JPanel();
+		seatT.setBounds(10, 50, 70, 10);
+		seatT.setBackground(Color.WHITE);
 
-			JLabel seat1u = new JLabel(sm.checkSeat(1));
+		JTextField test = new JTextField();
+		test.setText("왜안나와");
+		
+		seatT.add(test);
+		
+		seat1.add(seatT);
+
+		seatT.setVisible(true);
+		
+		seatGP.add(seat1);
+		if(sm.checkSeat(1, seat1, mf) != null){
+
+			JLabel seat1u = new JLabel(sm.checkSeat(1, seat1, mf));
 			seat1u.setBounds(10, 30, 50, 20);
 			seat1u.setHorizontalAlignment(JLabel.CENTER);
-			seat1u.setBackground(Color.white);
+			seat1u.setBackground(Color.RED);
 			seat1.add(seat1u);
+			
+			test.setText("체크포인트");
+			
+			TestC tc = new TestC(mf, test);
+			
+		//	tc.test();
+			
+			seatT.setBounds(10, 50, 70, 30);
+			seat1.add(seatT);
 
+			seatT.setVisible(true);
 
 		}else{
 			JLabel seat1e = new JLabel();
 			seat1e.setIcon(new ImageIcon(empty));
 			seat1e.setBounds(10, 30, 90, 45);
 			seat1.add(seat1e);
+			
 		}
 
 
@@ -207,17 +235,20 @@ public class MainPanel extends JPanel
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int seatNo = 1;
-				if(sm.checkSeat(seatNo) == null){
-					EmptySeat es = new EmptySeat(mf, seatNo);
+				if(sm.checkSeat(seatNo, seat1, mf) == null){
+					//GamePanel gp = new GamePanel(mf);
+					EmptySeat es = new EmptySeat(mf, seatT, seatNo);
+					//seatGP.add(gp);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo, seat1, mf)),
+							seatNo);
 					changePanel(us);
 				}
 			}
 		});
 
-		// 2번좌석
+		/*// 2번좌석
 		JPanel seat2 = new JPanel();
 		seat2.setLayout(null);
 		seat2.setBackground(Color.GRAY);
@@ -437,7 +468,7 @@ public class MainPanel extends JPanel
 
 		seat7.add(seatl07);
 		seatGP.add(seat7);
-		
+
 		if(sm.checkSeat(7) != null){
 			JLabel seat7u = new JLabel(sm.checkSeat(7));
 			seat7u.setBounds(10, 30, 50, 20);
@@ -475,10 +506,10 @@ public class MainPanel extends JPanel
 		JLabel seatl08 = new JLabel("8");
 		seatl08.setHorizontalAlignment(JLabel.CENTER);
 		seatl08.setBounds(10, 10, 20, 20);
-		
+
 		seat8.add(seatl08);
 		seatGP.add(seat8);
-		
+
 		if(sm.checkSeat(8) != null){
 			JLabel seat8u = new JLabel(sm.checkSeat(8));
 			seat8u.setBounds(10, 30, 50, 20);
@@ -516,10 +547,10 @@ public class MainPanel extends JPanel
 		JLabel seatl09 = new JLabel("9");
 		seatl09.setHorizontalAlignment(JLabel.CENTER);
 		seatl09.setBounds(10, 10, 20, 20);
-		
+
 		seat9.add(seatl09);
 		seatGP.add(seat9);
-		
+
 		if(sm.checkSeat(9) != null){
 			JLabel seat9u = new JLabel(sm.checkSeat(9));
 			seat9u.setBounds(10, 30, 50, 20);
@@ -557,10 +588,10 @@ public class MainPanel extends JPanel
 		JLabel seatl10 = new JLabel("10");
 		seatl10.setHorizontalAlignment(JLabel.CENTER);
 		seatl10.setBounds(10, 10, 20, 20);
-		
+
 		seat10.add(seatl10);
 		seatGP.add(seat10);
-		
+
 		if(sm.checkSeat(10) != null){
 			JLabel seat10u = new JLabel(sm.checkSeat(10));
 			seat10u.setBounds(10, 30, 50, 20);
@@ -598,10 +629,10 @@ public class MainPanel extends JPanel
 		JLabel seatl11 = new JLabel("11");
 		seatl11.setHorizontalAlignment(JLabel.CENTER);
 		seatl11.setBounds(10, 10, 20, 20);
-		
+
 		seat11.add(seatl11);
 		seatGP.add(seat11);
-		
+
 		if(sm.checkSeat(11) != null){
 			JLabel seat11u = new JLabel(sm.checkSeat(11));
 			seat11u.setBounds(10, 30, 50, 20);
@@ -639,10 +670,10 @@ public class MainPanel extends JPanel
 		JLabel seatl12 = new JLabel("12");
 		seatl12.setHorizontalAlignment(JLabel.CENTER);
 		seatl12.setBounds(10, 10, 20, 20);
-		
+
 		seat12.add(seatl12);
 		seatGP.add(seat12);
-		
+
 		if(sm.checkSeat(12) != null){
 			JLabel seat12u = new JLabel(sm.checkSeat(12));
 			seat12u.setBounds(10, 30, 50, 20);
@@ -680,10 +711,10 @@ public class MainPanel extends JPanel
 		JLabel seatl13 = new JLabel("13");
 		seatl13.setHorizontalAlignment(JLabel.CENTER);
 		seatl13.setBounds(10, 10, 20, 20);
-		
+
 		seat13.add(seatl13);
 		seatGP.add(seat13);
-		
+
 		if(sm.checkSeat(13) != null){
 			JLabel seat13u = new JLabel(sm.checkSeat(13));
 			seat13u.setBounds(10, 30, 50, 20);
@@ -721,10 +752,10 @@ public class MainPanel extends JPanel
 		JLabel seatl14 = new JLabel("14");
 		seatl14.setHorizontalAlignment(JLabel.CENTER);
 		seatl14.setBounds(10, 10, 20, 20);
-		
+
 		seat14.add(seatl14);
 		seatGP.add(seat14);
-		
+
 		if(sm.checkSeat(14) != null){
 			JLabel seat14u = new JLabel(sm.checkSeat(14));
 			seat14u.setBounds(10, 30, 50, 20);
@@ -762,10 +793,10 @@ public class MainPanel extends JPanel
 		JLabel seatl15 = new JLabel("15");
 		seatl15.setHorizontalAlignment(JLabel.CENTER);
 		seatl15.setBounds(10, 10, 20, 20);
-		
+
 		seat15.add(seatl15);
 		seatGP.add(seat15);
-		
+
 		if(sm.checkSeat(15) != null){
 			JLabel seat15u = new JLabel(sm.checkSeat(15));
 			seat15u.setBounds(10, 30, 50, 20);
@@ -803,10 +834,10 @@ public class MainPanel extends JPanel
 		JLabel seatl16 = new JLabel("16");
 		seatl16.setHorizontalAlignment(JLabel.CENTER);
 		seatl16.setBounds(10, 10, 20, 20);
-		
+
 		seat16.add(seatl16);
 		seatGP.add(seat16);
-		
+
 		if(sm.checkSeat(16) != null){
 			JLabel seat16u = new JLabel(sm.checkSeat(16));
 			seat16u.setBounds(10, 30, 50, 20);
@@ -844,10 +875,10 @@ public class MainPanel extends JPanel
 		JLabel seatl17 = new JLabel("17");
 		seatl17.setHorizontalAlignment(JLabel.CENTER);
 		seatl17.setBounds(10, 10, 20, 20);
-		
+
 		seat17.add(seatl17);
 		seatGP.add(seat17);
-		
+
 		if(sm.checkSeat(17) != null){
 			JLabel seat17u = new JLabel(sm.checkSeat(17));
 			seat17u.setBounds(10, 30, 50, 20);
@@ -885,10 +916,10 @@ public class MainPanel extends JPanel
 		JLabel seatl18 = new JLabel("18");
 		seatl18.setHorizontalAlignment(JLabel.CENTER);
 		seatl18.setBounds(10, 10, 20, 20);
-		
+
 		seat18.add(seatl18);
 		seatGP.add(seat18);
-		
+
 		if(sm.checkSeat(18) != null){
 			JLabel seat18u = new JLabel(sm.checkSeat(18));
 			seat18u.setBounds(10, 30, 50, 20);
@@ -926,10 +957,10 @@ public class MainPanel extends JPanel
 		JLabel seatl19 = new JLabel("19");
 		seatl19.setHorizontalAlignment(JLabel.CENTER);
 		seatl19.setBounds(10, 10, 20, 20);
-		
+
 		seat19.add(seatl19);
 		seatGP.add(seat19);
-		
+
 		if(sm.checkSeat(19) != null){
 			JLabel seat19u = new JLabel(sm.checkSeat(19));
 			seat19u.setBounds(10, 30, 50, 20);
@@ -967,10 +998,10 @@ public class MainPanel extends JPanel
 		JLabel seatl20 = new JLabel("20");
 		seatl20.setHorizontalAlignment(JLabel.CENTER);
 		seatl20.setBounds(10, 10, 20, 20);
-		
+
 		seat20.add(seatl20);
 		seatGP.add(seat20);
-		
+
 		if(sm.checkSeat(20) != null){
 			JLabel seat20u = new JLabel(sm.checkSeat(20));
 			seat20u.setBounds(10, 30, 50, 20);
@@ -999,7 +1030,7 @@ public class MainPanel extends JPanel
 				}
 			}
 		});
-
+		 */
 		seatP.add(seatGP);
 		menu.add(iconp);
 

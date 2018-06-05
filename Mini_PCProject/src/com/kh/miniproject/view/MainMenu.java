@@ -96,7 +96,7 @@ public class MainMenu {
 					System.out.println("없는 좌석입니다.");
 					break;
 				}
-				sm.checkSeat(num);
+			//	sm.checkSeat(num);
 				break;
 			case 3: 
 				System.out.print("사용할 좌석 : ");
@@ -105,7 +105,7 @@ public class MainMenu {
 					System.out.println("없는 좌석입니다.");
 					break;
 				}
-				sm.useSeat(num);
+			//	sm.useSeat(num);
 				break;
 			case 4:
 				System.out.print("추가할 회원ID : ");

@@ -13,7 +13,9 @@ public class TimerMake extends JFrame {
 	private static TimerMake frame = new TimerMake();
 
 	public static int threadNumber;
-	
+	public static JPanel panel = null;
+	public static JFrame mf = null;
+
 	private JPanel rootPanel; // 메인 패널
 	private JLabel xBtn; // 닫기 버튼
 	private JLabel timeText; // 시간 표시 라벨
@@ -38,6 +40,8 @@ public class TimerMake extends JFrame {
 	// 스태틱 함수로 프레임 실행
 	public static void visibleFrame(){
 		frame.setVisible(true);
+
+
 	}
 
 	private void consistComponent(){
@@ -50,14 +54,14 @@ public class TimerMake extends JFrame {
 		rootPanel.add(centerPanel, "Center");
 
 		// 닫기 버튼이 있는 패널 생성
-		Panel northPanel = createNorthPanel();
-		rootPanel.add(northPanel, "North");
+	/*	Panel northPanel = createNorthPanel();
+		rootPanel.add(northPanel, "North");*/
 
 		// 루트 패널 부착
 		setContentPane(rootPanel);
 	}
 
-	private Panel createNorthPanel(){
+	/*private Panel createNorthPanel(){
 		GridBagConstraints constraints2 = new GridBagConstraints();
 		constraints2.anchor = GridBagConstraints.EAST;
 		constraints2.gridx = 0; constraints2.gridy = 0;
@@ -76,7 +80,7 @@ public class TimerMake extends JFrame {
 		barPanel.add(xBtn, constraints2);
 
 		return barPanel;
-	}
+	}*/
 
 	private Panel createCenterPanel(){
 		GridBagLayout gridLayout = new GridBagLayout();
@@ -108,6 +112,7 @@ public class TimerMake extends JFrame {
 
 	private void start(){
 		if(timeTh == null || !timeTh.isAlive()){
+
 			if(time != 0) preTime = System.currentTimeMillis() - time;
 			else preTime = System.currentTimeMillis();
 			timeTh = new TimeThread();
@@ -118,8 +123,10 @@ public class TimerMake extends JFrame {
 
 	private class TimeThread extends Thread{
 		public void run() {
+			
 			try {
 				while (!Thread.currentThread().isInterrupted()) {
+
 					sleep(10);
 					time = System.currentTimeMillis() - preTime;
 					timeText.setText(toTime(time));
@@ -185,19 +192,23 @@ public class TimerMake extends JFrame {
 	}
 
 	private String toTime(long time){
-		// time 은  초 * 1000
-		// 단위가 밀리세컨드임
+		
+		
 		
 		time = (SeatDao.iList[threadNumber] * 1000);
-		start();
+
+			start();
+			// 단위가 밀리세컨드임
 		int t = (int)(time / 1000.0 / 60.0 / 60.0);
 		int m = (int)(time / 1000.0 / 60.0);
 		int s = (int)(time % (1000.0 * 60) / 1000.0);
-		
+
+
+
 		return String.format("%02d : %02d : %02d",t , m, s/*, ms*/);
 	}
-	
-	public static void main(String args[]){
+
+	/*public static void main(String args[]){
 		visibleFrame();
-	}
+	}*/
 }

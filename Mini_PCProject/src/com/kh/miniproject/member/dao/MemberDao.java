@@ -135,6 +135,8 @@ public class MemberDao implements ConversionTime {
 
 		int check = 0;
 
+		System.out.println("11");
+		
 		try(DataOutputStream dout
 				= new DataOutputStream(
 						new FileOutputStream("member.txt"))){
@@ -376,6 +378,8 @@ public class MemberDao implements ConversionTime {
 		
 		//System.out.printf("%02d:%02d:%02d", hour, minute, second);
 		s = String.format("%02d:%02d:%02d", hour, minute, second);
+		
+		System.out.print(s);
 		
 		return s;
 	}

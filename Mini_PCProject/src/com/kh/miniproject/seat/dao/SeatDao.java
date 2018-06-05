@@ -10,9 +10,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.seat.vo.Seat;
+import com.kh.miniproject.view.MainFrame;
 import com.kh.miniproject.view.Timer;
 import com.kh.miniproject.view.TimerMake;
 
@@ -22,7 +27,7 @@ public class SeatDao extends Thread implements ConversionTime{
 	Scanner sc = new Scanner(System.in);
 
 	MemberManager mm = new MemberManager();
-	//TimerMake tm = new TimerMake();
+	TimerMake tm = new TimerMake();
 	ArrayList<Seat> sl = new ArrayList<Seat>();
 
 	final static int MAX_SEAT = 12;
@@ -137,7 +142,7 @@ public class SeatDao extends Thread implements ConversionTime{
 		System.out.println();
 	}
 
-	public String checkSeat(int seatNo){
+	public String checkSeat(int seatNo, JPanel seat1, MainFrame mf){
 
 		insertList();
 
@@ -148,14 +153,17 @@ public class SeatDao extends Thread implements ConversionTime{
 
 
 					
-					/*mm.memberInfo(sl.get(i).getUserId());
+					mm.memberInfo(sl.get(i).getUserId());
 					System.out.println();
 
 					System.out.print("사용시간 : ");
 					conversionTime(iList[seatNo-1]);
-					System.out.println();*/
+					System.out.println();
 					
-					/*tm.threadNumber = seatNo-1;
+				/*	tm.panel = seat;
+					tm.mf = mf;
+					
+					tm.threadNumber = seatNo-1;
 					tm.visibleFrame();*/
 					
 					return sl.get(i).getUserId();
@@ -168,7 +176,7 @@ public class SeatDao extends Thread implements ConversionTime{
 	}
 
 	
-	public void useSeat(int seatNo, String id, int time){
+	public void useSeat(JFrame mf, JPanel panel, int seatNo, String id, int time){
 
 		insertList();
 
@@ -211,9 +219,8 @@ public class SeatDao extends Thread implements ConversionTime{
 
 					if(sl.get(i).getUserTime() > 0){
 
-						Timer timer = new Timer(sl.get(i).getSeatNo(),
-								sl.get(i).getUserId(),
-								sl.get(i).getUserTime());
+						Timer timer = new Timer(mf, panel, sl.get(i).getSeatNo(),
+								sl.get(i).getUserId(), sl.get(i).getUserTime());
 						Thread t1 = timer;
 
 						tList[sl.get(i).getSeatNo()-1] = t1;
@@ -271,15 +278,21 @@ public class SeatDao extends Thread implements ConversionTime{
 	}
 
 	@Override
-	public void conversionTime(int time){
+	public String conversionTime(int time){
 		long cTime = time;
 
 
 		long second = (long) ((cTime ) % 60);
 		long minute = (long) ((cTime / (  60)) % 60);
 		long hour = (long) ((cTime / ( 60 * 60)));
-
-		System.out.printf("%02d:%02d:%02d", hour, minute, second);
+	String s = null;
+		
+		//System.out.printf("%02d:%02d:%02d", hour, minute, second);
+		s = String.format("%02d:%02d:%02d", hour, minute, second);
+		
+		System.out.print(s);
+		
+		return s;
 	}
 
 }

@@ -8,11 +8,12 @@ public class MainFrame extends JFrame{
 	public MainFrame(){
 		this.setSize(1200,800);
 		this.setTitle("앗! 피시방비가 타이어보다 싸다!");
-		new StartPanel(this);
-		//new AddTimePanel(this);
+	//	new StartPanel(this);
+		new MainPanel(this);
+	//	new AddTimePanel(this);
 		//new MemberJoinPanel(this);
 		//new MemberManagement(this);
-		//new EmptySeat(this);
+	//	new EmptySeat(this);
 		//new InuseSeat(this);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

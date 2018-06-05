@@ -2,9 +2,14 @@ package com.kh.miniproject.seat.controller;
 
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.member.vo.Member;
 import com.kh.miniproject.seat.dao.SeatDao;
+import com.kh.miniproject.view.MainFrame;
 
 public class SeatManager {
 
@@ -20,16 +25,13 @@ public class SeatManager {
 	}
 	
 	
-	public String checkSeat(int seatNo){
+	public String checkSeat(int seatNo, JPanel seat1, MainFrame mf){
 		
-		return sd.checkSeat(seatNo);
+		return sd.checkSeat(seatNo, seat1, mf);
 		
 	}
 	
-	public void useSeat(int seatNo){
-		
-		System.out.print("등록할 회원 id : " );
-		String id = sc.nextLine();
+	public void useSeat(JFrame mf, JPanel panel, String id, int seatNo){
 		
 		Member m = mm.memberInfo(id);
 		
@@ -43,9 +45,7 @@ public class SeatManager {
 			return;
 		}
 		
-		//m.getRestTime() 초로 저장되어있음..
-		
-		sd.useSeat(seatNo, id, m.getRestTime());
+		sd.useSeat(mf, panel, seatNo, id, m.getRestTime());
 		
 	}
 	

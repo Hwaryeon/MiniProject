@@ -12,7 +12,7 @@ public class EmptySeat extends JPanel
 {
 	private MainFrame mf;
 
-	public EmptySeat(MainFrame mf, int seatNo) 
+	public EmptySeat(MainFrame mf, JPanel panel, int seatNo) 
 	{
 		this.mf = mf;
 		this.setSize(mf.getWidth(), mf.getHeight());
@@ -85,7 +85,7 @@ public class EmptySeat extends JPanel
 					@Override
 					public void mouseClicked(MouseEvent e)
 					{
-						AddTimePanel atp = new AddTimePanel(mf);
+						UseSeat atp = new UseSeat(mf, panel, seatNo);
 						//changePanel(atp);
 						changePanel(atp);
 					}
