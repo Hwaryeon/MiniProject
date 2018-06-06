@@ -10,14 +10,17 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.kh.miniproject.IProfit.IProfit;
+import com.kh.miniproject.ProductAndProfit.vo.Profit;
 import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.member.vo.Member;
 import com.kh.miniproject.seat.dao.SeatDao;
 
-public class MemberDao implements ConversionTime {
+public class MemberDao implements ConversionTime, IProfit {
 
 	ArrayList<Member> ml = new ArrayList<Member>();
-
+	Profit profit = new Profit();
+	
 	public void memberJoin(Member m){
 
 		insertList();
@@ -148,6 +151,9 @@ public class MemberDao implements ConversionTime {
 					}else{
 						ml.get(i).setRestTime(ml.get(i).getRestTime()
 								+ (time * 60 * 60) );
+						
+						Add_Money(time * 1000);
+						
 						check = 1;
 					}
 
@@ -429,5 +435,15 @@ public class MemberDao implements ConversionTime {
 		return 0;
 
 	}
+
+
+	//정산후 저장
+		@Override
+		public void Add_Money(int money){
+			
+			System.out.println("이득 + " + money);
+			profit.setItem_M(money);
+
+		}
 
 }

@@ -145,6 +145,20 @@ public class MainPanel extends JPanel
 		chartL.setFont(font);
 		chartL.setHorizontalAlignment(JLabel.CENTER);
 		chartL.setBounds(25, 380, 150, 25);
+		
+		chart.addMouseListener(new MyMouseAdapter(){
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("荐劳包府 ...");
+
+				Profit_view pv = new Profit_view(mf);
+				changePanel(pv);
+
+			}
+		});
+		
+		
 		// 犁绊包府 滚瓢
 		JButton product = new JButton();
 		Image cart = new ImageIcon("icon/shopping.png").getImage().getScaledInstance(150, 150, 0);
@@ -157,6 +171,19 @@ public class MainPanel extends JPanel
 		productL.setHorizontalAlignment(JLabel.CENTER);
 		productL.setBounds(225, 380, 150, 25);
 
+		product.addMouseListener(new MyMouseAdapter(){
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("犁绊包府 ...");
+
+				Product_Panel pp = new Product_Panel(mf);
+				changePanel(pp);
+
+			}
+		});
+		
+		
 		iconp.add(timePlus);
 		iconp.add(timePlusL);
 		iconp.add(manageuser);
