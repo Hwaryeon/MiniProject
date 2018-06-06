@@ -100,6 +100,7 @@ public class StartPanel extends JPanel
 				}else{
 					System.out.println("¿À·ù");
 				}*/
+				
 				MainPanel mp = new MainPanel(mf);
 				changePanel(mp);
 				
