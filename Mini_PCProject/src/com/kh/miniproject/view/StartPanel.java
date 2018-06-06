@@ -91,8 +91,18 @@ public class StartPanel extends JPanel
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
+				
+				/*if(id.getText().equals("admin") && pw.getText().equals("1234")){
+					
+					MainPanel mp = new MainPanel(mf);
+					changePanel(mp);
+					
+				}else{
+					System.out.println("¿À·ù");
+				}*/
 				MainPanel mp = new MainPanel(mf);
 				changePanel(mp);
+				
 			}
 		});
 		

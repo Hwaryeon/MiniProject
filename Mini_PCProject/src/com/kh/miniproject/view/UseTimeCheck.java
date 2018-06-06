@@ -7,7 +7,7 @@ import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.seat.controller.SeatManager;
 import com.kh.miniproject.seat.dao.SeatDao;
 
-public class useTimeCheck extends Thread implements ConversionTime {
+public class UseTimeCheck extends Thread implements ConversionTime {
 	
 	
 	private MainFrame mf;
@@ -19,7 +19,7 @@ public class useTimeCheck extends Thread implements ConversionTime {
 	
 	SeatManager sm = new SeatManager();
 
-	public useTimeCheck(MainFrame mf, /*JPanel seat1,*/ JTextField test, int seatNo) {
+	public UseTimeCheck(MainFrame mf, /*JPanel seat1,*/ JTextField test, int seatNo) {
 
 	
 		this.mf = mf;

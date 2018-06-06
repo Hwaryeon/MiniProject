@@ -25,7 +25,7 @@ import com.kh.miniproject.view.decoration.RoundedButton;
 public class AddTimePanel extends JPanel{
 	private MainFrame mf;
 	private MemberManager mm = new MemberManager();
-	private ImageTest it;
+	private ImageChange it;
 	
 	
 	public AddTimePanel(MainFrame mf){
@@ -293,7 +293,7 @@ public class AddTimePanel extends JPanel{
 		capture.setBounds(600, 50, 350, 400);
 
 		
-		it = new ImageTest(capture, 1);
+		it = new ImageChange(capture, 1);
 		it.start();
 
 

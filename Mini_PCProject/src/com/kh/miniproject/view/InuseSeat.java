@@ -18,8 +18,8 @@ public class InuseSeat extends JPanel
 	private MemberDao md = new MemberDao();
 	private SeatManager sm = new SeatManager();
 
-	useTimeCheck tc;
-	private ImageTest it;
+	UseTimeCheck tc;
+	private ImageChange it;
 	
 	public InuseSeat(MainFrame mf, Member m, int seatNo) 
 	{
@@ -220,7 +220,7 @@ public class InuseSeat extends JPanel
 
 		JTextField useAccTimeT = new JTextField("");
 
-		tc = new useTimeCheck(mf, useAccTimeT, seatNo);
+		tc = new UseTimeCheck(mf, useAccTimeT, seatNo);
 		tc.start();
 
 		useAccTimeT.setBounds(170, 330, 150, 50);
@@ -235,7 +235,7 @@ public class InuseSeat extends JPanel
 		guksuImage.setIcon(new ImageIcon(guksu));
 		guksuImage.setBounds(340, 10, 270, 390);
 
-		it = new ImageTest(guksuImage, 2);
+		it = new ImageChange(guksuImage, 2);
 		it.start();
 		
 		
@@ -257,6 +257,7 @@ public class InuseSeat extends JPanel
 		mf.add(panel);
 		mf.repaint();
 		tc.interrupt();
+		it.interrupt();
 
 	}
 }

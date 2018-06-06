@@ -6,13 +6,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class ImageTest extends Thread{
+public class ImageChange extends Thread{
 
 	private JLabel label;
 	private int pageNum;
 
 
-	public ImageTest(JLabel label, int pageNum) {
+	public ImageChange(JLabel label, int pageNum) {
 
 		this.label = label;
 		this.pageNum = pageNum;
@@ -32,7 +32,7 @@ public class ImageTest extends Thread{
 			if(pageNum == 1){
 
 				try {
-					Thread.sleep(3500);		//	3초
+					Thread.sleep(3000);		//	3초
 
 					if(sw == 0){
 						//gif 파일
@@ -61,7 +61,7 @@ public class ImageTest extends Thread{
 			}else if(pageNum == 2){
 				
 				try {
-					Thread.sleep(3500);		//	3초
+					Thread.sleep(3000);		//	3초
 
 					if(sw == 0){
 						capImage = new ImageIcon("icon/guksu2.png").getImage().getScaledInstance(270, 390, 0);
