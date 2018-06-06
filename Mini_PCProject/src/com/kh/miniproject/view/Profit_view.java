@@ -23,10 +23,10 @@ public class Profit_view  extends JPanel {
 
 		this.mf = mf;
 		Profit pf = new Profit();
-		JPanel start = new JPanel();
-		start.setLayout(null);
-		start.setSize(mf.getWidth(), mf.getHeight());
-		start.setBackground(Color.BLACK);
+		//JPanel start = new JPanel();
+		this.setLayout(null);
+		this.setSize(mf.getWidth(), mf.getHeight());
+		this.setBackground(Color.BLACK);
 
 		// 뒤로가기 버튼
 		JButton goback = new JButton();
@@ -47,10 +47,10 @@ public class Profit_view  extends JPanel {
 
 
 		JPanel memberManagePanel = new JPanel();
-
-		memberManagePanel.setSize(600,100);
+		memberManagePanel.setLayout(null);
 		memberManagePanel.setLocation(300, 50);
 		memberManagePanel.setBackground(Color.WHITE);
+		memberManagePanel.setSize(600,100);
 
 
 		//패널 위 "수익관리" 라벨
@@ -59,7 +59,6 @@ public class Profit_view  extends JPanel {
 		text.setLocation(100, 100);
 		text.setForeground(Color.BLACK);
 		text.setFont(new Font("맑은 고딕", Font.BOLD, 40));
-
 		text.setHorizontalAlignment(JLabel.CENTER);
 		memberManagePanel.add(text);      
 
@@ -191,9 +190,9 @@ public class Profit_view  extends JPanel {
 		timeMI.setLocation(65,65);
 		timeM.add(timeMI);
 
-		mf.add(memberManagePanel);
-		mf.add(member);
-		mf.add(start);
+		this.add(memberManagePanel);
+		this.add(member);
+		mf.add(this);
 
 
 	}

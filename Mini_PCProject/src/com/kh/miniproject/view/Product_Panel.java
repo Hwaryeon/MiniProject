@@ -46,11 +46,11 @@ public class Product_Panel  extends JPanel{
 		iMt = new Inventory_Management();	//재고관리 매니저
 		
 		//메인 프레임과 같은 사이즈의 패널
-		JPanel start = new JPanel();
+		//JPanel start = new JPanel();
 		
-		start.setLayout(null);
-		start.setSize(mf.getSize());
-		start.setBackground(Color.BLACK);
+		this.setLayout(null);
+		this.setSize(mf.getSize());
+		this.setBackground(Color.BLACK);
 		
 		// 뒤로가기 버튼
 		JButton goback = new JButton();
@@ -176,9 +176,9 @@ public class Product_Panel  extends JPanel{
 		
 		WHpanel.add(MainMenuPanel,"North");
 		
-		mf.add(WHpanel);
-		mf.add(addTimeText);
-		mf.add(start);
+		this.add(WHpanel);
+		this.add(addTimeText);
+		mf.add(this);
 		
 	}
 	

@@ -442,7 +442,7 @@ public class MemberDao implements ConversionTime, IProfit {
 		public void Add_Money(int money){
 			
 			System.out.println("ÀÌµז + " + money);
-			profit.setItem_M(money);
+			profit.setTime_M(money);
 
 		}
 

@@ -230,15 +230,13 @@ public class MainPanel extends JPanel
 		seat1.setLayout(null);
 		seat1.setBackground(Color.GRAY);
 
-		seat1.setBounds(25, 25, 100, 80);
+		seat1.setBounds(25, 25, 100, 75);
 		//seat1.setBounds(25, 25, 500, 580);
 		JLabel seatl01 = new JLabel("1");
 		seatl01.setHorizontalAlignment(JLabel.CENTER);
 		seatl01.setBounds(10, 10, 20, 20);
 
 		seat1.add(seatl01);
-
-
 
 		seatGP.add(seat1);
 		if(sm.checkSeat(1) != null){

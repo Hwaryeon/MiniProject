@@ -17,7 +17,6 @@ public class Run {
 		
 		new MainFrame();
 		
-		
 		//폰트 종류 확인
 		/*GraphicsEnvironment ge = null;
 		ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
