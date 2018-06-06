@@ -39,8 +39,8 @@ public class Timer extends Thread implements ConversionTime{
 				System.out.print("종료전까지 사용시간 : ");
 				conversionTime(SeatDao.iList[seatNum-1]);
 				System.out.println();
-				//this.interrupt();
-				this.stop();
+				//this.stop();
+				return;
 			}
 
 		}

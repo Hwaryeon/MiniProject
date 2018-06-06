@@ -24,6 +24,8 @@ public class MemberJoinPanel extends JPanel {
 	private MainPanel mp;
 	MemberManager mm = new MemberManager();
 	boolean overlapCheck = false;
+	
+	private ImageChange it;
 
 	public MemberJoinPanel(MainFrame mf){
 		this.mf = mf;
@@ -220,7 +222,8 @@ public class MemberJoinPanel extends JPanel {
 		capture.setIcon(new ImageIcon(capImage));
 		capture.setBounds(500, 50, 450, 400);
 
-
+		it = new ImageChange(capture, 3);
+		it.start();
 
 		//joinMain.add(joinSuccess);
 		joinMain.add(join);
@@ -248,6 +251,7 @@ public class MemberJoinPanel extends JPanel {
 		mf.remove(this);
 		mf.add(panel);
 		mf.repaint();
+		it.interrupt();
 	}
 
 

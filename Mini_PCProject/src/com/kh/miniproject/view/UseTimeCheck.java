@@ -50,7 +50,7 @@ public class UseTimeCheck extends Thread implements ConversionTime {
 				
 			} catch (InterruptedException e) {
 				System.out.println("좌석 사용 종료...");
-				this.stop();
+				return;
 			}
 
 		}

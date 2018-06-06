@@ -281,7 +281,7 @@ public class MainPanel extends JPanel
 					//seatGP.add(gp);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)),
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)),
 							seatNo);
 					changePanel(us);
 				}
@@ -339,7 +339,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -393,7 +393,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -447,7 +447,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -500,7 +500,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 
@@ -554,7 +554,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -606,7 +606,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -658,7 +658,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -710,7 +710,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -762,7 +762,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -814,7 +814,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -866,7 +866,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -917,7 +917,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -969,7 +969,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -1021,7 +1021,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -1073,7 +1073,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -1125,7 +1125,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -1177,7 +1177,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -1229,7 +1229,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}
@@ -1281,7 +1281,7 @@ public class MainPanel extends JPanel
 					EmptySeat es = new EmptySeat(mf, seatNo);
 					changePanel(es);
 				}else{
-					InuseSeat us = new InuseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
+					InUseSeat us = new InUseSeat(mf, mm.memberInfo(sm.checkSeat(seatNo)), seatNo);
 					changePanel(us);
 				}
 			}

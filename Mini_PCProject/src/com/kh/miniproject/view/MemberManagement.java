@@ -276,6 +276,9 @@ public class MemberManagement extends JPanel implements ConversionTime{
 				mm.memberAdmission(insertID.getText());
 				System.out.println("승인되었습니다");
 				insertID.setText("승인되었습니다");
+				
+				MemberManagement mm = new MemberManagement(mf);
+				changePanel(mm);
 
 			}
 
