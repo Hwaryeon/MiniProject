@@ -22,7 +22,7 @@ public class StartPanel extends JPanel
 		this.setBackground(Color.BLACK);
 		
 		//회원가입 버튼
-		JButton signup = new RoundedButton("회원로그인");
+		JButton signup = new RoundedButton("회원가입");
 		signup.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		signup.setBackground(Color.WHITE);
 		signup.setSize(200, 50);
