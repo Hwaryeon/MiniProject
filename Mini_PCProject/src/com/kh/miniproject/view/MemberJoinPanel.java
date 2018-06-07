@@ -29,12 +29,9 @@ public class MemberJoinPanel extends JPanel {
 
 	public MemberJoinPanel(MainFrame mf){
 		this.mf = mf;
-
 		this.setLayout(null);
 		this.setSize(mf.getWidth(), mf.getHeight());
 		this.setBackground(Color.BLACK);
-
-		
 		
 		// 뒤로가기 버튼
 		JButton goback = new JButton();
@@ -80,7 +77,6 @@ public class MemberJoinPanel extends JPanel {
 		joinMain.setLocation(100, 200);
 		joinMain.setBackground(Color.LIGHT_GRAY);
 
-
 		//회원 정보 입력 텍스트필드, 라벨
 		JLabel id = new JLabel("아이디");
 		id.setFont(new Font("맑은 고딕", Font.BOLD, 16));
@@ -117,12 +113,6 @@ public class MemberJoinPanel extends JPanel {
 		textEmail.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		textEmail.setBounds(30, 390, 200, 30);
 		
-	/*	JLabel joinSuccess = new JLabel();
-		joinSuccess.setBounds(250, 435, 250, 50);
-		joinSuccess.setBackground(Color.WHITE);
-		joinSuccess.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		joinSuccess.setForeground(Color.RED);*/
-
 		JButton overlap = new RoundedButton("ID 중복확인");
 		overlap.setBounds(250, 70, 130, 30);
 		overlap.setForeground(Color.WHITE);
@@ -137,9 +127,6 @@ public class MemberJoinPanel extends JPanel {
 
 		JLabel checkOverlap = new JLabel("중복된 아이디 입니다.");
 		checkOverlap.setHorizontalAlignment(JLabel.CENTER);
-		
-		
-		//boolean overlapCheck = false;
 		
 		overlapDialog.add(dialogClose, "South");
 		overlapDialog.add(checkOverlap, "North");
@@ -159,27 +146,17 @@ public class MemberJoinPanel extends JPanel {
 					checkOverlap.setText("중복된 아이디 입니다.");
 					overlapCheck = false;
 				}
-
 				overlapDialog.setVisible(true);
-
-
 			}
 
 		});
 		//중복 검사 팝업창 닫기 버튼
 		dialogClose.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-
 				overlapDialog.setVisible(false);
-
 			}
-
 		});
-
-
 
 		//시간 추가 버튼
 		JButton join = new RoundedButton("가입");
@@ -189,7 +166,6 @@ public class MemberJoinPanel extends JPanel {
 		join.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		//시간추가 버튼 기능 구현
 		join.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
@@ -199,7 +175,6 @@ public class MemberJoinPanel extends JPanel {
 						|| textPhoneNum.getText().equals("")
 						|| overlapCheck == false
 						){
-
 					checkOverlap.setText("정보 입력이 잘못되었습니다.");
 					overlapDialog.setVisible(true);
 				}else if(overlapCheck == true){
@@ -209,11 +184,7 @@ public class MemberJoinPanel extends JPanel {
 							textPhoneNum.getText());
 					overlapDialog.setVisible(true);
 				}
-
-
-
 			}
-
 		});
 
 		//광고창
@@ -225,7 +196,6 @@ public class MemberJoinPanel extends JPanel {
 		it = new ImageChange(capture, 3);
 		it.start();
 
-		//joinMain.add(joinSuccess);
 		joinMain.add(join);
 		joinMain.add(capture);
 		joinMain.add(overlap);

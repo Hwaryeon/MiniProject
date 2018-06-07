@@ -90,14 +90,12 @@ public class MemberManagement extends JPanel implements ConversionTime{
 		memberButton.add(approve);
 		memberButton.add(search);
 
-
 		//회원관리 메인 패널 //
 		JPanel member = new JPanel();
 		member.setLayout(null);
 		member.setSize(1000,500);
 		member.setLocation(100, 200);
 		member.setBackground(Color.LIGHT_GRAY);
-
 
 		member.add(search);
 		member.add(approve);
@@ -194,8 +192,6 @@ public class MemberManagement extends JPanel implements ConversionTime{
 				}
 			}
 
-
-
 		JTable tableSearch = new JTable(approveContents, approveHeader);
 		tableSearch.setBounds(0, 0, 800, 200);
 		tableSearch.getTableHeader().setReorderingAllowed(false);
@@ -247,15 +243,12 @@ public class MemberManagement extends JPanel implements ConversionTime{
 		insertID.setHorizontalAlignment(JLabel.CENTER);
 		insertID.setBounds(15, 60, 260, 30);
 
-
-
 		approveDialog.add(apvID);
 		approveDialog.add(selectApv);
 		approveDialog.add(dialogClose);
 		approveDialog.add(insertID);
 
 		//승인하기 버튼 추가
-
 		memberApprove.add(approveBtn);
 
 		//승인 팝업창 //승인여부 false인 회원 불러와서 승인해주는 기능 연결 필요
@@ -263,8 +256,6 @@ public class MemberManagement extends JPanel implements ConversionTime{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				approveDialog.setVisible(true);
-
-
 			}
 
 		});
@@ -276,25 +267,19 @@ public class MemberManagement extends JPanel implements ConversionTime{
 				mm.memberAdmission(insertID.getText());
 				System.out.println("승인되었습니다");
 				insertID.setText("승인되었습니다");
-				
 				MemberManagement mm = new MemberManagement(mf);
 				changePanel(mm);
-
 			}
 
 		});	
 
 		//승인 팝업창 닫기 버튼
 		dialogClose.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				approveDialog.setVisible(false);
-
 			}
-
 		});
-
 
 		//회원찾기 패널
 		JPanel memberSearch = new JPanel();

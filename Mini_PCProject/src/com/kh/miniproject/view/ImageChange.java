@@ -29,25 +29,20 @@ public class ImageChange extends Thread{
 		while(true){
 
 			if(pageNum == 1){		// 시간 추가 화면
-
 				try {
 					Thread.sleep(3000);		//	3초
-
 					if(sw == 0){
 						//gif 파일
 						capImage = new ImageIcon("icon/hos.gif").getImage().getScaledInstance(350, 400, 0);
 						sw = 1;
 					}else if(sw == 1){
-
 						//png 파일
 						capImage = new ImageIcon("icon/iPhone.png").getImage().getScaledInstance(350, 400, 0);
 						sw = 2;
 					}else{
-
 						//png 파일
 						capImage = new ImageIcon("icon/capture.PNG").getImage().getScaledInstance(350, 400, 0);
 						sw = 0;
-
 					}
 
 					label.setIcon(new ImageIcon(capImage));
@@ -58,7 +53,7 @@ public class ImageChange extends Thread{
 
 				}
 			}else if(pageNum == 2){		// 좌석 사용중 일때
-				
+
 				try {
 					Thread.sleep(3000);		//	3초
 
@@ -75,45 +70,29 @@ public class ImageChange extends Thread{
 				} catch (InterruptedException e){
 					System.out.println("사진변경 스레드 종료...");
 					return;
-
 				}
-				
-				
 			}else if(pageNum == 3){		// 회원 가입일때
-				
 				try {
 					Thread.sleep(3000);		//	3초
-
 					if(sw == 0){
 						//gif 파일
 						capImage = new ImageIcon("icon/tropicana.gif").getImage().getScaledInstance(450, 400, 0);
 						sw = 1;
 					}else{
-
 						//png 파일
 						capImage = new ImageIcon("icon/project-1.PNG").getImage().getScaledInstance(450, 400, 0);
 						sw = 0;
 					}
 					label.setIcon(new ImageIcon(capImage));
-					
 					if(sw == 1){
 						Thread.sleep(5000);	
 					}
-					
-
 				} catch (InterruptedException e){
 					System.out.println("사진변경 스레드 종료...");
 
 					return;
-
 				}
-				
-				
 			}
-
 		}
-
-
 	}
-
 }

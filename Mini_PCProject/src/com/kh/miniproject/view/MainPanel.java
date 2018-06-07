@@ -12,24 +12,28 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 
 import com.kh.miniproject.event.MyMouseAdapter;
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.seat.controller.SeatManager;
-import com.kh.miniproject.seat.dao.SeatDao;
 
 public class MainPanel extends JPanel 
 {
 	private MainFrame mf;
 	private SeatManager sm = new SeatManager();
 	private MemberManager mm = new MemberManager();
-	private SeatDao sd = new SeatDao();
 
 	public ArrayList<Thread> thList = new ArrayList(20);
 
 	public MainPanel(MainFrame mf) 
 	{
+		try{
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());			//님버스테마
+		}catch(Exception e){
+		}
+
 		this.mf = mf;
 		this.setSize(mf.getWidth(), mf.getHeight());
 		this.setLayout(null);
@@ -145,20 +149,19 @@ public class MainPanel extends JPanel
 		chartL.setFont(font);
 		chartL.setHorizontalAlignment(JLabel.CENTER);
 		chartL.setBounds(25, 380, 150, 25);
-		
+
 		chart.addMouseListener(new MyMouseAdapter(){
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("수익관리 ...");
-
 				Profit_view pv = new Profit_view(mf);
 				changePanel(pv);
 
 			}
 		});
-		
-		
+
+
 		// 재고관리 버튼
 		JButton product = new JButton();
 		Image cart = new ImageIcon("icon/shopping.png").getImage().getScaledInstance(150, 150, 0);
@@ -172,7 +175,6 @@ public class MainPanel extends JPanel
 		productL.setBounds(225, 380, 150, 25);
 
 		product.addMouseListener(new MyMouseAdapter(){
-
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("재고관리 ...");
@@ -182,8 +184,7 @@ public class MainPanel extends JPanel
 
 			}
 		});
-		
-		
+
 		iconp.add(timePlus);
 		iconp.add(timePlusL);
 		iconp.add(manageuser);
@@ -205,19 +206,6 @@ public class MainPanel extends JPanel
 		seatTitle.setBounds(0, 0, 650, 100);
 		seatP.add(seatTitle);
 
-		seatTitle.addMouseListener(new MyMouseAdapter(){
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				sd.seatLeset();
-				System.out.println("좌석 초기화...");
-
-				MainPanel mp = new MainPanel(mf);
-				changePanel(mp);
-
-			}
-		});
-
 		// 비어있음(empty)
 		Image empty = new ImageIcon("icon/empty.png").getImage().getScaledInstance(100, 45, 0);
 		JPanel seatGP = new JPanel();
@@ -225,7 +213,7 @@ public class MainPanel extends JPanel
 		seatGP.setBounds(0, 100, 650, 425);
 		seatGP.setBackground(null);
 
-		// 1번좌석
+		// 1번좌석 1
 		JPanel seat1 = new JPanel();
 		seat1.setLayout(null);
 		seat1.setBackground(Color.GRAY);
@@ -257,16 +245,12 @@ public class MainPanel extends JPanel
 			UseTimeCheck tc = new UseTimeCheck(mf, /*seat1, */useTime, 1);
 			thList.add(tc);
 			tc.start();
-
-
 		}else{
 			JLabel seat1e = new JLabel();
 			seat1e.setIcon(new ImageIcon(empty));
 			seat1e.setBounds(10, 30, 90, 45);
 			seat1.add(seat1e);
-
 		}
-
 
 		seat1.addMouseListener(new MyMouseAdapter(){
 
@@ -297,9 +281,7 @@ public class MainPanel extends JPanel
 
 		seat2.add(seatl02);
 
-
 		seatGP.add(seat2);
-
 
 		if(sm.checkSeat(2) != null){
 			JTextField useTime2 = new JTextField("사용시간");
@@ -325,11 +307,7 @@ public class MainPanel extends JPanel
 			seat2e.setBounds(10, 30, 90, 45);
 			seat2.add(seat2e);
 		}
-
-
-
 		seat2.addMouseListener(new MyMouseAdapter(){
-
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int seatNo = 2;
@@ -1285,16 +1263,11 @@ public class MainPanel extends JPanel
 			}
 		});
 
-
-
 		seatP.add(seatGP);
 		menu.add(iconp);
-
 		this.add(menu);
 		this.add(seatP);
-
 		mf.add(this);
-
 	}
 
 	public int thEnd(){
@@ -1313,10 +1286,7 @@ public class MainPanel extends JPanel
 		mf.repaint();
 
 		for(int i = 0; i < thList.size(); i++){
-
 			thList.get(i).interrupt();
-
 		}
-
 	}
 }
