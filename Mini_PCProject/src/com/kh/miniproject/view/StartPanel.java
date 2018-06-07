@@ -102,7 +102,6 @@ public class StartPanel extends JPanel
 		loginp.add(pw);
 		loginp.add(login);
 		
-		
 		this.add(loginp);
 		
 		mf.add(this);

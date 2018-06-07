@@ -37,7 +37,6 @@ public class EmptySeat extends JPanel
 		});
 		this.add(goback);
 
-		//상단 제목 패널 //패널 위 라벨로 구성
 		JPanel emptyPanel = new JPanel();
 		emptyPanel.setLayout(null);
 		emptyPanel.setLocation(300, 50);
@@ -47,6 +46,9 @@ public class EmptySeat extends JPanel
 		Image titleLayerI = new ImageIcon("icon/titleLayer.png").getImage().getScaledInstance(600, 100, 0);
 		titleLayer.setIcon(new ImageIcon(titleLayerI));
 		titleLayer.setBounds(0, 0, 600, 100);
+
+
+
 		//패널 위 제목 라벨
 		JLabel text = new JLabel("비어있는 좌석");
 		text.setSize(300, 50);
@@ -54,9 +56,9 @@ public class EmptySeat extends JPanel
 		text.setBackground(Color.GREEN);
 		text.setFont(new Font("맑은 고딕", Font.BOLD, 40));
 		text.setHorizontalAlignment(JTextField.CENTER);
+
 		emptyPanel.add(text);
 		emptyPanel.add(titleLayer);
-
 
 		// 메뉴패널
 		JPanel menu = new JPanel();
@@ -91,7 +93,6 @@ public class EmptySeat extends JPanel
 			public void mouseClicked(MouseEvent e)
 			{
 				UseSeat atp = new UseSeat(mf, seatNo);
-				//changePanel(atp);
 				changePanel(atp);
 			}
 		});
@@ -100,10 +101,8 @@ public class EmptySeat extends JPanel
 		seatPlusL.setHorizontalAlignment(JLabel.CENTER);
 		seatPlusL.setBounds(120, 260, 150, 25);
 
-
 		iconp.add(seatPlus);
 		iconp.add(seatPlusL);
-
 
 		// 좌석패널
 		JPanel seatP = new JPanel();
@@ -117,8 +116,6 @@ public class EmptySeat extends JPanel
 		seatTitle.setBounds(0, 0, 650, 100);
 		seatP.add(seatTitle);
 
-
-
 		JLabel seatNoLabel = new JLabel(seatNo+"");
 		seatNoLabel.setHorizontalAlignment(JLabel.CENTER);
 		seatNoLabel.setBounds(10,100,100,100);
@@ -131,7 +128,6 @@ public class EmptySeat extends JPanel
 		seatUse.setFont(new Font("맑은고딕", Font.BOLD, 44));
 		seatP.add(seatUse);
 
-
 		menu.add(iconp);
 
 		this.add(menu);
@@ -140,7 +136,6 @@ public class EmptySeat extends JPanel
 		mf.add(this);
 
 	}
-
 
 	public void changePanel(JPanel panel)
 	{

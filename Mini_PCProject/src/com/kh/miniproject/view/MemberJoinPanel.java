@@ -24,6 +24,9 @@ public class MemberJoinPanel extends JPanel {
 	private MainPanel mp;
 	MemberManager mm = new MemberManager();
 	boolean overlapCheck = false;
+	
+	
+	private ImageChange it;
 
 	public MemberJoinPanel(MainFrame mf){
 		this.mf = mf;
@@ -32,8 +35,6 @@ public class MemberJoinPanel extends JPanel {
 		this.setSize(mf.getWidth(), mf.getHeight());
 		this.setBackground(Color.BLACK);
 
-		
-		
 		// 뒤로가기 버튼
 		JButton goback = new JButton();
 		Image back = new ImageIcon("icon/pointer.png").getImage().getScaledInstance(100, 100, 0);
@@ -63,8 +64,6 @@ public class MemberJoinPanel extends JPanel {
 		titleLayer.setBounds(0, 0, 600, 100);
 		//패널 위 "회원가입" 라벨
 		JLabel text = new JLabel("회원가입");
-		//text.setSize(200, 50);
-		//text.setLocation(200, 25);
 		text.setBounds(0, 0, 600, 100);
 		text.setFont(new Font("맑은 고딕", Font.BOLD, 40));
 		text.setHorizontalAlignment(JTextField.CENTER);
@@ -77,7 +76,6 @@ public class MemberJoinPanel extends JPanel {
 		joinMain.setSize(1000,500);
 		joinMain.setLocation(100, 200);
 		joinMain.setBackground(Color.LIGHT_GRAY);
-
 
 		//회원 정보 입력 텍스트필드, 라벨
 		JLabel id = new JLabel("아이디");
@@ -101,9 +99,9 @@ public class MemberJoinPanel extends JPanel {
 		textName.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		textName.setBounds(30, 230, 200, 30);
 
-		JLabel phoneNum = new JLabel("전화번호");
+		JLabel phoneNum = new JLabel("전화번호( ' - ' 제외 숫자입력 )");
 		phoneNum.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-		phoneNum.setBounds(30, 240, 100, 100);
+		phoneNum.setBounds(30, 240, 300, 100);
 		JTextField textPhoneNum = new JTextField();
 		textPhoneNum.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		textPhoneNum.setBounds(30, 310, 200, 30);
@@ -115,12 +113,6 @@ public class MemberJoinPanel extends JPanel {
 		textEmail.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		textEmail.setBounds(30, 390, 200, 30);
 		
-	/*	JLabel joinSuccess = new JLabel();
-		joinSuccess.setBounds(250, 435, 250, 50);
-		joinSuccess.setBackground(Color.WHITE);
-		joinSuccess.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		joinSuccess.setForeground(Color.RED);*/
-
 		JButton overlap = new RoundedButton("ID 중복확인");
 		overlap.setBounds(250, 70, 130, 30);
 		overlap.setForeground(Color.WHITE);
@@ -131,87 +123,80 @@ public class MemberJoinPanel extends JPanel {
 		overlapDialog.setBounds(500, 380, 200, 100);
 
 		JButton dialogClose = new RoundedButton("닫기");
-		dialogClose.setBounds(50, 125, 50, 50);
+		dialogClose.setBounds(50, 125, 50, 70);
 
 		JLabel checkOverlap = new JLabel("중복된 아이디 입니다.");
 		checkOverlap.setHorizontalAlignment(JLabel.CENTER);
 		
-		
-		//boolean overlapCheck = false;
-		
 		overlapDialog.add(dialogClose, "South");
 		overlapDialog.add(checkOverlap, "North");
+		
 		//중복 검사 팝업창 //checkOverlap 기능 연결하여 중복 검사 필요
 		overlap.addActionListener(new ActionListener(){	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				int check = mm.checkUser(textId.getText());
-
-				System.out.println("check : "  + check);
-
-				if(check == 0){		// 중복 x
-					overlapCheck = true;
-					checkOverlap.setText("사용 가능한 아이디입니다.");
-				}else if(check == 1){	// 중복 o
-					checkOverlap.setText("중복된 아이디 입니다.");
-					overlapCheck = false;
-				}
-
+				checkOverlap.setText(overlapCheck(textId.getText()));
 				overlapDialog.setVisible(true);
-
-
 			}
-
 		});
 		//중복 검사 팝업창 닫기 버튼
 		dialogClose.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-
 				overlapDialog.setVisible(false);
-
 			}
-
 		});
 
-
-
-		//시간 추가 버튼
+		//가입 버튼
 		JButton join = new RoundedButton("가입");
 		join.setBounds(30, 435, 100, 50);
 		join.setBackground(Color.BLACK);
 		join.setForeground(Color.WHITE);
 		join.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		//시간추가 버튼 기능 구현
+		//가입버튼 기능 구현
 		join.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				boolean phoneCheck = true;
+				boolean phoneLength = false;
+				checkOverlap.setText(overlapCheck(textId.getText()));
+			
+				for(int i = 0; i < textPhoneNum.getText().length(); i++){
+					char[] ch = textPhoneNum.getText().toCharArray();
+					if(ch.length == 11 || ch.length == 10){
+						phoneLength = true;
+					}
+					if(!(ch[i] >= '0' && ch[i] <= '9')){
+						phoneCheck = false;
+					}
+				}
+			
 				if(textName.getText().equals("") || textId.getText().equals("")
 						|| textPwd.getText().equals("")
 						|| textEmail.getText().equals("")
 						|| textPhoneNum.getText().equals("")
-						|| overlapCheck == false
 						){
 
-					checkOverlap.setText("정보 입력이 잘못되었습니다.");
+					checkOverlap.setText("모든 정보를 입력하세요.");
 					overlapDialog.setVisible(true);
-				}else if(overlapCheck == true){
-					checkOverlap.setText("가입 완료되었습니다");
+				}else if(overlapCheck == true && phoneCheck == true && 
+						phoneLength == true){
+					checkOverlap.setText("가입 완료되었습니다.");
 					mm.memberJoin(textName.getText(), textId.getText(),
 							textPwd.getText(), textEmail.getText(),
 							textPhoneNum.getText());
+						textName.setText(""); textId.setText(""); textPwd.setText("");
+						textEmail.setText(""); textPhoneNum.setText("");
+					overlapDialog.setVisible(true);
+				}if(overlapCheck == false){
+					checkOverlap.setText("ID 중복확인을 다시 해주세요.");
+					overlapDialog.setVisible(true);
+				}if(phoneCheck == false || phoneLength == false){
+					checkOverlap.setText("전화번호를 다시 확인해주세요.");
 					overlapDialog.setVisible(true);
 				}
-
-
-
 			}
-
 		});
 
 		//광고창
@@ -220,9 +205,9 @@ public class MemberJoinPanel extends JPanel {
 		capture.setIcon(new ImageIcon(capImage));
 		capture.setBounds(500, 50, 450, 400);
 
+		it = new ImageChange(capture, 3);
+		it.start();
 
-
-		//joinMain.add(joinSuccess);
 		joinMain.add(join);
 		joinMain.add(capture);
 		joinMain.add(overlap);
@@ -240,14 +225,28 @@ public class MemberJoinPanel extends JPanel {
 		this.add(joinMain);
 		this.add(memberJoinText);
 		mf.add(this);
-
 	}
 
+	public String overlapCheck(String s){
+		int check = mm.checkUser(s);
+
+
+		if(check == 0){		// 중복 x
+			overlapCheck = true;
+			return "사용 가능한 아이디입니다.";
+		}else if(check == 1){	// 중복 o
+			overlapCheck = false;
+			return "중복된 아이디 입니다.";
+		}
+		return "";
+	}
+	
 	public void changePanel(JPanel panel)
 	{
 		mf.remove(this);
 		mf.add(panel);
 		mf.repaint();
+		it.interrupt();
 	}
 
 

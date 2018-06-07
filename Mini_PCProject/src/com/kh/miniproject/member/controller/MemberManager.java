@@ -28,7 +28,6 @@ public class MemberManager {
 		Member m = new Member(name, id, pwd, email, age, pNumber);
 
 		md.memberJoin(m);
-		System.out.println(m.toString());
 
 	}
 
@@ -53,9 +52,7 @@ public class MemberManager {
 
 	public void timePlus(){
 
-		System.out.print("충전할 ID : ");
 		String id = sc.nextLine();
-		System.out.print("충전할 시간 : ");
 		int time = sc.nextInt();
 
 		md.timePlus(id, time);
@@ -63,14 +60,12 @@ public class MemberManager {
 
 	public void timePlus(String id, int time){
 
-		System.out.println("시간추가");
 		
 		md.timePlus(id, time);
 	}
 
 	public Member memberInfo(String id){
 
-		System.out.println(id + "님의 회원정보를 출력합니다.");
 
 		Member m = md.memberInfo(id);
 

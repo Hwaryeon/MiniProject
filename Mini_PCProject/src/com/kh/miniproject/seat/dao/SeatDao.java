@@ -16,7 +16,6 @@ import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.seat.vo.Seat;
 import com.kh.miniproject.view.Timer;
-import com.kh.miniproject.view.TimerMake;
 
 public class SeatDao extends Thread implements ConversionTime{
 
@@ -24,7 +23,6 @@ public class SeatDao extends Thread implements ConversionTime{
 	Scanner sc = new Scanner(System.in);
 
 	MemberManager mm = new MemberManager();
-	TimerMake tm = new TimerMake();
 	ArrayList<Seat> sl = new ArrayList<Seat>();
 
 	final static int MAX_SEAT = 20;
@@ -32,12 +30,6 @@ public class SeatDao extends Thread implements ConversionTime{
 	public static Thread[] tList = new Thread[MAX_SEAT];
 	public static int[] iList = new int[MAX_SEAT];
 
-	/*Timer timer = new Timer(0, "", 0);
-	Thread t1 = timer;
-	public void seatExit(){
-		t1.interrupt();
-	}*/
-	
 
 	public void seatLeset(){
 		int num = 1;
@@ -59,6 +51,7 @@ public class SeatDao extends Thread implements ConversionTime{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 
 	}
 
@@ -89,12 +82,10 @@ public class SeatDao extends Thread implements ConversionTime{
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}catch(EOFException e){
-			//System.out.println("모든 좌석 출력...");
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println();
 	}
 
 	public void printAllSeat(){
@@ -124,25 +115,10 @@ public class SeatDao extends Thread implements ConversionTime{
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}catch(EOFException e){
-			//System.out.println("모든 좌석 출력...");
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
 
-
-		for(int i = 0; i < MAX_SEAT; i++){
-			if(sl.get(i).getUseCheck() == false){
-				System.out.print(sl.get(i).getSeatNo() + " : O\t");
-			}else{
-				System.out.print(sl.get(i).getSeatNo() + " : X\t");
-			}
-			if(i == 3 || i == 7){
-				System.out.println();
-			}
-
-		}
-
-		System.out.println();
 	}
 
 	public String checkSeat(int seatNo){
@@ -155,16 +131,11 @@ public class SeatDao extends Thread implements ConversionTime{
 				if(sl.get(i).getUseCheck() == true){
 
 
-					
-					mm.memberInfo(sl.get(i).getUserId());
-					System.out.println();
 
-					System.out.print("사용시간 : ");
+					mm.memberInfo(sl.get(i).getUserId());
+
 					conversionTime(iList[seatNo-1]);
-					System.out.println();
-					/*tm.threadNumber = seatNo-1;
-					tm.visibleFrame();*/
-					
+
 					return sl.get(i).getUserId();
 				}
 			}
@@ -173,25 +144,25 @@ public class SeatDao extends Thread implements ConversionTime{
 		return null;/*System.out.println("해당 좌석은 사용중이지 않습니다.");*/
 
 	}
-	
+
 	public boolean useUser(String id){
-		
+
 		insertList();
-		
+
 		if(sl.size() == 0){
 			return true;
 		}
 		for(int i=0; i < MAX_SEAT; i++){
 			if(sl.get(i).getUserId().equals(id)){
 				return false;
-				
+
 			}
 		}
-		
+
 		return true;
 	}
 
-	
+
 	public void useSeat(JFrame mf, int seatNo, String id, int time){
 
 		insertList();
@@ -202,12 +173,10 @@ public class SeatDao extends Thread implements ConversionTime{
 
 			for(int i=0; i < MAX_SEAT; i++){
 				if(	sl.get(i).getUserId().equals(id) ){
-					System.out.println("사용자가 좌석 이용중입니다.");
 					check = 1;
 				}
 
 				if(sl.get(i).getSeatNo() == seatNo && time <= 0){
-					System.out.println("사용자의 잔여시간이 없습니다. ");
 					check = 1;
 				}
 
@@ -215,7 +184,6 @@ public class SeatDao extends Thread implements ConversionTime{
 
 					if(sl.get(i).getUseCheck() == true){
 
-						System.out.println("해당 좌석은 이용중입니다.");
 					}
 
 					else if(check != 1){
@@ -238,7 +206,6 @@ public class SeatDao extends Thread implements ConversionTime{
 						Timer timer = new Timer(sl.get(i).getSeatNo(),
 								sl.get(i).getUserId(), sl.get(i).getUserTime());
 						Thread t1 = timer;
-						t1.setDaemon(true);
 
 						tList[sl.get(i).getSeatNo()-1] = t1;
 
@@ -268,16 +235,14 @@ public class SeatDao extends Thread implements ConversionTime{
 				if(sl.get(i).getSeatNo() == seatNo){
 
 					if(sl.get(i).getUseCheck() == false){
-						System.out.println("해당 좌석은 사용중이지 않습니다.");
 					}else{
 
 						sl.get(i).setUseCheck(false);
 						userId = sl.get(i).getUserId();
 						sl.get(i).setUserId("");
 						sl.get(i).setUserTime(0);
-						System.out.println("좌석 사용 종료...");
 						tList[seatNo-1].interrupt();
-						
+
 					}
 				}
 				os.writeInt(sl.get(i).getSeatNo());
@@ -302,11 +267,10 @@ public class SeatDao extends Thread implements ConversionTime{
 		long minute = (long) ((cTime / (  60)) % 60);
 		long hour = (long) ((cTime / ( 60 * 60)));
 		String s = null;
-		
+
 		s = String.format("%02d:%02d:%02d", hour, minute, second);
-		
-		System.out.print(s);
-		
+
+
 		return s;
 	}
 }

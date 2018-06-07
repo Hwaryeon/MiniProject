@@ -10,21 +10,23 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.kh.miniproject.IProfit.IProfit;
+import com.kh.miniproject.ProductAndProfit.vo.Profit;
 import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.member.vo.Member;
 import com.kh.miniproject.seat.dao.SeatDao;
 
-public class MemberDao implements ConversionTime {
+public class MemberDao implements ConversionTime, IProfit {
 
 	ArrayList<Member> ml = new ArrayList<Member>();
-
+	Profit profit = new Profit();
+	
 	public void memberJoin(Member m){
 
 		insertList();
 
 		for(int i=0; i<ml.size(); i++){
 			if(ml.get(i).getId().equals(m.getId())){
-				System.out.println("ID가 중복되어 가입이 취소됩니다.");
 				return;
 			}
 		}
@@ -54,13 +56,11 @@ public class MemberDao implements ConversionTime {
 
 		insertList();
 
-		System.out.println(ml.get(0).getName());
 
 		for(int i=0; i < ml.size(); i++){
 			if(ml.get(i).getName().equals(name) &&
 					ml.get(i).getEmail().equals(email)){
 
-				//System.out.println("찾은 ID : " + ml.get(i).getId());
 				return ml.get(i).getId();
 
 			}
@@ -76,12 +76,7 @@ public class MemberDao implements ConversionTime {
 					if(ml.get(i).getName().equals(name) &&
 							ml.get(i).getId().equals(id)){
 		
-						/*System.out.println("찾은 PASSWORD : "
-								+ ml.get(i).getPwd());*/
-						
-						
 						return ml.get(i).getPwd();
-		
 		 			}
 		 		}
 				return "잘못 입력하셨습니다.";
@@ -121,19 +116,12 @@ public class MemberDao implements ConversionTime {
 			e.printStackTrace();
 		}
 
-		if(check == 1){
-			//System.out.println("가입 승인 완료...");
-		}else{
-			//System.out.println("가입 승인 실패...");
-		}
-
 	}
 
 	public void timePlus(String id, int time){
 
 		insertList();
 
-		System.out.println("id : " + id);
 		
 		int check = 0;
 
@@ -144,10 +132,10 @@ public class MemberDao implements ConversionTime {
 			for(int i = 0; i < ml.size(); i++){
 				if(ml.get(i).getId().equals(id)){
 					if(ml.get(i).getAdmission() == false){
-						System.out.println("가입 승인 상태가 아닙니다.");
 					}else{
 						ml.get(i).setRestTime(ml.get(i).getRestTime()
 								+ (time * 60 * 60) );
+						Add_Money(time * 1000);
 						check = 1;
 					}
 
@@ -171,10 +159,8 @@ public class MemberDao implements ConversionTime {
 		}
 
 		if(check == 1){
-			//	System.out.println("충전 성공...");
 			return;
 		}else{
-			//	System.out.println("충전 실패...");
 			return;
 		}
 
@@ -188,20 +174,11 @@ public class MemberDao implements ConversionTime {
 
 			if(ml.get(i).getId().equals(id)){
 
-				System.out.println();
-				System.out.println("이름 : " + ml.get(i).getName());
-				System.out.println("아이디 : " + ml.get(i).getId());
-				System.out.print("충전 시간 : ");
-				conversionTime(ml.get(i).getRestTime());
-				System.out.println();
-				System.out.print("누적사용시간 : ");
 				conversionTime(ml.get(i).getAccTime());
-				System.out.println();
 				return ml.get(i);
 
 			}
 		}
-		System.out.println("ID 조회 실패...");
 		return new Member();
 
 	}
@@ -244,10 +221,8 @@ public class MemberDao implements ConversionTime {
 		}
 
 		if(check == 1){
-			//System.out.println("사용시간  계산 완료...");
 			return;
 		}else{
-			//System.out.println("사용시간  계산 실패...");
 			return;
 		}
 
@@ -290,7 +265,6 @@ public class MemberDao implements ConversionTime {
 
 			}
 		}catch(EOFException e){
-			//	System.out.println("모든 멤버 출력...");
 		}
 		catch(Exception e){
 			//	e.printStackTrace();
@@ -304,17 +278,8 @@ public class MemberDao implements ConversionTime {
 
 		for(int i = 0; i < ml.size(); i++){
 
-			System.out.print(num +" : " + ml.get(i).getName() + ", " + ml.get(i).getId()
-					+ ", " + ml.get(i).getPwd()
-					+ ", " + ml.get(i).getEmail() +", " + ml.get(i).getAge()
-					+ ", " + ml.get(i).getpNumber() +", " );
-
 			conversionTime(ml.get(i).getRestTime());
-			System.out.print(", ");
 			conversionTime(ml.get(i).getAccTime());
-
-			System.out.printf(", %b" , ml.get(i).getAdmission());
-			System.out.println();
 
 			num++;
 		}
@@ -334,18 +299,11 @@ public class MemberDao implements ConversionTime {
 
 
 			if(ml.get(i).getAdmission() == true && b == true){
-				System.out.print(num +" : " + ml.get(i).getName() + ", " + ml.get(i).getId()
-						+ ", " + ml.get(i).getPwd()
-						+ ", " + ml.get(i).getEmail() +", " + ml.get(i).getAge()
-						+ ", " + ml.get(i).getpNumber() +", " );
 
 				conversionTime(ml.get(i).getRestTime());
 
-				System.out.print(", ");
 				conversionTime(ml.get(i).getAccTime());
 
-				System.out.printf(", %b" , ml.get(i).getAdmission());
-				System.out.println();
 
 				/*this.name = name;
 				this.id = id;
@@ -367,18 +325,11 @@ public class MemberDao implements ConversionTime {
 
 
 			}else if(ml.get(i).getAdmission() == false && b == false){
-				System.out.print(num +" : " + ml.get(i).getName() + ", " + ml.get(i).getId()
-						+ ", " + ml.get(i).getPwd()
-						+ ", " + ml.get(i).getEmail() +", " + ml.get(i).getAge()
-						+ ", " + ml.get(i).getpNumber() +", " );
 
 				conversionTime(ml.get(i).getRestTime());
 
-				System.out.print(", ");
 				conversionTime(ml.get(i).getAccTime());
 
-				System.out.printf(", %b" , ml.get(i).getAdmission());
-				System.out.println();
 				tf.add(new Member(ml.get(i).getName(), ml.get(i).getId(),
 						ml.get(i).getPwd(),
 						ml.get(i).getEmail(), ml.get(i).getAge(),
@@ -403,10 +354,8 @@ public class MemberDao implements ConversionTime {
 		long hour = (long) ((cTime / ( 60 * 60)));
 		String s = null;
 		
-		//System.out.printf("%02d:%02d:%02d", hour, minute, second);
 		s = String.format("%02d:%02d:%02d", hour, minute, second);
 		
-		System.out.print(s);
 		
 		return s;
 	}
@@ -418,16 +367,23 @@ public class MemberDao implements ConversionTime {
 		for(int i = 0; i < ml.size(); i++){
 
 			if(ml.get(i).getId().equals(id)){
-				System.out.println("아이디 확인");
 				return 1;
 
 			}
 
 		}
 
-		System.out.println("아이디 없음 ");
 		return 0;
 
 	}
+
+
+	//정산후 저장
+		@Override
+		public void Add_Money(int money){
+			
+			profit.setTime_M(money);
+
+		}
 
 }
