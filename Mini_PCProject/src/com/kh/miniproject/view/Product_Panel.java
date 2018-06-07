@@ -29,7 +29,7 @@ import com.kh.miniproject.ProductAndProfit.vo.Product;
 import com.kh.miniproject.view.Product_List.Product_List;
 
 	//재고관리 UI
-public class Product_Panel  extends JPanel{
+public class Product_Panel extends JPanel{
 	private MainFrame mf;
 	private JPanel mp;
 	private Inventory_Management iMt= null;
@@ -39,19 +39,8 @@ public class Product_Panel  extends JPanel{
 		
 		try{
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");	//윈도우테마
-//			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");			//님버스테마
 		}catch(Exception e){
 		}
-		
-		this.mf = mf;   
-		iMt = new Inventory_Management();	//재고관리 매니저
-		
-		//메인 프레임과 같은 사이즈의 패널
-		//JPanel start = new JPanel();
-		
-		this.setLayout(null);
-		this.setSize(mf.getSize());
-		this.setBackground(Color.BLACK);
 		
 		// 뒤로가기 버튼
 		JButton goback = new JButton();
@@ -68,6 +57,16 @@ public class Product_Panel  extends JPanel{
 			}
 		});
 		this.add(goback);
+		this.mf = mf;   
+		iMt = new Inventory_Management();	//재고관리 매니저
+		
+		//메인 프레임과 같은 사이즈의 패널
+		//JPanel start = new JPanel();
+		
+		this.setLayout(null);
+		this.setSize(mf.getSize());
+		this.setBackground(Color.BLACK);
+		
 		
 		
 		//상단 시간추가 패널 //패널 위 TextField로 구성
@@ -226,11 +225,5 @@ public class Product_Panel  extends JPanel{
 		mf.remove(this);
 		mf.add(panel);
 		mf.repaint();
-		/*try {
-			UIManager.setLookAndFeel("");
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		}*/
 	}
 }
