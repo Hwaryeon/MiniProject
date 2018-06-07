@@ -177,8 +177,8 @@ public class MainPanel extends JPanel
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("재고관리 ...");
 
-				Product_Panel pp = new Product_Panel(mf);
-				changePanel(pp);
+				//Product_Panel pp = new Product_Panel(mf);
+				changePanel(new Product_Panel(mf));
 
 			}
 		});
