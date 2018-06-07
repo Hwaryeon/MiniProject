@@ -20,13 +20,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 
 import com.kh.miniproject.ProductAndProfit.controller.Inventory_Management;
 import com.kh.miniproject.ProductAndProfit.vo.Product;
 import com.kh.miniproject.view.Product_List.Product_List;
+import com.kh.miniproject.view.decoration.RoundedButton;
+
+
 
 	//재고관리 UI
 public class Product_Panel extends JPanel{
@@ -39,43 +41,47 @@ public class Product_Panel extends JPanel{
 		
 		try{
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");	//윈도우테마
+//			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");			//님버스테마
 		}catch(Exception e){
 		}
 		
-		// 뒤로가기 버튼
+		iMt = new Inventory_Management();	//재고관리 매니저
+		
+		//메인 프레임과 같은 사이즈의 패널
+		this.mf = mf;
+		this.setSize(mf.getWidth(), mf.getHeight());
+		this.setLayout(null);
+		this.setBackground(Color.BLACK);
+		
+		//뒤로가기 버튼
 		JButton goback = new JButton();
 		Image back = new ImageIcon("icon/pointer.png").getImage().getScaledInstance(100, 100, 0);
 		goback.setIcon(new ImageIcon(back));
 		goback.setBounds(25, 25, 100, 100);
 		goback.setBorderPainted(false);
 		goback.setBackground(null);
-		goback.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				MainPanel mp = new MainPanel(mf);
-				changePanel(mp);
-			}
-		});
+		goback.addMouseListener(new MouseAdapter()
+				{
+					@Override
+					public void mouseClicked(MouseEvent e)
+					{
+						MainPanel mp = new MainPanel(mf);
+						changePanel(mp);
+					}
+				});
 		this.add(goback);
-		this.mf = mf;   
-		iMt = new Inventory_Management();	//재고관리 매니저
 		
-		//메인 프레임과 같은 사이즈의 패널
-		//JPanel start = new JPanel();
-		
-		this.setLayout(null);
-		this.setSize(mf.getSize());
-		this.setBackground(Color.BLACK);
-		
-		
-		
+
 		//상단 시간추가 패널 //패널 위 TextField로 구성
-		JPanel addTimeText = new JPanel();
-		addTimeText.setLayout(null);
-		addTimeText.setLocation(300, 50);
-		addTimeText.setBackground(Color.WHITE);
-		addTimeText.setSize(600,100);
-		
+		JPanel title = new JPanel();
+		title.setLayout(null);
+		title.setLocation(300, 50);
+		title.setBackground(Color.WHITE);
+		title.setSize(600,100);
+		JLabel titleLayer = new JLabel();
+		Image titleLayerI = new ImageIcon("icon/titleLayer.png").getImage().getScaledInstance(600, 100, 0);
+		titleLayer.setIcon(new ImageIcon(titleLayerI));
+		titleLayer.setBounds(0, 0, 600, 100);
 		//패널 위 "재고관리" 텍스트필드
 		JLabel text = new JLabel("재고관리");
 		text.setSize(200, 50);
@@ -83,7 +89,8 @@ public class Product_Panel extends JPanel{
 		text.setBackground(Color.GREEN);
 		text.setFont(new Font("맑은 고딕", Font.BOLD, 40));
 		text.setHorizontalAlignment(JTextField.CENTER);
-		addTimeText.add(text);
+		title.add(text);
+		title.add(titleLayer);
 		
 		//하단 메인 패널 //
 		JPanel WHpanel = new JPanel();
@@ -134,10 +141,13 @@ public class Product_Panel extends JPanel{
 		WHpanel.add(scrollSingle,"Center");
 		
 		// - 2 제고관리  상단 버튼
-		JButton jtn1 = new JButton("제품등록창아아아");			//제품등록버튼
-		JTextField jtx_Seach = new JTextField(9);
-		JButton jtn_Seach = new JButton("검색");
-		JButton jtn_Refresh = new JButton("새로고침");
+		JButton jtn1 = new RoundedButton("제품등록창");//제품등록버튼
+		jtn1.setBackground(Color.LIGHT_GRAY);
+		JTextField jtx_Search = new JTextField(9);
+		JButton jtn_Search = new RoundedButton("검색");
+		jtn_Search.setBackground(Color.LIGHT_GRAY);
+		JButton jtn_Refresh = new RoundedButton("새로고침");
+		jtn_Refresh.setBackground(Color.LIGHT_GRAY);
 		
 		//제품등록창 버튼
 		jtn1.addActionListener(new ActionListener(){
@@ -149,14 +159,14 @@ public class Product_Panel extends JPanel{
 			}
 		});
 		//제품검색 버튼
-		jtn_Seach.addActionListener(new ActionListener(){
+		jtn_Search.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ArrayList<Product> pro = iMt.Seach(jtx_Seach.getText());
-				if(jtx_Seach.getText().equals("") || pro.size() == 0){
+				ArrayList<Product> pro = iMt.Seach(jtx_Search.getText());
+				if(jtx_Search.getText().equals("") || pro.size() == 0){
 					JOptionPane.showMessageDialog(null, "해당 제품은 존재하지않습니다.", "입력 오류", JOptionPane.ERROR_MESSAGE);
 				}else
-					seach_list(ViewPanel,pro);
+					Search_list(ViewPanel,pro);
 			}
 		});
 		//새로고침 버튼
@@ -170,15 +180,16 @@ public class Product_Panel extends JPanel{
 		
 		MainMenuPanel.add(category,"North");
 		MainMenuPanel.add(jtn1,"North");
-		MainMenuPanel.add(jtx_Seach,"North");
-		MainMenuPanel.add(jtn_Seach,"North");
-		MainMenuPanel.add(jtn_Refresh,"North");
+		MainMenuPanel.add(jtx_Search,"North");
+		MainMenuPanel.add(jtn_Search,"East");
+		MainMenuPanel.add(jtn_Refresh,"East");
 		
 		WHpanel.add(MainMenuPanel,"North");
 		
 		this.add(WHpanel);
-		this.add(addTimeText);
+		this.add(title);
 		mf.add(this);
+		mf.setVisible(true);
 		
 	}
 	
@@ -203,7 +214,7 @@ public class Product_Panel extends JPanel{
 	}
 	 
 	//재고관리창 검색한 리스트 패널 설정
-	public void seach_list(JPanel ViewPanel, ArrayList<Product> product){
+	public void Search_list(JPanel ViewPanel, ArrayList<Product> product){
 		ViewPanel.removeAll();	//패널안에 있는 컴포넌트 초기화
 		
 		ArrayList<Product> first_list = product;
