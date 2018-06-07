@@ -16,7 +16,6 @@ import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.seat.vo.Seat;
 import com.kh.miniproject.view.Timer;
-import com.kh.miniproject.view.TimerMake;
 
 public class SeatDao extends Thread implements ConversionTime{
 
@@ -24,10 +23,9 @@ public class SeatDao extends Thread implements ConversionTime{
 	Scanner sc = new Scanner(System.in);
 
 	MemberManager mm = new MemberManager();
-	TimerMake tm = new TimerMake();
 	ArrayList<Seat> sl = new ArrayList<Seat>();
 
-	final static int MAX_SEAT = 12;
+	final static int MAX_SEAT = 20;
 
 	public static Thread[] tList = new Thread[MAX_SEAT];
 	public static int[] iList = new int[MAX_SEAT];
@@ -53,6 +51,8 @@ public class SeatDao extends Thread implements ConversionTime{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		System.out.println("좌석 초기화 완료...");
 
 	}
 
@@ -130,7 +130,8 @@ public class SeatDao extends Thread implements ConversionTime{
 			}else{
 				System.out.print(sl.get(i).getSeatNo() + " : X\t");
 			}
-			if(i == 3 || i == 7){
+			if(i == 3 || i == 7 ||
+					i == 11 || i == 15){
 				System.out.println();
 			}
 
@@ -149,7 +150,7 @@ public class SeatDao extends Thread implements ConversionTime{
 				if(sl.get(i).getUseCheck() == true){
 
 
-					
+
 					mm.memberInfo(sl.get(i).getUserId());
 					System.out.println();
 
@@ -158,7 +159,7 @@ public class SeatDao extends Thread implements ConversionTime{
 					System.out.println();
 					/*tm.threadNumber = seatNo-1;
 					tm.visibleFrame();*/
-					
+
 					return sl.get(i).getUserId();
 				}
 			}
@@ -168,7 +169,24 @@ public class SeatDao extends Thread implements ConversionTime{
 
 	}
 
-	
+	public boolean useUser(String id){
+
+		insertList();
+
+		if(sl.size() == 0){
+			return true;
+		}
+		for(int i=0; i < MAX_SEAT; i++){
+			if(sl.get(i).getUserId().equals(id)){
+				return false;
+
+			}
+		}
+
+		return true;
+	}
+
+
 	public void useSeat(JFrame mf, int seatNo, String id, int time){
 
 		insertList();
@@ -253,7 +271,7 @@ public class SeatDao extends Thread implements ConversionTime{
 						sl.get(i).setUserTime(0);
 						System.out.println("좌석 사용 종료...");
 						tList[seatNo-1].interrupt();
-						
+
 					}
 				}
 				os.writeInt(sl.get(i).getSeatNo());
@@ -278,12 +296,11 @@ public class SeatDao extends Thread implements ConversionTime{
 		long minute = (long) ((cTime / (  60)) % 60);
 		long hour = (long) ((cTime / ( 60 * 60)));
 		String s = null;
-		
-		//System.out.printf("%02d:%02d:%02d", hour, minute, second);
+
 		s = String.format("%02d:%02d:%02d", hour, minute, second);
-		
+
 		System.out.print(s);
-		
+
 		return s;
 	}
 }

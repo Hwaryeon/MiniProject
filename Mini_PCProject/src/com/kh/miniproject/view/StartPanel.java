@@ -22,7 +22,7 @@ public class StartPanel extends JPanel
 		this.setBackground(Color.BLACK);
 		
 		//회원가입 버튼
-		JButton signup = new RoundedButton("회원로그인");
+		JButton signup = new RoundedButton("회원가입");
 		signup.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		signup.setBackground(Color.WHITE);
 		signup.setSize(200, 50);
@@ -91,8 +91,19 @@ public class StartPanel extends JPanel
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
+				
+				/*if(id.getText().equals("admin") && pw.getText().equals("1234")){
+					
+					MainPanel mp = new MainPanel(mf);
+					changePanel(mp);
+					
+				}else{
+					System.out.println("오류");
+				}*/
+				
 				MainPanel mp = new MainPanel(mf);
 				changePanel(mp);
+				
 			}
 		});
 		
