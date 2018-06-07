@@ -22,34 +22,21 @@ public class Timer extends Thread implements ConversionTime{
 		this.time = time;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void run() {
-		System.out.println();
-
 		for(int j = 0; j < time; j++){
 			try {
 				Thread.sleep(1000);	// 1초
 				count++;
-				SeatDao.iList[seatNum-1] = count;
-			//	System.out.println(id + "님의 사용시간 : " + j );
-			} catch (InterruptedException e) {
-				System.out.println("좌석 사용 종료...");
 				
-				System.out.print("종료전까지 사용시간 : ");
+				SeatDao.iList[seatNum-1] = count;
+			} catch (InterruptedException e) {
 				conversionTime(SeatDao.iList[seatNum-1]);
 				System.out.println();
-				//this.stop();
 				return;
 			}
-
 		}
-
 		sm.exitSeat(seatNum);
-
-		System.out.println();
-		System.out.println(id + "님의 사용시간종료");
-
 	}
 
 	@Override
@@ -60,11 +47,7 @@ public class Timer extends Thread implements ConversionTime{
 		long minute = (long) ((cTime / (  60)) % 60);
 		long hour = (long) ((cTime / ( 60 * 60)));
 		String s = null;
-		
-		//System.out.printf("%02d:%02d:%02d", hour, minute, second);
 		s = String.format("%02d:%02d:%02d", hour, minute, second);
-		
-		System.out.print(s);
 		
 		return s;
 	}
