@@ -27,7 +27,6 @@ public class AddTimePanel extends JPanel{
 	private MemberManager mm = new MemberManager();
 	private ImageChange it;
 	
-	
 	public AddTimePanel(MainFrame mf){
 		this.mf = mf;
 		//메인 프레임과 같은 사이즈의 패널
@@ -264,7 +263,7 @@ public class AddTimePanel extends JPanel{
 
 		//광고창
 		JLabel capture = new JLabel();
-		Image capImage = new ImageIcon("icon/capture.PNG").getImage().getScaledInstance(350, 400, 0);
+		Image capImage = new ImageIcon("icon/movie1.gif").getImage().getScaledInstance(350, 400, 0);
 		capture.setIcon(new ImageIcon(capImage));
 		capture.setBounds(600, 50, 350, 400);
 		

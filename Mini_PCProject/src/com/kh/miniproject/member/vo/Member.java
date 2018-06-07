@@ -119,8 +119,5 @@ public class Member implements Serializable {
 				+ ", " + pNumber + ", " + restTime + ", " + accTime
 				+ ", " + admission;
 	}
-
-	
-	
 	
 }

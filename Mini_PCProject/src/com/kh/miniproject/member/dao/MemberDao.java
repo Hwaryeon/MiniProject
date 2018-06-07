@@ -18,9 +18,7 @@ public class MemberDao implements ConversionTime, IProfit {
 	Profit profit = new Profit();
 	
 	public void memberJoin(Member m){
-
 		insertList();
-
 		for(int i=0; i<ml.size(); i++){
 			if(ml.get(i).getId().equals(m.getId())){
 				return;
@@ -30,26 +28,21 @@ public class MemberDao implements ConversionTime, IProfit {
 		try(DataOutputStream dout
 				= new DataOutputStream(
 						new FileOutputStream("member.txt", true))){
-
 			dout.writeUTF(m.getName());
 			dout.writeUTF(m.getId());
 			dout.writeUTF(m.getPwd());
 			dout.writeUTF(m.getEmail());
 			dout.writeInt(m.getAge());
 			dout.writeUTF(m.getpNumber());
-
 			dout.writeInt(m.getRestTime());
 			dout.writeInt(m.getAccTime());
 			dout.writeBoolean(m.getAdmission());
-
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-
 	}
 
 	public String idSearch(String name, String email){
-
 		insertList();
 		for(int i=0; i < ml.size(); i++){
 			if(ml.get(i).getName().equals(name) &&
@@ -74,20 +67,13 @@ public class MemberDao implements ConversionTime, IProfit {
 	public void memberAdmission(String id){
 
 		insertList();
-
-		int check = 0;
-
 		try(DataOutputStream dout
 				= new DataOutputStream(
 						new FileOutputStream("member.txt"))){
-
 			for(int i = 0; i < ml.size(); i++){
-
 				if(ml.get(i).getId().equals(id)){
 					ml.get(i).setAdmission(true);
-					check = 1;
 				}
-
 				dout.writeUTF(ml.get(i).getName());
 				dout.writeUTF(ml.get(i).getId());
 				dout.writeUTF(ml.get(i).getPwd());
@@ -98,24 +84,19 @@ public class MemberDao implements ConversionTime, IProfit {
 				dout.writeInt(ml.get(i).getRestTime());
 				dout.writeInt(ml.get(i).getAccTime());
 				dout.writeBoolean(ml.get(i).getAdmission());
-
 			}
 
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-
 	}
 
 	public void timePlus(String id, int time){
 
 		insertList();
-		int check = 0;
-
 		try(DataOutputStream dout
 				= new DataOutputStream(
 						new FileOutputStream("member.txt"))){
-
 			for(int i = 0; i < ml.size(); i++){
 				if(ml.get(i).getId().equals(id)){
 					if(ml.get(i).getAdmission() == false){
@@ -123,40 +104,28 @@ public class MemberDao implements ConversionTime, IProfit {
 						ml.get(i).setRestTime(ml.get(i).getRestTime()
 								+ (time * 60 * 60) );
 						Add_Money(time * 1000);
-						check = 1;
 					}
 				}
-
 				dout.writeUTF(ml.get(i).getName());
 				dout.writeUTF(ml.get(i).getId());
 				dout.writeUTF(ml.get(i).getPwd());
 				dout.writeUTF(ml.get(i).getEmail());
 				dout.writeInt(ml.get(i).getAge());
 				dout.writeUTF(ml.get(i).getpNumber());
-
 				dout.writeInt(ml.get(i).getRestTime());
 				dout.writeInt(ml.get(i).getAccTime());
 				dout.writeBoolean(ml.get(i).getAdmission());
-
 			}
-
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 
-		if(check == 1){
-			return;
-		}else{
-			return;
-		}
 	}
 
 	public Member memberInfo(String id){
 
 		insertList();
-
 		for(int i=0; i< ml.size(); i++){
-
 			if(ml.get(i).getId().equals(id)){
 				conversionTime(ml.get(i).getRestTime());
 				conversionTime(ml.get(i).getAccTime());
@@ -169,8 +138,6 @@ public class MemberDao implements ConversionTime, IProfit {
 	public void useTime(String id, int time){
 
 		insertList();
-
-		int check = 0;
 		try(DataOutputStream dout
 				= new DataOutputStream(
 						new FileOutputStream("member.txt"))){
@@ -180,29 +147,19 @@ public class MemberDao implements ConversionTime, IProfit {
 							- (time / 60 / 60));
 					ml.get(i).setAccTime(ml.get(i).getAccTime()
 							+ (time / 60 / 60));
-					check = 1;
 				}
-
 				dout.writeUTF(ml.get(i).getName());
 				dout.writeUTF(ml.get(i).getId());
 				dout.writeUTF(ml.get(i).getPwd());
 				dout.writeUTF(ml.get(i).getEmail());
 				dout.writeInt(ml.get(i).getAge());
 				dout.writeUTF(ml.get(i).getpNumber());
-
 				dout.writeInt(ml.get(i).getRestTime());
 				dout.writeInt(ml.get(i).getAccTime());
 				dout.writeBoolean(ml.get(i).getAdmission());
 			}
-
 		}catch(Exception e){
 			e.printStackTrace();
-		}
-
-		if(check == 1){
-			return;
-		}else{
-			return;
 		}
 	}
 
@@ -214,7 +171,6 @@ public class MemberDao implements ConversionTime, IProfit {
 		String email;
 		int age;
 		String pNumber;
-
 		int restTime;
 		int accTime;
 		boolean admission;
@@ -223,7 +179,6 @@ public class MemberDao implements ConversionTime, IProfit {
 				= new DataInputStream(
 						new FileInputStream("member.txt"));
 				){
-
 			while(true){
 				name = din.readUTF();
 				id = din.readUTF();
@@ -234,7 +189,6 @@ public class MemberDao implements ConversionTime, IProfit {
 				restTime = din.readInt();
 				accTime = din.readInt();
 				admission = din.readBoolean();
-
 				ml.add(new Member(name, id, pwd, email, age, pNumber,
 						restTime, accTime, admission));
 			}
@@ -252,7 +206,6 @@ public class MemberDao implements ConversionTime, IProfit {
 	public ArrayList<Member> memberTFList(boolean b){
 
 		insertList();
-		int num = 1;
 		ArrayList<Member> tf = new ArrayList<Member>();
 		for(int i = 0; i < ml.size(); i++){
 			if(ml.get(i).getAdmission() == true && b == true){
@@ -262,7 +215,6 @@ public class MemberDao implements ConversionTime, IProfit {
 						ml.get(i).getpNumber(), ml.get(i).getRestTime(),
 						ml.get(i).getAccTime(), ml.get(i).getAdmission()
 						));
-				num++;
 			}else if(ml.get(i).getAdmission() == false && b == false){
 
 				tf.add(new Member(ml.get(i).getName(), ml.get(i).getId(),
@@ -271,7 +223,6 @@ public class MemberDao implements ConversionTime, IProfit {
 						ml.get(i).getpNumber(), ml.get(i).getRestTime(),
 						ml.get(i).getAccTime(), ml.get(i).getAdmission()
 						));
-				num++;
 			}
 		}
 		return tf;
@@ -280,13 +231,11 @@ public class MemberDao implements ConversionTime, IProfit {
 	@Override
 	public String conversionTime(int time){
 		long cTime = time;
-
 		long second = (long) ((cTime ) % 60);
 		long minute = (long) ((cTime / (  60)) % 60);
 		long hour = (long) ((cTime / ( 60 * 60)));
 		String s = null;
 		s = String.format("%02d:%02d:%02d", hour, minute, second);
-		System.out.print(s);
 		return s;
 	}
 
@@ -301,6 +250,7 @@ public class MemberDao implements ConversionTime, IProfit {
 		}
 		return 0;
 	}
+	
 		@Override
 		public void Add_Money(int money){
 			profit.setTime_M(money);

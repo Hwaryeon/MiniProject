@@ -10,20 +10,25 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import com.kh.miniproject.ProductAndProfit.vo.Profit;
 
-
-public class Profit_view  extends JPanel {
+public class Profit_view extends JPanel {
 
 	private MainFrame mf;
 
-	public Profit_view(MainFrame mf)
-	{
+	/*
+	 * JLabel id = new JLabel("¾ÆÀÌµð"); id.setFont(new Font("¸¼Àº °íµñ", Font.BOLD,
+	 * 16)); id.setBounds(30, 0, 100, 100); JTextField textId = new
+	 * JTextField(); textId.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 14));
+	 * textId.setBounds(30, 70, 200, 30); member.add(id);
+	 */
+
+	public Profit_view(MainFrame mf) {
 
 		this.mf = mf;
 		Profit pf = new Profit();
-		//JPanel start = new JPanel();
 		this.setLayout(null);
 		this.setSize(mf.getWidth(), mf.getHeight());
 		this.setBackground(Color.BLACK);
@@ -44,159 +49,132 @@ public class Profit_view  extends JPanel {
 		});
 		this.add(goback);
 
-
-
+		//Á¦¸ñÆÐ³Î
 		JPanel memberManagePanel = new JPanel();
-		memberManagePanel.setLayout(null);
+		memberManagePanel.setSize(600, 100);
 		memberManagePanel.setLocation(300, 50);
 		memberManagePanel.setBackground(Color.WHITE);
-		memberManagePanel.setSize(600,100);
-
-
-		//ÆÐ³Î À§ "¼öÀÍ°ü¸®" ¶óº§
+		// ÆÐ³Î À§ "¼öÀÍ°ü¸®" ¶óº§
+		JLabel titleLayer = new JLabel();
+		Image titleLayerI = new ImageIcon("icon/titleLayer.png").getImage().getScaledInstance(600, 100, 0);
+		titleLayer.setIcon(new ImageIcon(titleLayerI));
+		titleLayer.setBounds(0, 0, 600, 100);
 		JLabel text = new JLabel("¼öÀÍ°ü¸®");
 		text.setSize(600, 100);
-		text.setLocation(100, 100);
+		text.setLocation(0, 0);
 		text.setForeground(Color.BLACK);
 		text.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 40));
 		text.setHorizontalAlignment(JLabel.CENTER);
-		memberManagePanel.add(text);      
-
+		memberManagePanel.add(text);
+		memberManagePanel.add(titleLayer);
 
 		JPanel member = new JPanel();
 		member.setLayout(null);
-		member.setSize(1000,500);
-		member.setLocation(100, 200);
-		member.setBackground(Color.YELLOW);
-
-
+		member.setSize(900, 500);
+		member.setLocation(150, 200);
+		member.setBackground(Color.LIGHT_GRAY);
 
 		JPanel allM = new JPanel();
 		allM.setLayout(null);
 		allM.setBackground(Color.WHITE);
-		allM.setSize(250, 150);
-		allM.setLocation(110, 80);
+		allM.setSize(300, 150);
+		allM.setLocation(100, 70);
 
-		JLabel empty = new JLabel();
-		Image emptyicon = new ImageIcon("icon/middleLine.png").getImage().getScaledInstance(300, 100, 0);
-		empty.setIcon(new ImageIcon(emptyicon));
-		empty.setBounds(0, 60, 500, 50);
-		allM.add(empty);
+		JLabel textboxLabel = new JLabel();
+		Image textbox = new ImageIcon("icon/textbox2.png").getImage().getScaledInstance(300, 150, 0);
+		textboxLabel.setIcon(new ImageIcon(textbox));
+		textboxLabel.setBounds(0, 0, 300, 150);
 
 		JLabel allMN = new JLabel("ÃÑ ´©Àû¼öÀÍ");
 		allMN.setHorizontalAlignment(JLabel.CENTER);
-		allMN.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		allMN.setSize(200,100);
-		allMN.setLocation(25,0);
+		allMN.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
+		allMN.setSize(300, 75);
+		allMN.setLocation(0, 0);
 		allM.add(allMN);
 
-		JLabel allMI = new JLabel(pf.getAll_M()+"");
+		JLabel allMI = new JLabel(pf.getAll_M() + "¿ø");
 		allMI.setHorizontalAlignment(JLabel.CENTER);
-		allMI.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		allMI.setSize(100,100);
-		allMI.setLocation(65,65);
+		allMI.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
+		allMI.setSize(300, 75);
+		allMI.setLocation(0, 75);
 		allM.add(allMI);
-
-
+		allM.add(textboxLabel);
 		member.add(allM);
-
 
 		JPanel dayM = new JPanel();
 		dayM.setLayout(null);
 		dayM.setBackground(Color.WHITE);
-		dayM.setSize(250, 150);
-		dayM.setLocation(610, 80);
-
-		JLabel empty1 = new JLabel();
-		Image emptyicon1 = new ImageIcon("icon/middleLine.png").getImage().getScaledInstance(300, 100, 0);
-
-		empty.setIcon(new ImageIcon(emptyicon1));
-		empty.setBounds(0, 60, 500, 50);
-		dayM.add(empty);
-
-
+		dayM.setSize(300, 150);
+		dayM.setLocation(500, 70);
+		JLabel textboxLabel1 = new JLabel();
+		textboxLabel1.setIcon(new ImageIcon(textbox));
+		textboxLabel1.setBounds(0, 0, 300, 150);
 		JLabel dayMN = new JLabel("ÇÏ·ç¼öÀÍ");
 		dayMN.setHorizontalAlignment(JLabel.CENTER);
-		dayMN.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		dayMN.setSize(100,100);
-		dayMN.setLocation(65,0);
+		dayMN.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
+		dayMN.setSize(300, 75);
+		dayMN.setLocation(0, 0);
 		dayM.add(dayMN);
-
-		JLabel dayMI = new JLabel(pf.getDay_M()+""/*Integer.parseInt(getDay_M())*/);
+		JLabel dayMI = new JLabel(pf.getDay_M() + "¿ø");
 		dayMI.setHorizontalAlignment(JLabel.CENTER);
-		dayMI.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		dayMI.setSize(100,100);
-		dayMI.setLocation(65,65);
+		dayMI.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
+		dayMI.setSize(300, 75);
+		dayMI.setLocation(0, 75);
 		dayM.add(dayMI);
-
+		dayM.add(textboxLabel1);
 		member.add(dayM);
-
-
 
 		JPanel itemM = new JPanel();
 		itemM.setLayout(null);
 		itemM.setBackground(Color.WHITE);
-		itemM.setSize(250, 150);
-		itemM.setLocation(110, 300);
-
-		JLabel empty2 = new JLabel();
-		Image emptyicon2 = new ImageIcon("icon/middleLine.png").getImage().getScaledInstance(300, 100, 0);
-		empty.setIcon(new ImageIcon(emptyicon2));
-		empty.setBounds(0, 60, 500, 50);
-		allM.add(empty);
-
-
+		itemM.setSize(300, 150);
+		itemM.setLocation(100, 290);
+		JLabel textboxLabel2 = new JLabel();
+		textboxLabel2.setIcon(new ImageIcon(textbox));
+		textboxLabel2.setBounds(0, 0, 300, 150);
 		JLabel itemMN = new JLabel("»óÇ°¼öÀÍ");
 		itemMN.setHorizontalAlignment(JLabel.CENTER);
-		itemMN.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		itemMN.setSize(100,100);
-		itemMN.setLocation(65,0);
+		itemMN.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
+		itemMN.setSize(300, 75);
+		itemMN.setLocation(0, 0);
 		itemM.add(itemMN);
-
-		JLabel itemMI = new JLabel(pf.getItem_M()+"");
+		JLabel itemMI = new JLabel(pf.getItem_M() + "¿ø");
 		itemMI.setHorizontalAlignment(JLabel.CENTER);
-		itemMI.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		itemMI.setSize(100,100);
-		itemMI.setLocation(65,65);
+		itemMI.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
+		itemMI.setSize(300, 75);
+		itemMI.setLocation(0, 75);
 		itemM.add(itemMI);
-
+		itemM.add(textboxLabel2);
 		member.add(itemM);
 
 		JPanel timeM = new JPanel();
 		timeM.setLayout(null);
 		timeM.setBackground(Color.WHITE);
-		timeM.setSize(250, 150);
-		timeM.setLocation(610, 300);
-
-		JLabel empty3 = new JLabel();
-		Image emptyicon3 = new ImageIcon("icon/middleLine.png").getImage().getScaledInstance(300, 100, 0);
-		empty.setIcon(new ImageIcon(emptyicon3));
-		empty.setBounds(0, 60, 500, 50);
-		allM.add(empty);
-
+		timeM.setSize(300, 150);
+		timeM.setLocation(500, 290);
+		JLabel textboxLabel3 = new JLabel();
+		textboxLabel3.setIcon(new ImageIcon(textbox));
+		textboxLabel3.setBounds(0, 0, 300, 150);
 		JLabel timeMN = new JLabel("»ç¿ë·á ¼öÀÍ");
 		timeMN.setHorizontalAlignment(JLabel.CENTER);
-		timeMN.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		timeMN.setSize(200,100);
-		timeMN.setLocation(25,0);
-		timeM.add(timeMN);
-
+		timeMN.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
+		timeMN.setSize(300, 75);
+		timeMN.setLocation(0, 0);
 		member.add(timeM);
-
-		JLabel timeMI = new JLabel(pf.getTime_M()+"");
+		JLabel timeMI = new JLabel(pf.getTime_M() + "¿ø");
 		timeMI.setHorizontalAlignment(JLabel.CENTER);
-		timeMI.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
-		timeMI.setSize(100,100);
-		timeMI.setLocation(65,65);
+		timeMI.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
+		timeMI.setSize(300, 75);
+		timeMI.setLocation(0, 75);
 		timeM.add(timeMI);
+		timeM.add(timeMN);
+		timeM.add(textboxLabel3);
 
 		this.add(memberManagePanel);
 		this.add(member);
 		mf.add(this);
-
-
 	}
-
+	
 	public void changePanel(JPanel panel)
 	{
 		mf.remove(this);

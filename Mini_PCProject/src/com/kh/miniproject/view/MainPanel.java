@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EtchedBorder;
 
 import com.kh.miniproject.event.MyMouseAdapter;
@@ -29,9 +30,11 @@ public class MainPanel extends JPanel
 
 	public MainPanel(MainFrame mf) 
 	{
-		try{
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());			//´Ô¹ö½ºÅ×¸¶
-		}catch(Exception e){
+		try {
+			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
 		}
 
 		this.mf = mf;

@@ -20,10 +20,8 @@ import com.kh.miniproject.view.Timer;
 public class SeatDao extends Thread implements ConversionTime{
 
 	Scanner sc = new Scanner(System.in);
-
 	MemberManager mm = new MemberManager();
 	ArrayList<Seat> sl = new ArrayList<Seat>();
-
 	final static int MAX_SEAT = 20;
 
 	public static Thread[] tList = new Thread[MAX_SEAT];
@@ -55,8 +53,6 @@ public class SeatDao extends Thread implements ConversionTime{
 		String userId = "";
 		boolean check = false;
 		int time = 0;
-		int value = 0;
-
 		try(DataInputStream dis = new DataInputStream(
 				new FileInputStream("seat.txt"))){
 			while(true){
@@ -83,7 +79,6 @@ public class SeatDao extends Thread implements ConversionTime{
 		String userId = "";
 		boolean check = false;
 		int time = 0;
-		int value = 0;
 
 		try(DataInputStream dis = new DataInputStream(
 				new FileInputStream("seat.txt"))){
@@ -115,7 +110,7 @@ public class SeatDao extends Thread implements ConversionTime{
 				}
 			}
 		}
-		return null;/*System.out.println("해당 좌석은 사용중이지 않습니다.");*/
+		return null;
 	}
 
 	public boolean useUser(String id){

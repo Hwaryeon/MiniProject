@@ -27,9 +27,9 @@ public class UseSeat extends JPanel{
 	private MainFrame mf;
 	private JPanel mp;
 	private MemberManager mm = new MemberManager();
-
 	private SeatManager sm = new SeatManager();
-
+	private ImageChange it;
+	
 	public UseSeat(MainFrame mf, int seatNo){
 		this.mf = mf;
 
@@ -221,10 +221,14 @@ public class UseSeat extends JPanel{
 
 		//±§∞Ì√¢
 		JLabel capture = new JLabel();
-		Image capImage = new ImageIcon("icon/capture.PNG").getImage().getScaledInstance(350, 400, 0);
+		Image capImage = new ImageIcon("icon/capture.PNG").getImage().getScaledInstance(380, 420, 0);
 		capture.setIcon(new ImageIcon(capImage));
-		capture.setBounds(600, 50, 350, 400);
+		capture.setBounds(600, 50, 380, 420);
 
+		it = new ImageChange(capture, 4);
+		it.start();
+		
+		
 		timeMain.add(capture);
 		timeMain.add(priceMin);
 		timeMain.add(idOverlap);
@@ -247,5 +251,6 @@ public class UseSeat extends JPanel{
 		mf.remove(this);
 		mf.add(panel);
 		mf.repaint();
+		it.interrupt();
 	}
 }

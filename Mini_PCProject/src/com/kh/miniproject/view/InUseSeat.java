@@ -219,7 +219,7 @@ public class InUseSeat extends JPanel
 
 		JTextField useAccTimeT = new JTextField("");
 
-		tc = new UseTimeCheck(mf, useAccTimeT, seatNo);
+		tc = new UseTimeCheck(mf, useRestTimeT, useAccTimeT, m, seatNo);
 		tc.start();
 
 		useAccTimeT.setBounds(170, 330, 150, 50);

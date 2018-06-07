@@ -11,9 +11,7 @@ import com.kh.miniproject.seat.dao.SeatDao;
 public class SeatManager {
 
 	Scanner sc = new Scanner(System.in);
-
 	MemberManager mm = new MemberManager();
-
 	SeatDao sd = new SeatDao();
 
 	public void seatLeset(){
@@ -35,11 +33,9 @@ public class SeatManager {
 	public void useSeat(JFrame mf, String id, int seatNo){
 
 		Member m = mm.memberInfo(id);
-
 		if(m.getId() == ""){
 			return;
 		}
-
 		if(m.getAdmission() == false){
 			return;
 		}
@@ -49,11 +45,9 @@ public class SeatManager {
 	public void plusTime(String id){
 
 		Member m = mm.memberInfo(id);
-
 		if(m.getId() == null){
 			return;
 		}
-
 		int time = sc.nextInt();
 		mm.timePlus(id, time);
 	}

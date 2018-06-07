@@ -47,14 +47,18 @@ public class Iventory_Sale extends JFrame{
 		
 		JPanel panel_view = new JPanel();
 		panel_view.setLayout(new GridLayout(5,2,3,5));
-		
+
 		JLabel name_label  = new JLabel("제품 이름 : ");
 		panel_view.add(name_label,"East");
-		panel_view.add(new JTextField(pro.getNames()));
+		JTextField name_text = new JTextField(pro.getNames());
+		name_text.setEditable(false);
+		panel_view.add(name_text);
+		
 		
 		JLabel num_label  = new JLabel("제품 갯수 : ");
 		panel_view.add(num_label);
 		JTextField num_text = new JTextField(""+pro.getCount());
+		num_text.setEditable(false);
 		panel_view.add(num_text);
 		
 		JLabel sale_label  = new JLabel("판매할 갯수 : ");

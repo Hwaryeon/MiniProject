@@ -6,7 +6,6 @@ import com.kh.miniproject.ProductAndProfit.vo.Product;
 public class Inventory_Add {
 
 	//InventoryDao호출
-	
 	public Inventory_Add() {
 		/*new Frame()으로 새로운 창을 호출*/
 	}

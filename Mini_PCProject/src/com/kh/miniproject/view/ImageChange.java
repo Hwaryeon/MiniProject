@@ -28,9 +28,9 @@ public class ImageChange extends Thread{
 
 		while(true){
 
-			if(pageNum == 1){		// 시간 추가 화면
+			if(pageNum == 4){		// 좌석 사용화면
 				try {
-					Thread.sleep(3000);		//	3초
+					Thread.sleep(1500);		//	1.5초
 					if(sw == 0){
 						//gif 파일
 						capImage = new ImageIcon("icon/hos.gif").getImage().getScaledInstance(350, 400, 0);
@@ -44,9 +44,12 @@ public class ImageChange extends Thread{
 						capImage = new ImageIcon("icon/capture.PNG").getImage().getScaledInstance(350, 400, 0);
 						sw = 0;
 					}
-
+					
 					label.setIcon(new ImageIcon(capImage));
 
+					if(sw == 1){
+						Thread.sleep(1500);
+					}
 				} catch (InterruptedException e){
 					System.out.println("사진변경 스레드 종료...");
 					return;
@@ -92,6 +95,33 @@ public class ImageChange extends Thread{
 
 					return;
 				}
+			}else if(pageNum == 1){		// 결제화면
+				try {
+					Thread.sleep(2000);		//	3초
+					if(sw == 0){
+						//gif 파일
+						capImage = new ImageIcon("icon/movie2.gif").getImage().getScaledInstance(380, 420, 0);
+						sw = 1;
+					}else if(sw == 1){
+						//gif 파일
+						capImage = new ImageIcon("icon/movie3.gif").getImage().getScaledInstance(380, 420, 0);
+						sw = 2;
+					}else{
+						capImage = new ImageIcon("icon/movie1.gif").getImage().getScaledInstance(380, 420, 0);
+						sw = 0;
+					}
+					
+					label.setIcon(new ImageIcon(capImage));
+					
+					if(sw == 1){
+						Thread.sleep(8000);	
+					}
+				} catch (InterruptedException e){
+					System.out.println("사진변경 스레드 종료...");
+
+					return;
+				}
+				
 			}
 		}
 	}

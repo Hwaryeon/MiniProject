@@ -11,12 +11,10 @@ import com.kh.miniproject.member.vo.Member;
 public class MemberManager {
 
 	Scanner sc = new Scanner(System.in);
-
 	MemberDao md = new MemberDao();
 
 	public void memberJoin(String textName, String textId, String textPwd
 			, String textEmail, String textPhoneNum){
-
 
 		String name = textName;
 		String id = textId;
@@ -24,30 +22,21 @@ public class MemberManager {
 		String email = textEmail;
 		int age = 20;
 		String pNumber = textPhoneNum;
-
 		Member m = new Member(name, id, pwd, email, age, pNumber);
-
 		md.memberJoin(m);
-
 	}
 
 	public String idSearch(String name, String email){
-
 		return md.idSearch(name, email);
-
 	}
 
 	public String pwSearch(String id, String name){
-		
-				return md.pwSearch(name, id);
-		
-			}
+		return md.pwSearch(name, id);
+	}
 
 	public void memberAdmission(String id){
-
-			md.memberAdmission(id);
-			return;
-
+		md.memberAdmission(id);
+		return;
 	}
 
 	public void timePlus(){
@@ -69,33 +58,19 @@ public class MemberManager {
 	}
 
 	public void useTime(String id, int time){
-
 		md.useTime(id, time);
-
-
 	}
 
 	public ArrayList<Member> memberTFList(boolean b){
-
-
 		return md.memberTFList(b);
-
-
-
 	}
 
 	public ArrayList<Member> memberList(){
-	
-		
 		return md.memberList();
 	}
-	
-	
-	public int checkUser(String id){
-		
-		return md.checkUser(id);
-		
-	}
-	
 
+
+	public int checkUser(String id){
+		return md.checkUser(id);
+	}
 }

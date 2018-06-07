@@ -14,7 +14,6 @@ public class Seat {
 	}
 
 	public Seat(int seatNo, String userId, boolean useCheck, int userTime){
-
 		this.seatNo = seatNo;
 		this.userId = userId;
 		this.useCheck = useCheck;
@@ -57,8 +56,5 @@ public class Seat {
 	public String toString() {
 		return seatNo + ", " + userId + ", " + useCheck + ", " + userTime;
 	}
-
-
-
 
 }
