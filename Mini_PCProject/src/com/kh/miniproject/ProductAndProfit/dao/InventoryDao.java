@@ -63,17 +63,17 @@ public class InventoryDao implements IProfit{
 	}
 
 	//재고 이름 검색
-	public ArrayList<Product> product_Seach(String name){
+	public ArrayList<Product> product_Search(String name){
 		
-		ArrayList<Product> seach_box = new ArrayList<Product>();
+		ArrayList<Product> Search_box = new ArrayList<Product>();
 		
 		for(int i=0; i<warehouse.size() ; i++){
 			if(warehouse.get(i).getNames().contains(name)){
-				seach_box.add(warehouse.get(i));
+				Search_box.add(warehouse.get(i));
 			}
 		}
 		
-		return seach_box;
+		return Search_box;
 		/*warehouse에서 name재고의 객체 반환*/
 	}
 	

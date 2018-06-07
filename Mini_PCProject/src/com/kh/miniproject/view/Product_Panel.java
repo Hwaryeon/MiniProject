@@ -33,6 +33,7 @@ import com.kh.miniproject.view.decoration.RoundedButton;
 	//재고관리 UI
 public class Product_Panel extends JPanel{
 	private MainFrame mf;
+	private JPanel mp;
 	private Inventory_Management iMt= null;
 	private String category_first = "라면";
 	
@@ -71,7 +72,7 @@ public class Product_Panel extends JPanel{
 		this.add(goback);
 		
 
-		//상단 제목 패널 //패널 위 TextField로 구성
+		//상단 시간추가 패널 //패널 위 TextField로 구성
 		JPanel title = new JPanel();
 		title.setLayout(null);
 		title.setLocation(300, 50);
@@ -139,12 +140,12 @@ public class Product_Panel extends JPanel{
 		scrollSingle.getVerticalScrollBar().setUnitIncrement(16);    //스크롤 속도
 		WHpanel.add(scrollSingle,"Center");
 		
-		// - 2 재고관리  상단 버튼
+		// - 2 제고관리  상단 버튼
 		JButton jtn1 = new RoundedButton("제품등록창아아아");//제품등록버튼
 		jtn1.setBackground(Color.LIGHT_GRAY);
-		JTextField jtx_Seach = new JTextField(9);
-		JButton jtn_Seach = new RoundedButton("검색");
-		jtn_Seach.setBackground(Color.LIGHT_GRAY);
+		JTextField jtx_Search = new JTextField(9);
+		JButton jtn_Search = new RoundedButton("검색");
+		jtn_Search.setBackground(Color.LIGHT_GRAY);
 		JButton jtn_Refresh = new RoundedButton("새로고침");
 		jtn_Refresh.setBackground(Color.LIGHT_GRAY);
 		
@@ -158,14 +159,14 @@ public class Product_Panel extends JPanel{
 			}
 		});
 		//제품검색 버튼
-		jtn_Seach.addActionListener(new ActionListener(){
+		jtn_Search.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ArrayList<Product> pro = iMt.Seach(jtx_Seach.getText());
-				if(jtx_Seach.getText().equals("") || pro.size() == 0){
+				ArrayList<Product> pro = iMt.Search(jtx_Search.getText());
+				if(jtx_Search.getText().equals("") || pro.size() == 0){
 					JOptionPane.showMessageDialog(null, "해당 제품은 존재하지않습니다.", "입력 오류", JOptionPane.ERROR_MESSAGE);
 				}else
-					seach_list(ViewPanel,pro);
+					Search_list(ViewPanel,pro);
 			}
 		});
 		//새로고침 버튼
@@ -179,8 +180,8 @@ public class Product_Panel extends JPanel{
 		
 		MainMenuPanel.add(category,"North");
 		MainMenuPanel.add(jtn1,"North");
-		MainMenuPanel.add(jtx_Seach,"North");
-		MainMenuPanel.add(jtn_Seach,"North");
+		MainMenuPanel.add(jtx_Search,"North");
+		MainMenuPanel.add(jtn_Search,"North");
 		MainMenuPanel.add(jtn_Refresh,"North");
 		
 		WHpanel.add(MainMenuPanel,"North");
@@ -188,6 +189,7 @@ public class Product_Panel extends JPanel{
 		this.add(WHpanel);
 		this.add(title);
 		mf.add(this);
+		mf.setVisible(true);
 		
 	}
 	
@@ -212,7 +214,7 @@ public class Product_Panel extends JPanel{
 	}
 	 
 	//재고관리창 검색한 리스트 패널 설정
-	public void seach_list(JPanel ViewPanel, ArrayList<Product> product){
+	public void Search_list(JPanel ViewPanel, ArrayList<Product> product){
 		ViewPanel.removeAll();	//패널안에 있는 컴포넌트 초기화
 		
 		ArrayList<Product> first_list = product;

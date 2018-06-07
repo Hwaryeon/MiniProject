@@ -35,10 +35,10 @@ public class Inventory_Management {
 	}
 	
 	//재고 검색창
-	public ArrayList<Product> Seach(String name){
-		return iDao.product_Seach(name);
+	public ArrayList<Product> Search(String name){
+		return iDao.product_Search(name);
 		
-		/*product_Seach(입력된 이름)의 인덱스로 제품의 객체를 가져온 후 출력*/ 
+		/*product_Search(입력된 이름)의 인덱스로 제품의 객체를 가져온 후 출력*/ 
 	}
 	
 	//재고 추가

@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
 
 import com.kh.miniproject.event.MyMouseAdapter;
@@ -171,14 +172,14 @@ public class MainPanel extends JPanel
 		productL.setHorizontalAlignment(JLabel.CENTER);
 		productL.setBounds(225, 380, 150, 25);
 
-		product.addMouseListener(new MyMouseAdapter(){
+		product.addMouseListener(new MouseAdapter(){
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("재고관리 ...");
-
-				//Product_Panel pp = new Product_Panel(mf);
-				changePanel(new Product_Panel(mf));
+				
+				Product_Panel pp = new Product_Panel(mf);
+				changePanel(pp);
 
 			}
 		});
