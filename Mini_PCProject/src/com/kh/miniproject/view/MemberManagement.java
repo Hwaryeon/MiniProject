@@ -19,6 +19,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.RowSorterEvent;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import com.kh.miniproject.iTime.ConversionTime;
@@ -111,11 +112,11 @@ public class MemberManagement extends JPanel implements ConversionTime{
 
 		ArrayList<Member> mList =  mm.memberList();
 
-		String[] listHeader = {"회원아이디", "이름", "잔여시간", "누적시간"};
+		String[] listHeader = {"회원아이디", "이름", "전화번호", "잔여시간", "누적시간"};
 		String[][] listContents = new String[mList.size()][listHeader.length];
 
 		for(int i = 0; i < mList.size(); i++){
-			for(int j = 0; j < 4; j++){
+			for(int j = 0; j < 5; j++){
 				switch(j){
 				case 0 :
 					listContents[i][j]
@@ -125,18 +126,22 @@ public class MemberManagement extends JPanel implements ConversionTime{
 					listContents[i][j]
 							= new String(mList.get(i).getName());
 					break;
-				case 2 :
+				case 2 : 
+					String s = mList.get(i).getpNumber();
+					listContents[i][j] = s.replaceFirst("(\\d{3})(\\d{3,4})(\\d{4})", "$1-$2-$3");
+					break;
+				case 3 :
 					listContents[i][j]
 							= new String(conversionTime(mList.get(i).getRestTime()));
 					break;
-				case 3 :
+				case 4 :
 					listContents[i][j]
 							= new String(conversionTime(mList.get(i).getAccTime()));
 					break;
 				}
 			}
 		}
-
+		
 		JTable tableList = new JTable(listContents, listHeader);
 		tableList.setBounds(0,0,800,300);
 
@@ -148,6 +153,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 		tableList.getColumn("이름").setCellRenderer(celAlignCenter);
 		tableList.getColumn("잔여시간").setCellRenderer(celAlignCenter);
 		tableList.getColumn("누적시간").setCellRenderer(celAlignCenter);
+		tableList.getColumn("전화번호").setCellRenderer(celAlignCenter);
 		JScrollPane scrollList = new JScrollPane(tableList);
 
 		scrollList.setBounds(0,0,950,400);
@@ -183,8 +189,8 @@ public class MemberManagement extends JPanel implements ConversionTime{
 								= new String(mList.get(i).getName());
 						break;
 					case 2 :
-						approveContents[i][j]
-								= new String(mList.get(i).getpNumber());
+						String s = mList.get(i).getpNumber();
+						approveContents[i][j] = s.replaceFirst("(\\d{3})(\\d{3,4})(\\d{4})", "$1-$2-$3");
 						break;
 					case 3 :
 						approveContents[i][j]
@@ -193,8 +199,6 @@ public class MemberManagement extends JPanel implements ConversionTime{
 					}
 				}
 			}
-
-
 
 		JTable tableSearch = new JTable(approveContents, approveHeader);
 		tableSearch.setBounds(0, 0, 800, 200);
@@ -255,7 +259,6 @@ public class MemberManagement extends JPanel implements ConversionTime{
 		approveDialog.add(insertID);
 
 		//승인하기 버튼 추가
-
 		memberApprove.add(approveBtn);
 
 		//승인 팝업창 //승인여부 false인 회원 불러와서 승인해주는 기능 연결 필요
@@ -263,8 +266,6 @@ public class MemberManagement extends JPanel implements ConversionTime{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				approveDialog.setVisible(true);
-
-
 			}
 
 		});
@@ -274,19 +275,14 @@ public class MemberManagement extends JPanel implements ConversionTime{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mm.memberAdmission(insertID.getText());
-				System.out.println("승인되었습니다");
 				insertID.setText("승인되었습니다");
-				
 				MemberManagement mm = new MemberManagement(mf);
 				changePanel(mm);
-
 			}
 
 		});	
-
 		//승인 팝업창 닫기 버튼
 		dialogClose.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				approveDialog.setVisible(false);
@@ -294,7 +290,6 @@ public class MemberManagement extends JPanel implements ConversionTime{
 			}
 
 		});
-
 
 		//회원찾기 패널
 		JPanel memberSearch = new JPanel();
@@ -349,11 +344,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				/*System.out.println(idSearch.getText());
-						System.out.println(emailSearch.getText());*/
 				idResult.setText(mm.idSearch(idSearch.getText(), emailSearch.getText()));
-				//mm.idSearch(idSearch.getText(), emailSearch.getText());
-
 			}
 
 		});	
@@ -441,10 +432,8 @@ public class MemberManagement extends JPanel implements ConversionTime{
 					member.remove(memberSearch);
 					member.add(memberlist);
 					member.repaint();
-				}else{
-					System.out.println("");
-				}
 
+			}
 			}
 		});
 
@@ -458,8 +447,6 @@ public class MemberManagement extends JPanel implements ConversionTime{
 					member.add(memberApprove);
 					member.repaint();
 
-				}else{
-					System.out.println("");
 				}
 			}		
 		});
@@ -473,13 +460,9 @@ public class MemberManagement extends JPanel implements ConversionTime{
 					member.remove(memberApprove);
 					member.add(memberSearch);
 					member.repaint();
-				}else{
-					System.out.println("");
 				}
 			}		
 		});
-
-
 
 		this.add(member);
 		this.add(memberManagePanel);
@@ -502,10 +485,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 		long hour = (long) ((cTime / ( 60 * 60)));
 		String s = null;
 		
-		//System.out.printf("%02d:%02d:%02d", hour, minute, second);
 		s = String.format("%02d:%02d:%02d", hour, minute, second);
-		
-		System.out.print(s);
 		
 		return s;
 	}

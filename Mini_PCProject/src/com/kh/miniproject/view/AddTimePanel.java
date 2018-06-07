@@ -111,21 +111,6 @@ public class AddTimePanel extends JPanel{
 		priceChoice.add("50000");
 		priceChoice.setBounds(30, 270, 200, 20);
 
-		//priceList.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-		/*JScrollPane priceScroll = new JScrollPane(priceChoice);
-		//priceScroll.setPreferredSize(new Dimension(200, 30));
-		priceScroll.setBounds(30, 270, 200, 20);*/
-		/*JTextField textPrice = new JTextField();
-		textPrice.setFont(new Font("맑은 고딕", Font.BOLD, 14));
-		textPrice.setBounds(30, 270, 200, 30);*/
-		/*textPrice.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(e.getSource() == true){				
-				}
-				textPrice.setText("");
-			}		
-		});*/
 		JLabel labelLayout = new JLabel();
 		Image labelImage = new ImageIcon("icon/labelLayout.PNG").getImage().getScaledInstance(200, 50, 0);
 		labelLayout.setIcon(new ImageIcon(labelImage));
@@ -192,12 +177,9 @@ public class AddTimePanel extends JPanel{
 					if(mList.get(i).getId().equals(textId.getText())){
 						checkAprov = false;
 						idOverlap.setText("비승인된 회원입니다.");
-						
 					}
 					
 				}
-				
-				
 				String str = "";
 				
 				switch(checkString){
@@ -209,7 +191,6 @@ public class AddTimePanel extends JPanel{
 				case "20000" : str = "20 : 00 충전 "; break;
 				case "50000" : str = "50 : 00 충전 "; break;
 				}
-				
 
 				try{
 					if(priceCheck >= 1000 && checkUser == 1 && checkAprov == true){
@@ -233,7 +214,6 @@ public class AddTimePanel extends JPanel{
 			}
 		});
 
-
 		//시간추가 팝업창 닫기 버튼
 		dialogClose.addActionListener(new ActionListener(){
 
@@ -246,7 +226,6 @@ public class AddTimePanel extends JPanel{
 				textId.setText("");
 				//textPrice.setText("");
 				addTimeDial.setVisible(false);
-
 			}
 
 		});
@@ -263,7 +242,6 @@ public class AddTimePanel extends JPanel{
 				int checkUser = mm.checkUser(textId.getText());
 				String checkString1 = priceChoice.getSelectedItem();
 
-
 				switch(checkString){
 				case "1000" : mm.timePlus(textId.getText(), 1); break;
 				case "2000" : mm.timePlus(textId.getText(), 2); break;
@@ -273,8 +251,6 @@ public class AddTimePanel extends JPanel{
 				case "20000" : mm.timePlus(textId.getText(), 20); break;
 				case "50000" : mm.timePlus(textId.getText(), 50); break;
 				}
-
-				//	mm.timePlus(textId.getText(), 1);
 
 				priceMin.setText("");
 				idOverlap.setText("");
@@ -291,11 +267,9 @@ public class AddTimePanel extends JPanel{
 		Image capImage = new ImageIcon("icon/capture.PNG").getImage().getScaledInstance(350, 400, 0);
 		capture.setIcon(new ImageIcon(capImage));
 		capture.setBounds(600, 50, 350, 400);
-
 		
 		it = new ImageChange(capture, 1);
 		it.start();
-
 
 		timeMain.add(capture);
 		timeMain.add(priceMin);
@@ -303,13 +277,11 @@ public class AddTimePanel extends JPanel{
 		timeMain.add(add);
 		timeMain.add(labelLayout);
 		timeMain.add(textId);
-		//timeMain.add(priceScroll);
 		timeMain.add(priceChoice);
 		timeMain.add(id);
 		timeMain.add(price);
 		timeMain.add(addTime);
 		timeMain.add(iconLabel);
-
 
 		this.add(timeMain);
 		this.add(addTimeText);

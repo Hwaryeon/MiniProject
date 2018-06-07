@@ -33,9 +33,6 @@ public class UseSeat extends JPanel{
 	public UseSeat(MainFrame mf, int seatNo){
 		this.mf = mf;
 
-		//메인 프레임과 같은 사이즈의 패널
-		//JPanel start = new JPanel();
-
 		//뒤로가기 버튼
 		JButton goback = new JButton();
 		Image back = new ImageIcon("icon/pointer.png").getImage().getScaledInstance(100, 100, 0);
@@ -53,9 +50,6 @@ public class UseSeat extends JPanel{
 			}
 		});
 		this.add(goback);
-
-
-		System.out.println("seatNo : " + seatNo);
 
 		this.setLayout(null);
 		this.setSize(mf.getSize());

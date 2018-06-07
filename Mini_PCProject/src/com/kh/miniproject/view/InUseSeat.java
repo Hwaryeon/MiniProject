@@ -217,7 +217,6 @@ public class InUseSeat extends JPanel
 		useAccTimeL.setEditable(false);
 		seatInUse.add(useAccTimeL);
 
-
 		JTextField useAccTimeT = new JTextField("");
 
 		tc = new UseTimeCheck(mf, useAccTimeT, seatNo);
@@ -238,7 +237,6 @@ public class InUseSeat extends JPanel
 		it = new ImageChange(guksuImage, 2);
 		it.start();
 		
-		
 		seatInUse.add(guksuImage);
 
 		menu.add(iconp);
@@ -248,7 +246,6 @@ public class InUseSeat extends JPanel
 		this.add(inUsePanel);
 
 		mf.add(this);
-
 	}
 
 	public void changePanel(JPanel panel)
@@ -258,6 +255,5 @@ public class InUseSeat extends JPanel
 		mf.repaint();
 		tc.interrupt();
 		it.interrupt();
-
 	}
 }

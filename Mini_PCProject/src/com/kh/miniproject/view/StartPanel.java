@@ -6,6 +6,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
+import com.kh.miniproject.event.MyMouseAdapter;
+import com.kh.miniproject.seat.dao.SeatDao;
 import com.kh.miniproject.view.decoration.*;
 
 
@@ -57,6 +59,16 @@ public class StartPanel extends JPanel
 		titlep.add(mode);
 		this.add(titlep);
 
+		mode.addMouseListener(new MyMouseAdapter(){
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				SeatDao sd = new SeatDao();
+				sd.seatLeset();
+				System.out.println("¡¬ºÆ √ ±‚»≠...");
+			}
+		});
+		
 		
 		JPanel loginp = new JPanel();
 		loginp.setLayout(null);
