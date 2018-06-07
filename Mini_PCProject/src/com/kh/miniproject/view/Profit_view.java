@@ -45,7 +45,7 @@ public class Profit_view  extends JPanel {
 		this.add(goback);
 
 
-
+		//수익관리 타이틀 패널
 		JPanel memberManagePanel = new JPanel();
 		memberManagePanel.setLayout(null);
 		memberManagePanel.setLocation(300, 50);
@@ -78,10 +78,9 @@ public class Profit_view  extends JPanel {
 		allM.setLocation(110, 80);
 
 		JLabel empty = new JLabel();
-		Image emptyicon = new ImageIcon("icon/middleLine.png").getImage().getScaledInstance(300, 100, 0);
-		empty.setIcon(new ImageIcon(emptyicon));
-		empty.setBounds(0, 60, 500, 50);
-		allM.add(empty);
+	    Image emptyicon = new ImageIcon("icon/textbox2.png").getImage().getScaledInstance(250, 150, 0);
+	    empty.setIcon(new ImageIcon(emptyicon));
+	    empty.setBounds(0, 0, 250, 150);
 
 		JLabel allMN = new JLabel("총 누적수익");
 		allMN.setHorizontalAlignment(JLabel.CENTER);
