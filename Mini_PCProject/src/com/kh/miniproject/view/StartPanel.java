@@ -1,15 +1,21 @@
 package com.kh.miniproject.view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import com.kh.miniproject.event.MyMouseAdapter;
-import com.kh.miniproject.seat.dao.SeatDao;
-import com.kh.miniproject.view.decoration.*;
-
+import com.kh.miniproject.seat.model.dao.SeatDao;
+import com.kh.miniproject.view.decoration.RoundedButton;
 
 public class StartPanel extends JPanel
 {

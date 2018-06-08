@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.kh.miniproject.member.controller.MemberManager;
-import com.kh.miniproject.member.vo.Member;
+import com.kh.miniproject.member.model.vo.Member;
 import com.kh.miniproject.view.decoration.RoundedButton;
 
 

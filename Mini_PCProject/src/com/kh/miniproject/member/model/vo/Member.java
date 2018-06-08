@@ -1,4 +1,4 @@
-package com.kh.miniproject.member.vo;
+package com.kh.miniproject.member.model.vo;
 
 import java.io.Serializable;
 

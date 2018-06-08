@@ -24,11 +24,9 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
 
 import com.kh.miniproject.ProductAndProfit.controller.Inventory_Management;
-import com.kh.miniproject.ProductAndProfit.vo.Product;
+import com.kh.miniproject.ProductAndProfit.model.vo.Product;
 import com.kh.miniproject.view.Product_List.Product_List;
 import com.kh.miniproject.view.decoration.RoundedButton;
-
-
 
 	//재고관리 UI
 public class Product_Panel extends JPanel{

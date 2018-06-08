@@ -24,8 +24,8 @@ import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.kh.miniproject.ProductAndProfit.dao.InventoryDao;
-import com.kh.miniproject.ProductAndProfit.vo.Product;
+import com.kh.miniproject.ProductAndProfit.model.dao.InventoryDao;
+import com.kh.miniproject.ProductAndProfit.model.vo.Product;
 import com.kh.miniproject.view.MainFrame;
 import com.kh.miniproject.view.ProductAdd_Frame.subFunction.ImageFileView;
 import com.kh.miniproject.view.ProductAdd_Frame.subFunction.ImagePreview;

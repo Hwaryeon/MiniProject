@@ -1,4 +1,4 @@
-package com.kh.miniproject.seat.vo;
+package com.kh.miniproject.seat.model.vo;
 
 public class Seat {
 

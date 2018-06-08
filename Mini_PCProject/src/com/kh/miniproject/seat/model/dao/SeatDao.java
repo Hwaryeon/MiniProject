@@ -1,4 +1,4 @@
-package com.kh.miniproject.seat.dao;
+package com.kh.miniproject.seat.model.dao;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 
 import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.member.controller.MemberManager;
-import com.kh.miniproject.seat.vo.Seat;
+import com.kh.miniproject.seat.model.vo.Seat;
 import com.kh.miniproject.view.Timer;
 
 public class SeatDao extends Thread implements ConversionTime{

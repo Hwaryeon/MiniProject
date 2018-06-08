@@ -1,4 +1,4 @@
-package com.kh.miniproject.ProductAndProfit.dao;
+package com.kh.miniproject.ProductAndProfit.model.dao;
 
 import java.io.EOFException;
 import java.io.FileInputStream;
@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import com.kh.miniproject.IProfit.IProfit;
-import com.kh.miniproject.ProductAndProfit.vo.Product;
-import com.kh.miniproject.ProductAndProfit.vo.Profit;
+import com.kh.miniproject.ProductAndProfit.model.vo.Product;
+import com.kh.miniproject.ProductAndProfit.model.vo.Profit;
 
 
 public class InventoryDao implements IProfit{

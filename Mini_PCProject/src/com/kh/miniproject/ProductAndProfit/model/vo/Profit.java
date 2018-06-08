@@ -1,4 +1,4 @@
-package com.kh.miniproject.ProductAndProfit.vo;
+package com.kh.miniproject.ProductAndProfit.model.vo;
 
 
 import java.io.DataInputStream;

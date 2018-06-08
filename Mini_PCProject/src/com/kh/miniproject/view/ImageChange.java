@@ -55,25 +55,6 @@ public class ImageChange extends Thread{
 					return;
 
 				}
-			}else if(pageNum == 2){		// 좌석 사용중 일때
-
-				try {
-					Thread.sleep(3000);		//	3초
-
-					if(sw == 0){
-						capImage = new ImageIcon("icon/guksu2.png").getImage().getScaledInstance(270, 390, 0);
-						sw = 1;
-					}else{
-						capImage = new ImageIcon("icon/guksu.png").getImage().getScaledInstance(270, 390, 0);
-						sw = 0;
-					}
-
-					label.setIcon(new ImageIcon(capImage));
-
-				} catch (InterruptedException e){
-					System.out.println("사진변경 스레드 종료...");
-					return;
-				}
 			}else if(pageNum == 3){		// 회원 가입일때
 				try {
 					Thread.sleep(3000);		//	3초

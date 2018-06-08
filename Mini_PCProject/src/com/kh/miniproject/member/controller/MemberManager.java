@@ -3,10 +3,9 @@ package com.kh.miniproject.member.controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.JTextField;
+import com.kh.miniproject.member.model.dao.MemberDao;
+import com.kh.miniproject.member.model.vo.Member;
 
-import com.kh.miniproject.member.dao.MemberDao;
-import com.kh.miniproject.member.vo.Member;
 
 public class MemberManager {
 

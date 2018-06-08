@@ -3,7 +3,7 @@ package com.kh.miniproject.view;
 import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.seat.controller.SeatManager;
-import com.kh.miniproject.seat.dao.SeatDao;
+import com.kh.miniproject.seat.model.dao.SeatDao;
 
 public class Timer extends Thread implements ConversionTime{
 

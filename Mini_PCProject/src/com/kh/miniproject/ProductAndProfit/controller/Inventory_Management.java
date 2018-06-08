@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
-import com.kh.miniproject.ProductAndProfit.dao.InventoryDao;
-import com.kh.miniproject.ProductAndProfit.vo.Product;
+import com.kh.miniproject.ProductAndProfit.model.dao.InventoryDao;
+import com.kh.miniproject.ProductAndProfit.model.vo.Product;
 import com.kh.miniproject.view.MainFrame;
 import com.kh.miniproject.view.ProductAdd_Frame.Iventory_Sale;
 import com.kh.miniproject.view.ProductAdd_Frame.ProductAdd;

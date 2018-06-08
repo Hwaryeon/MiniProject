@@ -1,15 +1,20 @@
 package com.kh.miniproject.view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
 
-import com.kh.miniproject.member.dao.MemberDao;
-import com.kh.miniproject.member.vo.Member;
+import com.kh.miniproject.member.model.dao.MemberDao;
+import com.kh.miniproject.member.model.vo.Member;
 import com.kh.miniproject.seat.controller.SeatManager;
 
 public class InUseSeat extends JPanel 
@@ -19,8 +24,6 @@ public class InUseSeat extends JPanel
 	private SeatManager sm = new SeatManager();
 
 	UseTimeCheck tc;
-	private ImageChange it;
-	
 	public InUseSeat(MainFrame mf, Member m, int seatNo) 
 	{
 		this.mf = mf;
@@ -233,9 +236,6 @@ public class InUseSeat extends JPanel
 		Image guksu = new ImageIcon("icon/guksu.PNG").getImage().getScaledInstance(270, 390, 0);
 		guksuImage.setIcon(new ImageIcon(guksu));
 		guksuImage.setBounds(340, 10, 270, 390);
-
-		it = new ImageChange(guksuImage, 2);
-		it.start();
 		
 		seatInUse.add(guksuImage);
 
@@ -254,6 +254,5 @@ public class InUseSeat extends JPanel
 		mf.add(panel);
 		mf.repaint();
 		tc.interrupt();
-		it.interrupt();
 	}
 }

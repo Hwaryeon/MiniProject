@@ -1,12 +1,11 @@
 package com.kh.miniproject.view;
 
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.kh.miniproject.iTime.ConversionTime;
-import com.kh.miniproject.member.vo.Member;
+import com.kh.miniproject.member.model.vo.Member;
 import com.kh.miniproject.seat.controller.SeatManager;
-import com.kh.miniproject.seat.dao.SeatDao;
+import com.kh.miniproject.seat.model.dao.SeatDao;
 
 public class UseTimeCheck extends Thread implements ConversionTime {
 

@@ -19,12 +19,11 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.event.RowSorterEvent;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.member.controller.MemberManager;
-import com.kh.miniproject.member.vo.Member;
+import com.kh.miniproject.member.model.vo.Member;
 import com.kh.miniproject.view.decoration.RoundedButton;
 
 public class MemberManagement extends JPanel implements ConversionTime{
@@ -222,7 +221,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 		memberApprove.add(roundLabel);
 
 		JLabel khLabel = new JLabel();
-		Image khImage = new ImageIcon("icon/khcop.PNG").getImage().getScaledInstance(150, 360, 0);
+		Image khImage = new ImageIcon("icon/beer1.PNG").getImage().getScaledInstance(150, 360, 0);
 		khLabel.setIcon(new ImageIcon(khImage));
 		khLabel.setBounds(800, 40, 150, 360);
 		memberApprove.add(khLabel);

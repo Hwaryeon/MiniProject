@@ -10,9 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-import com.kh.miniproject.ProductAndProfit.vo.Profit;
+import com.kh.miniproject.ProductAndProfit.model.vo.Profit;
 
 public class Profit_view extends JPanel {
 

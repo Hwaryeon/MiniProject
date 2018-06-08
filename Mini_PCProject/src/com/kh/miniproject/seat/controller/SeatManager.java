@@ -5,8 +5,8 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 
 import com.kh.miniproject.member.controller.MemberManager;
-import com.kh.miniproject.member.vo.Member;
-import com.kh.miniproject.seat.dao.SeatDao;
+import com.kh.miniproject.member.model.vo.Member;
+import com.kh.miniproject.seat.model.dao.SeatDao;
 
 public class SeatManager {
 

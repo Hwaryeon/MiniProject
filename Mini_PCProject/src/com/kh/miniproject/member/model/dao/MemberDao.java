@@ -1,4 +1,4 @@
-package com.kh.miniproject.member.dao;
+package com.kh.miniproject.member.model.dao;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -8,9 +8,9 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import com.kh.miniproject.IProfit.IProfit;
-import com.kh.miniproject.ProductAndProfit.vo.Profit;
+import com.kh.miniproject.ProductAndProfit.model.vo.Profit;
 import com.kh.miniproject.iTime.ConversionTime;
-import com.kh.miniproject.member.vo.Member;
+import com.kh.miniproject.member.model.vo.Member;
 
 public class MemberDao implements ConversionTime, IProfit {
 

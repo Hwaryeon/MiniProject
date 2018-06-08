@@ -13,8 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
 import com.kh.miniproject.ProductAndProfit.controller.Inventory_Management;
-import com.kh.miniproject.ProductAndProfit.vo.Product;
-
+import com.kh.miniproject.ProductAndProfit.model.vo.Product;
 
 public class Product_List extends JPanel{
 	//재고관리 목록에 각각의 리스트패널
