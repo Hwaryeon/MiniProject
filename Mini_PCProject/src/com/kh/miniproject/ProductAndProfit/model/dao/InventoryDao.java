@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import com.kh.miniproject.IProfit.IProfit;
 import com.kh.miniproject.ProductAndProfit.model.vo.Product;
 import com.kh.miniproject.ProductAndProfit.model.vo.Profit;
+import com.kh.miniproject.view.MainFrame;
 
 
 public class InventoryDao implements IProfit{
@@ -37,7 +38,11 @@ public class InventoryDao implements IProfit{
 			System.out.println("클래스를 찾을수가 없다고함");
 		}
 
-
+		if(MainFrame.only_one)
+		{
+			new Inventory_Server(this);
+			MainFrame.only_one = false;
+		}
 		profit = new Profit();
 	}
 
@@ -160,6 +165,31 @@ public class InventoryDao implements IProfit{
 		 * 총금액을 profit.setItem()에 저장한다. 
 		 * 
 		 */
+	}
+	
+	//클라이언트에서 접근
+	public synchronized boolean product_UserSale(String item, int Quantity){
+
+		//이름과 종류가 동시에 같은 제품을 찾는다.
+		for(int i=0; i<warehouse.size(); i++){
+			if(item.equals(warehouse.get(i).getNames())){
+				//현재 가지고있는 재고수에서 판매된 갯수를 차감한다.
+				//그 이후 저장한다.
+				if(Quantity > warehouse.get(i).getCount()){
+					return false;
+				}
+				warehouse.get(i).setCount(warehouse.get(i).getCount()-Quantity);	//재고차감
+				Add_Money(Quantity*warehouse.get(i).getPrice());					//수익가산
+				//저장
+				product_Save();
+				System.out.println("판매가 정상적으로 이루어졌습니다.");
+				product_Save();
+				return true;
+			}
+		}
+
+		System.out.println("그 재고는 존재하지않음!");
+		return false;
 	}
 
 }

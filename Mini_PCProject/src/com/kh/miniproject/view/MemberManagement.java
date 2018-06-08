@@ -24,6 +24,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import com.kh.miniproject.iTime.ConversionTime;
 import com.kh.miniproject.member.controller.MemberManager;
 import com.kh.miniproject.member.model.vo.Member;
+import com.kh.miniproject.view.decoration.CustomTable;
 import com.kh.miniproject.view.decoration.RoundedButton;
 
 public class MemberManagement extends JPanel implements ConversionTime{
@@ -141,7 +142,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 			}
 		}
 		
-		JTable tableList = new JTable(listContents, listHeader);
+		JTable tableList = new CustomTable(listContents, listHeader);
 		tableList.setBounds(0,0,800,300);
 
 		tableList.getTableHeader().setReorderingAllowed(false);
@@ -199,7 +200,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 				}
 			}
 
-		JTable tableSearch = new JTable(approveContents, approveHeader);
+		JTable tableSearch = new CustomTable(approveContents, approveHeader);
 		tableSearch.setBounds(0, 0, 800, 200);
 		tableSearch.getTableHeader().setReorderingAllowed(false);
 

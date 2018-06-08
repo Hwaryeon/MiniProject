@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 
 public class MainFrame extends JFrame{
 	private JPanel panel;
+	public static boolean only_one = true;
+	
 	
 	public MainFrame(){
 		this.setSize(1200,800);
