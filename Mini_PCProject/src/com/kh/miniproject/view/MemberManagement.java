@@ -81,7 +81,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 		JRadioButton approve = new JRadioButton("회원 승인");
 		approve.setBounds(200, 0, 200, 50);
 		approve.setBackground(Color.LIGHT_GRAY);
-		JRadioButton search = new JRadioButton("회원 찾기");
+		JRadioButton search = new JRadioButton("회원 정보찾기");
 		search.setBounds(400, 0, 200, 50);
 		search.setBackground(Color.LIGHT_GRAY);
 

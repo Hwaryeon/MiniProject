@@ -48,7 +48,7 @@ public class EmptySeat extends JPanel
 		titleLayer.setBounds(0, 0, 600, 100);
 
 		//패널 위 제목 라벨
-		JLabel text = new JLabel("비어있는 좌석");
+		JLabel text = new JLabel("빈 좌석");
 		text.setSize(300, 50);
 		text.setLocation(150, 25);
 		text.setBackground(Color.GREEN);

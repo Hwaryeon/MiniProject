@@ -148,7 +148,7 @@ public class MainPanel extends JPanel
 		chart.setBackground(null);
 		chart.setBounds(25, 225, 150, 150);
 		chart.setBorderPainted(false);
-		JLabel chartL = new JLabel("수익관리");
+		JLabel chartL = new JLabel("매출관리");
 		chartL.setFont(font);
 		chartL.setHorizontalAlignment(JLabel.CENTER);
 		chartL.setBounds(25, 380, 150, 25);
@@ -210,7 +210,7 @@ public class MainPanel extends JPanel
 		seatP.add(seatTitle);
 
 		// 비어있음(empty)
-		Image empty = new ImageIcon("icon/empty.png").getImage().getScaledInstance(100, 45, 0);
+		Image empty = new ImageIcon("icon/empty.png").getImage().getScaledInstance(70, 25, 0);
 		JPanel seatGP = new JPanel();
 		seatGP.setLayout(null);
 		seatGP.setBounds(0, 100, 650, 425);
