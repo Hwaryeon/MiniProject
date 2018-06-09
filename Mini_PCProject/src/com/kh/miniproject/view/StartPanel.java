@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -120,7 +121,7 @@ public class StartPanel extends JPanel
 					MainPanel mp = new MainPanel(mf);
 					changePanel(mp);
 				}else{
-					System.out.println("입력정보가 맞지않습니다.");
+					JOptionPane.showMessageDialog(null, "입력정보가 정확하지 않습니다.");
 				}
 			}
 		});
@@ -130,7 +131,6 @@ public class StartPanel extends JPanel
 		loginp.add(id);
 		loginp.add(pw);
 		loginp.add(login);
-		
 		
 		this.add(loginp);
 		
