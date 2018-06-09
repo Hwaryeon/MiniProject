@@ -109,19 +109,19 @@ public class StartPanel extends JPanel
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
+				char[] pwdCheck = pw.getPassword();
+				String pwd = "";
 				
-				/*if(id.getText().equals("admin") && pw.getText().equals("1234")){
-					
+				for(int i=0; i < pwdCheck.length; i++){
+					pwd += pwdCheck[i];
+				}
+				
+				if(id.getText().equals("admin") && pwd.equals("1234")){
 					MainPanel mp = new MainPanel(mf);
 					changePanel(mp);
-					
 				}else{
-					System.out.println("오류");
-				}*/
-				
-				MainPanel mp = new MainPanel(mf);
-				changePanel(mp);
-				
+					System.out.println("입력정보가 맞지않습니다.");
+				}
 			}
 		});
 		

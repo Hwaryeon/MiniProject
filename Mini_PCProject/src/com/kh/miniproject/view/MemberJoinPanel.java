@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import com.kh.miniproject.member.controller.MemberManager;
@@ -88,7 +89,7 @@ public class MemberJoinPanel extends JPanel {
 		JLabel pwd = new JLabel("비밀번호");
 		pwd.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		pwd.setBounds(30, 80, 100, 100);		
-		JTextField textPwd = new JTextField();		
+		JPasswordField textPwd = new JPasswordField();		
 		textPwd.setFont(new Font("맑은 고딕", Font.BOLD, 14));	
 		textPwd.setBounds(30, 150, 200, 30);
 
@@ -189,6 +190,10 @@ public class MemberJoinPanel extends JPanel {
 						textName.setText(""); textId.setText(""); textPwd.setText("");
 						textEmail.setText(""); textPhoneNum.setText("");
 					overlapDialog.setVisible(true);
+					
+					StartPanel sp = new StartPanel(mf);
+					changePanel(sp);
+					
 				}if(overlapCheck == false){
 					checkOverlap.setText("ID 중복확인을 다시 해주세요.");
 					overlapDialog.setVisible(true);

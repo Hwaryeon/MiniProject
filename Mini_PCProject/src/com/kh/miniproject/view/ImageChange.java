@@ -57,7 +57,7 @@ public class ImageChange extends Thread{
 				}
 			}else if(pageNum == 3){		// 회원 가입일때
 				try {
-					Thread.sleep(3000);		//	3초
+					Thread.sleep(2000);		//	2초
 					if(sw == 0){
 						//gif 파일
 						capImage = new ImageIcon("icon/tropicana.gif").getImage().getScaledInstance(450, 400, 0);

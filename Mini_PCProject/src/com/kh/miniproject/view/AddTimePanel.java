@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -288,13 +289,18 @@ public class AddTimePanel extends JPanel{
             textId.setText("");
             //textPrice.setText("");
             addTimeDial.setVisible(false);
+
+            MainPanel mp = new MainPanel(mf);
+            changePanel(mp);
+            JOptionPane.showMessageDialog(null, "충전이 완료되었습니다.");
+            
          }
 
       });
 
       //광고창
       JLabel capture = new JLabel();
-      Image capImage = new ImageIcon("icon/capture.PNG").getImage().getScaledInstance(350, 400, 0);
+      Image capImage = new ImageIcon("icon/movie1.gif").getImage().getScaledInstance(350, 400, 0);
       capture.setIcon(new ImageIcon(capImage));
       capture.setBounds(600, 50, 350, 400);
       

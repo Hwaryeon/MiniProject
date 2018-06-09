@@ -39,7 +39,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 		this.setLayout(null);
 		this.setSize(mf.getWidth(), mf.getHeight());
 		this.setBackground(Color.BLACK);
-		
+
 		//상단 회원관리 패널 //패널 위 라벨로 구성
 		JPanel memberManagePanel = new JPanel();
 		memberManagePanel.setLayout(null);
@@ -76,7 +76,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 		this.add(goback);
 
 		//라디오 버튼
-		JRadioButton list = new JRadioButton("회원 리스트");
+		JRadioButton list = new JRadioButton("회원 리스트", true);
 		list.setBounds(0, 0, 200, 50);
 		list.setBackground(Color.LIGHT_GRAY);
 		JRadioButton approve = new JRadioButton("회원 승인");
@@ -141,7 +141,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 				}
 			}
 		}
-		
+
 		JTable tableList = new CustomTable(listContents, listHeader);
 		tableList.setBounds(0,0,800,300);
 
@@ -421,8 +421,12 @@ public class MemberManagement extends JPanel implements ConversionTime{
 		memberSearch.add(idLabel);
 		memberSearch.add(idSearchBtn);
 
+		
+		//회원관리 화면 들어가면
+		//회원 리스트가 기본적으로 보이도록
+		member.add(memberlist);
 
-
+		
 		list.addActionListener(new ActionListener(){
 
 			@Override
@@ -433,7 +437,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 					member.add(memberlist);
 					member.repaint();
 
-			}
+				}
 			}
 		});
 
@@ -468,7 +472,7 @@ public class MemberManagement extends JPanel implements ConversionTime{
 		this.add(memberManagePanel);
 		mf.add(this);
 	}
-	
+
 	public void changePanel(JPanel panel)
 	{
 		mf.remove(this);
@@ -484,9 +488,9 @@ public class MemberManagement extends JPanel implements ConversionTime{
 		long minute = (long) ((cTime / (  60)) % 60);
 		long hour = (long) ((cTime / ( 60 * 60)));
 		String s = null;
-		
+
 		s = String.format("%02d:%02d:%02d", hour, minute, second);
-		
+
 		return s;
 	}
 }
