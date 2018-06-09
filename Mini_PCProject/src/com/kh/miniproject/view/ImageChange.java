@@ -28,19 +28,19 @@ public class ImageChange extends Thread{
 
 		while(true){
 
-			if(pageNum == 4){		// ÁÂ¼® »ç¿ëÈ­¸é
+			if(pageNum == 4){		// ì¢Œì„ ì‚¬ìš©í™”ë©´
 				try {
-					Thread.sleep(1500);		//	1.5ÃÊ
+					Thread.sleep(1500);		//	1.5ì´ˆ
 					if(sw == 0){
-						//gif ÆÄÀÏ
+						//gif íŒŒì¼
 						capImage = new ImageIcon("icon/hos.gif").getImage().getScaledInstance(350, 400, 0);
 						sw = 1;
 					}else if(sw == 1){
-						//png ÆÄÀÏ
+						//png íŒŒì¼
 						capImage = new ImageIcon("icon/iPhone.png").getImage().getScaledInstance(350, 400, 0);
 						sw = 2;
 					}else{
-						//png ÆÄÀÏ
+						//png íŒŒì¼
 						capImage = new ImageIcon("icon/capture.PNG").getImage().getScaledInstance(350, 400, 0);
 						sw = 0;
 					}
@@ -51,19 +51,19 @@ public class ImageChange extends Thread{
 						Thread.sleep(1500);
 					}
 				} catch (InterruptedException e){
-					System.out.println("»çÁøº¯°æ ½º·¹µå Á¾·á...");
+					System.out.println("ì‚¬ì§„ë³€ê²½ ìŠ¤ë ˆë“œ ì¢…ë£Œ...");
 					return;
 
 				}
-			}else if(pageNum == 3){		// È¸¿ø °¡ÀÔÀÏ¶§
+			}else if(pageNum == 3){		// íšŒì› ê°€ì…ì¼ë•Œ
 				try {
-					Thread.sleep(2000);		//	2ÃÊ
+					Thread.sleep(2000);		//	2ì´ˆ
 					if(sw == 0){
-						//gif ÆÄÀÏ
+						//gif íŒŒì¼
 						capImage = new ImageIcon("icon/tropicana.gif").getImage().getScaledInstance(450, 400, 0);
 						sw = 1;
 					}else{
-						//png ÆÄÀÏ
+						//png íŒŒì¼
 						capImage = new ImageIcon("icon/project-1.PNG").getImage().getScaledInstance(450, 400, 0);
 						sw = 0;
 					}
@@ -72,19 +72,19 @@ public class ImageChange extends Thread{
 						Thread.sleep(5000);	
 					}
 				} catch (InterruptedException e){
-					System.out.println("»çÁøº¯°æ ½º·¹µå Á¾·á...");
+					System.out.println("ì‚¬ì§„ë³€ê²½ ìŠ¤ë ˆë“œ ì¢…ë£Œ...");
 
 					return;
 				}
-			}else if(pageNum == 1){		// °áÁ¦È­¸é
+			}else if(pageNum == 1){		// ê²°ì œí™”ë©´
 				try {
-					Thread.sleep(2000);		//	3ÃÊ
+					Thread.sleep(2000);		//	3ì´ˆ
 					if(sw == 0){
-						//gif ÆÄÀÏ
+						//gif íŒŒì¼
 						capImage = new ImageIcon("icon/movie2.gif").getImage().getScaledInstance(380, 420, 0);
 						sw = 1;
 					}else if(sw == 1){
-						//gif ÆÄÀÏ
+						//gif íŒŒì¼
 						capImage = new ImageIcon("icon/movie3.gif").getImage().getScaledInstance(380, 420, 0);
 						sw = 2;
 					}else{
@@ -95,10 +95,10 @@ public class ImageChange extends Thread{
 					label.setIcon(new ImageIcon(capImage));
 					
 					if(sw == 1){
-						Thread.sleep(8000);	
+						Thread.sleep(9000);	
 					}
 				} catch (InterruptedException e){
-					System.out.println("»çÁøº¯°æ ½º·¹µå Á¾·á...");
+					System.out.println("ì‚¬ì§„ë³€ê²½ ìŠ¤ë ˆë“œ ì¢…ë£Œ...");
 
 					return;
 				}
