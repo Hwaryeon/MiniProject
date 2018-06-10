@@ -1,7 +1,6 @@
 package com.kh.miniproject.ProductAndProfit.controller;
 
-import com.kh.miniproject.ProductAndProfit.vo.Product;
-
+import com.kh.miniproject.ProductAndProfit.model.vo.Product;
 
 public class Inventory_Add {
 
