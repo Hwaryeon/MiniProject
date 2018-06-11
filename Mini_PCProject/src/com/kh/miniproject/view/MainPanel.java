@@ -95,6 +95,13 @@ public class MainPanel extends JPanel
 		menul.setBounds(0, 0, 400, 100);
 		menu.add(menul);
 
+		/* JLabel capture = new JLabel();
+	      Image capImage = new ImageIcon("icon/menu.png").getImage().getScaledInstance(400, 100, 0);
+	      capture.setIcon(new ImageIcon(capImage));
+	      capture.setBounds(0, 0, 400, 100);
+		
+	      menu.add(capture);*/
+		
 		// 아이콘패널
 		JPanel iconp = new JPanel();
 		iconp.setLayout(null);

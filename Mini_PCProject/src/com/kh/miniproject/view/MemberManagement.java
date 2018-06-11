@@ -112,11 +112,11 @@ public class MemberManagement extends JPanel implements ConversionTime{
 
 		ArrayList<Member> mList =  mm.memberList();
 
-		String[] listHeader = {"회원아이디", "이름", "전화번호", "잔여시간", "누적시간"};
+		String[] listHeader = {"회원아이디", "이름", "전화번호", "E-mail", "잔여시간", "누적시간"};
 		String[][] listContents = new String[mList.size()][listHeader.length];
 
 		for(int i = 0; i < mList.size(); i++){
-			for(int j = 0; j < 5; j++){
+			for(int j = 0; j < 6; j++){
 				switch(j){
 				case 0 :
 					listContents[i][j]
@@ -130,11 +130,15 @@ public class MemberManagement extends JPanel implements ConversionTime{
 					String s = mList.get(i).getpNumber();
 					listContents[i][j] = s.replaceFirst("(\\d{3})(\\d{3,4})(\\d{4})", "$1-$2-$3");
 					break;
-				case 3 :
+				case 3 : 
+					listContents[i][j] = new String(mList.get(i).getEmail());
+					break;
+					
+				case 4 :
 					listContents[i][j]
 							= new String(conversionTime(mList.get(i).getRestTime()));
 					break;
-				case 4 :
+				case 5 :
 					listContents[i][j]
 							= new String(conversionTime(mList.get(i).getAccTime()));
 					break;

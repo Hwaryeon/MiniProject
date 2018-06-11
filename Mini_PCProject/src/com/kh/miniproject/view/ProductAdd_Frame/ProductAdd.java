@@ -49,7 +49,7 @@ public class ProductAdd extends JFrame {
 	
 	public ProductAdd(InventoryDao iAdd, MainFrame mf) {
 		super("재고 추가");
-		this.setSize(500,300);
+		this.setSize(500,200);
 		this.setResizable(false);
 
 		this.mf = mf;

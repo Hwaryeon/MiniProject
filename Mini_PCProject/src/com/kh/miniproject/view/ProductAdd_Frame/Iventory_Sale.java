@@ -1,5 +1,6 @@
 package com.kh.miniproject.view.ProductAdd_Frame;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -39,10 +40,10 @@ public class Iventory_Sale extends JFrame{
 				dispose();	//´Ý±â
 			}});
 		
-		ImageIcon ic  = new ImageIcon(pro.getPhoto());
-		JLabel img_label  = new JLabel(ic);
+		Image ic  = new ImageIcon(pro.getPhoto()).getImage().getScaledInstance(180, 180, 0);
+		JLabel img_label  = new JLabel(new ImageIcon(ic));
 		img_label.setLocation(80,50);
-		img_label.setSize(150,150);
+		img_label.setSize(180,180);
 		this.add(img_label);
 		
 		JPanel panel_view = new JPanel();

@@ -5,12 +5,12 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import com.kh.miniproject.ProductAndProfit.model.vo.Profit;
 
@@ -94,7 +94,9 @@ public class Profit_view extends JPanel {
       allMN.setForeground(Color.BLACK);
       allM.add(allMN);
 
-      JLabel allMI = new JLabel(pf.getAll_M() + "¿ø");
+      DecimalFormat df = new DecimalFormat("#,###");
+      
+      JLabel allMI = new JLabel(df.format(pf.getAll_M()) + "¿ø");
       allMI.setHorizontalAlignment(JLabel.CENTER);
       allMI.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
       allMI.setSize(300, 75);
@@ -119,7 +121,7 @@ public class Profit_view extends JPanel {
       dayMN.setLocation(0, 0);
       dayMN.setForeground(Color.BLACK);
       dayM.add(dayMN);
-      JLabel dayMI = new JLabel(pf.getDay_M() + "¿ø");
+      JLabel dayMI = new JLabel(df.format(pf.getDay_M()) + "¿ø");
       dayMI.setHorizontalAlignment(JLabel.CENTER);
       dayMI.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
       dayMI.setSize(300, 75);
@@ -144,7 +146,7 @@ public class Profit_view extends JPanel {
       itemMN.setLocation(0, 0);
       itemMN.setForeground(Color.BLACK);
       itemM.add(itemMN);
-      JLabel itemMI = new JLabel(pf.getItem_M() + "¿ø");
+      JLabel itemMI = new JLabel(df.format(pf.getItem_M()) + "¿ø");
       itemMI.setHorizontalAlignment(JLabel.CENTER);
       itemMI.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
       itemMI.setSize(300, 75);
@@ -169,7 +171,7 @@ public class Profit_view extends JPanel {
       timeMN.setLocation(0, 0);
       timeMN.setForeground(Color.BLACK);
       member.add(timeM);
-      JLabel timeMI = new JLabel(pf.getTime_M() + "¿ø");
+      JLabel timeMI = new JLabel(df.format(pf.getTime_M()) + "¿ø");
       timeMI.setHorizontalAlignment(JLabel.CENTER);
       timeMI.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
       timeMI.setSize(300, 75);
