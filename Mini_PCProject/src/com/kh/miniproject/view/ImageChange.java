@@ -69,7 +69,7 @@ public class ImageChange extends Thread{
 					}
 					label.setIcon(new ImageIcon(capImage));
 					if(sw == 1){
-						Thread.sleep(5000);	
+						Thread.sleep(6000);	
 					}
 				} catch (InterruptedException e){
 					System.out.println("사진변경 스레드 종료...");
