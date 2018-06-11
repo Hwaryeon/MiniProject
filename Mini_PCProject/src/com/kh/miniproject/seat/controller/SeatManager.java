@@ -53,7 +53,7 @@ public class SeatManager {
 	}
 
 	public void exitSeat(int seatNo){
-		mm.useTime(sd.exitSeat(seatNo), (SeatDao.iList[seatNo-1] * 60 * 60 ));
+		mm.useTime(sd.exitSeat(seatNo), (SeatDao.iList[seatNo-1]));
 	}
 
 }

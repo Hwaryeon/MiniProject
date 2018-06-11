@@ -144,9 +144,9 @@ public class MemberDao implements ConversionTime, IProfit {
 			for(int i=0; i < ml.size(); i++){
 				if(ml.get(i).getId().equals(id)){
 					ml.get(i).setRestTime(ml.get(i).getRestTime()
-							- (time / 60 / 60));
+							- (time));
 					ml.get(i).setAccTime(ml.get(i).getAccTime()
-							+ (time / 60 / 60));
+							+ (time));
 				}
 				dout.writeUTF(ml.get(i).getName());
 				dout.writeUTF(ml.get(i).getId());
